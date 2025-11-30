@@ -5,6 +5,8 @@ import Hero from '../components/Hero.astro';
 import Experience from '../components/Experience.astro';
 import Projects from '../components/Projects.astro';
 import Skills from '../components/Skills.astro';
+import CLI from '../components/CLI.astro';
+import Footer from '../components/Footer.astro';
 import { resume } from '../data/resume';
 ---
 
@@ -12,14 +14,10 @@ import { resume } from '../data/resume';
 	<Navbar />
 	<main>
 		<Hero />
-    <Skills />
-    <Experience />
-    <Projects />
-    
-    <!-- Simple Footer -->
-    <footer class="py-8 text-center text-slate-600 font-mono text-sm border-t border-terminal-slate/30">
-      <p>Built with Astro & Tailwind. Deployed on Cloudflare.</p>
-      <p class="mt-2">&copy; {new Date().getFullYear()} {resume.basics.name}. All rights reserved.</p>
-    </footer>
+		<Skills />
+		<Experience />
+		<Projects />
+        <CLI />
 	</main>
+    <Footer />
 </Layout>
