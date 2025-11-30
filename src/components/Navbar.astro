@@ -1,36 +1,67 @@
 ---
 const navItems = [
-  { name: '~/home', href: '#' },
-  { name: '~/projects', href: '#projects' },
-  { name: '~/about', href: '#about' },
-  { name: '~/contact', href: '#contact' },
+  { name: 'About', href: '#about' },
+  { name: 'Stack', href: '#stack' },
+  { name: 'Projects', href: '#projects' },
+  { name: 'CLI', href: '#cli' },
 ];
 ---
 
-<nav class="fixed top-0 w-full z-50 bg-terminal-dark/90 backdrop-blur-sm border-b border-terminal-slate/50">
+<nav class="fixed top-0 w-full z-50 bg-white/80 dark:bg-navy-900/80 backdrop-blur-md border-b border-slate-200 dark:border-white/5 transition-colors duration-300">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex items-center justify-between h-16">
-      <div class="flex-shrink-0">
-        <span class="font-mono text-terminal-green font-bold text-xl">&lt;DevOps /&gt;</span>
+    <div class="flex items-center justify-between h-20">
+      <!-- Logo -->
+      <div class="flex-shrink-0 flex items-center gap-2 cursor-pointer">
+        <div class="text-primary">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-terminal"><polyline points="4 17 10 11 4 5"/><line x1="12" x2="20" y1="19" y2="19"/></svg>
+        </div>
+        <span class="font-bold text-xl tracking-tight text-slate-900 dark:text-white">Dev<span class="text-primary">.DevOps</span></span>
       </div>
       
       <!-- Desktop Menu -->
       <div class="hidden md:block">
-        <div class="ml-10 flex items-baseline space-x-8">
+        <div class="ml-10 flex items-center space-x-8">
           {navItems.map((item) => (
             <a
               href={item.href}
-              class="font-mono text-sm text-slate-400 hover:text-terminal-green transition-colors duration-300"
+              class="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-white transition-colors duration-200"
             >
               {item.name}
             </a>
           ))}
+          
+          <!-- Theme Toggle -->
+          <button id="theme-toggle" class="text-slate-500 dark:text-slate-400 hover:text-primary dark:hover:text-white transition-colors p-2 rounded-full hover:bg-slate-100 dark:hover:bg-white/5">
+            <!-- Sun Icon -->
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+            </svg>
+            <!-- Moon Icon -->
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+            </svg>
+          </button>
+
+          <!-- CTA Button -->
+          <a href="#contact" class="bg-primary hover:bg-sky-400 text-white px-5 py-2 rounded-md font-medium transition-colors duration-200 shadow-lg shadow-primary/20">
+            Let's Talk
+          </a>
         </div>
       </div>
 
-      <!-- Mobile Menu Button (Hamburger) -->
-      <div class="md:hidden">
-        <button type="button" id="mobile-menu-btn" class="text-slate-400 hover:text-white focus:outline-none">
+      <!-- Mobile Menu Button -->
+      <div class="md:hidden flex items-center gap-4">
+        <!-- Mobile Theme Toggle -->
+         <button id="mobile-theme-toggle" class="text-slate-500 dark:text-slate-400 hover:text-primary dark:hover:text-white transition-colors">
+            <svg id="mobile-theme-toggle-light-icon" class="hidden w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+            </svg>
+            <svg id="mobile-theme-toggle-dark-icon" class="hidden w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+            </svg>
+         </button>
+
+        <button type="button" id="mobile-menu-btn" class="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-white focus:outline-none">
           <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
           </svg>
@@ -39,20 +70,66 @@ const navItems = [
     </div>
   </div>
 
-  <!-- Mobile Menu, hidden by default -->
-  <div class="md:hidden hidden bg-terminal-dark border-b border-terminal-slate/50" id="mobile-menu">
-    <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+  <!-- Mobile Menu -->
+  <div class="md:hidden hidden bg-white dark:bg-navy-900 border-b border-slate-200 dark:border-white/5" id="mobile-menu">
+    <div class="px-4 pt-2 pb-4 space-y-1">
       {navItems.map((item) => (
         <a
           href={item.href}
-          class="block px-3 py-2 rounded-md text-base font-medium font-mono text-slate-400 hover:text-terminal-green hover:bg-terminal-slate/50 transition-colors duration-300"
+          class="block px-3 py-2 rounded-md text-base font-medium text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-white hover:bg-slate-50 dark:hover:bg-white/5 transition-colors duration-200"
         >
           {item.name}
         </a>
       ))}
+      <div class="pt-4 flex items-center gap-4 px-3">
+         <a href="#contact" class="block w-full text-center bg-primary hover:bg-sky-400 text-white px-5 py-2 rounded-md font-medium transition-colors duration-200 shadow-lg shadow-primary/20">
+            Let's Talk
+          </a>
+      </div>
     </div>
   </div>
 </nav>
+
+<script>
+  // Theme Toggle Logic
+  const themeToggleBtn = document.getElementById('theme-toggle');
+  const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+  const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+  
+  const mobileThemeToggleBtn = document.getElementById('mobile-theme-toggle');
+  const mobileThemeToggleDarkIcon = document.getElementById('mobile-theme-toggle-dark-icon');
+  const mobileThemeToggleLightIcon = document.getElementById('mobile-theme-toggle-light-icon');
+
+  function updateIcons() {
+      if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+          themeToggleLightIcon.classList.remove('hidden');
+          themeToggleDarkIcon.classList.add('hidden');
+          mobileThemeToggleLightIcon.classList.remove('hidden');
+          mobileThemeToggleDarkIcon.classList.add('hidden');
+      } else {
+          themeToggleLightIcon.classList.add('hidden');
+          themeToggleDarkIcon.classList.remove('hidden');
+          mobileThemeToggleLightIcon.classList.add('hidden');
+          mobileThemeToggleDarkIcon.classList.remove('hidden');
+      }
+  }
+
+  updateIcons();
+
+  function toggleTheme() {
+      if (localStorage.getItem('theme') === 'dark') {
+          document.documentElement.classList.remove('dark');
+          localStorage.setItem('theme', 'light');
+      } else {
+          document.documentElement.classList.add('dark');
+          localStorage.setItem('theme', 'dark');
+      }
+      updateIcons();
+  }
+
+  themeToggleBtn.addEventListener('click', toggleTheme);
+  mobileThemeToggleBtn.addEventListener('click', toggleTheme);
+</script>
 
 <script>
   const btn = document.getElementById('mobile-menu-btn');

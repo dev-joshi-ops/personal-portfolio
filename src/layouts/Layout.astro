@@ -7,33 +7,111 @@ const { title } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="description" content="DevOps Engineer Portfolio" />
 		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" type="image/png" href="/favicon.png" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+        <script is:inline>
+            // Check for saved theme preference or system preference
+            if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        </script>
+        <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script> 
+        <script is:inline>
+            document.addEventListener('DOMContentLoaded', () => {
+                const lenis = new Lenis({
+                    duration: 0.8,
+                    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+                    direction: 'vertical',
+                    gestureDirection: 'vertical',
+                    smooth: true,
+                    mouseMultiplier: 1,
+                    smoothTouch: false,
+                    touchMultiplier: 2,
+                });
+
+                function raf(time) {
+                    lenis.raf(time);
+                    requestAnimationFrame(raf);
+                }
+
+                requestAnimationFrame(raf);
+
+                // Integrate with Astro's view transitions or standard anchor links if needed
+                document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                    anchor.addEventListener('click', function (e) {
+                        e.preventDefault();
+                        lenis.scrollTo(this.getAttribute('href'));
+                    });
+                });
+            });
+        </script>
 	</head>
-	<body class="bg-terminal-dark text-slate-300 font-sans antialiased selection:bg-terminal-green selection:text-terminal-dark">
+	<body class="bg-slate-50 text-slate-900 dark:bg-navy-900 dark:text-slate-300 font-sans antialiased selection:bg-primary selection:text-white">
 		<slot />
 	</body>
 </html>
 
 <style is:global>
-	/* Custom Scrollbar for that terminal feel */
+    html.lenis {
+        height: auto;
+    }
+    
+    .lenis.lenis-smooth {
+        scroll-behavior: auto;
+    }
+    
+    .lenis.lenis-smooth [data-lenis-prevent] {
+        overscroll-behavior: contain;
+    }
+    
+    .lenis.lenis-stopped {
+        overflow: hidden;
+    }
+    
+    .lenis.lenis-scrolling iframe {
+        pointer-events: none;
+    }
+
+	body {
+        transition: background-color 0.5s cubic-bezier(0.25, 0.8, 0.25, 1), color 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    /* Smooth theme transition for all elements */
+    *, *::before, *::after {
+        transition-property: background-color, border-color, color, fill, stroke;
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        transition-duration: 500ms;
+    }
+
+	/* Custom Scrollbar */
 	::-webkit-scrollbar {
 		width: 10px;
 	}
 	::-webkit-scrollbar-track {
-		background: #0c0c0c;
+		background: #f1f5f9;
 	}
+    :global(.dark) ::-webkit-scrollbar-track {
+        background: #0B1120;
+    }
 	::-webkit-scrollbar-thumb {
-		background: #1e293b;
-		border-radius: 2px;
+		background: #cbd5e1;
+		border-radius: 5px;
 	}
+    :global(.dark) ::-webkit-scrollbar-thumb {
+        background: #1e293b;
+    }
 	::-webkit-scrollbar-thumb:hover {
-		background: #4af626;
+		background: #0EA5E9;
 	}
 </style>

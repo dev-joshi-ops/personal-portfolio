@@ -1,25 +1,19 @@
 /** @type {import('tailwindcss').Config} */
 export default {
+    darkMode: 'class',
     content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
     theme: {
         extend: {
             colors: {
-                // Custom terminal green for that DevOps aesthetic
-                'terminal-green': '#4af626',
-                'terminal-dark': '#0c0c0c',
-                'terminal-slate': '#1e293b',
+                navy: {
+                    900: '#0B1120', // Main background
+                    800: '#1e293b', // Cards/Sections
+                },
+                primary: '#0EA5E9', // Sky 500
             },
             fontFamily: {
-                mono: [
-                    'ui-monospace',
-                    'SFMono-Regular',
-                    'Menlo',
-                    'Monaco',
-                    'Consolas',
-                    '"Liberation Mono"',
-                    '"Courier New"',
-                    'monospace'
-                ],
+                sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+                mono: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', 'monospace'],
             },
         },
     },
