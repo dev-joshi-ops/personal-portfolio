@@ -15,64 +15,108 @@ export function getStaticPaths() {
 const { project } = Astro.props;
 ---
 
-<Layout title={`${project.name} | Projects`}>
+<Layout title={`${project.name} | Case Study`}>
   <Navbar />
-  <main class="pt-24 pb-20">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+  <main class="pt-32 pb-20 bg-slate-50 dark:bg-navy-900 min-h-screen transition-colors duration-500">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       
-      <!-- Breadcrumb -->
-      <div class="mb-8 font-mono text-sm text-slate-500">
-        <a href="/" class="hover:text-terminal-green">~/home</a>
-        <span class="mx-2">/</span>
-        <a href="/#projects" class="hover:text-terminal-green">projects</a>
-        <span class="mx-2">/</span>
-        <span class="text-terminal-green">{project.name.toLowerCase().replace(/ /g, '_')}</span>
-      </div>
-
-      <div class="bg-terminal-slate/20 border border-terminal-slate/50 rounded-lg overflow-hidden">
-        <div class="p-8">
-          <h1 class="font-mono text-3xl md:text-4xl font-bold text-white mb-4">
+      <!-- Header -->
+      <div class="mb-8">
+        <a href="/#projects" class="inline-flex items-center text-sm font-medium text-slate-500 dark:text-slate-400 hover:text-primary dark:hover:text-primary transition-colors mb-6 group">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 group-hover:-translate-x-1 transition-transform"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
+            Back to Portfolio
+        </a>
+        <h1 class="text-3xl md:text-5xl font-bold text-slate-900 dark:text-white mb-6 tracking-tight">
             {project.name}
-          </h1>
-          
-          <p class="text-xl text-terminal-green font-mono mb-8 border-b border-terminal-slate/30 pb-4">
-            {project.description}
-          </p>
-
-          <div class="space-y-8">
-            <div>
-              <h3 class="text-lg font-bold text-white mb-4 flex items-center">
-                <span class="text-terminal-green mr-2">#</span> Project Highlights
-              </h3>
-              <ul class="space-y-3">
-                {project.highlights.map((highlight) => (
-                  <li class="flex items-start text-slate-300">
-                    <span class="text-terminal-green mr-3 mt-1.5 text-xs">▶</span>
-                    <span class="leading-relaxed">{highlight}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <!-- Placeholder for potential future content like tech stack tags if added to data -->
-            <div class="pt-6 border-t border-terminal-slate/30">
-              <div class="flex items-center text-slate-500 font-mono text-sm">
-                <span class="mr-2">Status:</span>
-                <span class="text-terminal-green">Completed</span>
-              </div>
-            </div>
-          </div>
+        </h1>
+        <div class="flex flex-wrap gap-2">
+            <span class="px-3 py-1 bg-primary text-white text-xs font-bold uppercase tracking-wider rounded-full shadow-lg shadow-primary/25">
+                {project.category}
+            </span>
+            {project.tags.map((tag) => (
+                <span class="px-3 py-1 bg-slate-200 dark:bg-navy-800 text-slate-700 dark:text-slate-300 text-xs font-bold uppercase tracking-wider rounded-full">
+                    {tag}
+                </span>
+            ))}
         </div>
       </div>
 
-      <div class="mt-12 text-center">
+      <!-- Hero Image -->
+      <div class="rounded-2xl overflow-hidden shadow-2xl shadow-slate-200/50 dark:shadow-black/50 mb-16 border border-slate-200 dark:border-white/5">
+        <img src={project.image} alt={project.name} class="w-full h-64 md:h-[500px] object-cover" />
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+        <!-- Main Content -->
+        <div class="lg:col-span-2 space-y-12">
+            
+            <!-- Challenge -->
+            <section>
+                <h2 class="text-2xl font-bold text-slate-900 dark:text-white mb-4">The Challenge</h2>
+                <p class="text-slate-600 dark:text-slate-300 leading-relaxed text-lg">
+                    {project.details?.challenge || project.description}
+                </p>
+            </section>
+
+            <!-- Strategy -->
+            <section>
+                <h2 class="text-2xl font-bold text-slate-900 dark:text-white mb-4">The Strategy</h2>
+                <p class="text-slate-600 dark:text-slate-300 leading-relaxed text-lg">
+                    {project.details?.strategy || "Strategic approach details coming soon."}
+                </p>
+            </section>
+
+            <!-- Implementation -->
+            <section>
+                <h2 class="text-2xl font-bold text-slate-900 dark:text-white mb-4">Implementation Details</h2>
+                <ul class="space-y-4">
+                    {project.details?.implementation?.map((item) => (
+                        <li class="flex items-start gap-3 text-slate-600 dark:text-slate-300 leading-relaxed">
+                            <span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0"></span>
+                            <span>{item}</span>
+                        </li>
+                    )) || <li>Implementation details coming soon.</li>}
+                </ul>
+            </section>
+
+        </div>
+
+        <!-- Sidebar / Metrics -->
+        <div class="lg:col-span-1">
+            <div class="bg-white dark:bg-navy-800 rounded-2xl p-8 border border-slate-200 dark:border-white/5 sticky top-32 shadow-xl shadow-slate-200/50 dark:shadow-none">
+                <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-6 border-b border-slate-100 dark:border-white/5 pb-4">Key Metrics</h3>
+                
+                <div class="space-y-6">
+                    {project.details?.metrics?.map((metric) => (
+                        <div>
+                            <p class="text-sm text-slate-500 dark:text-slate-400 mb-1">{metric.label}</p>
+                            <div class="flex items-baseline gap-2">
+                                <span class="text-2xl font-bold text-primary">{metric.value}</span>
+                                {metric.change && <span class="text-xs font-medium text-emerald-500 bg-emerald-500/10 px-2 py-0.5 rounded-full">{metric.change}</span>}
+                            </div>
+                        </div>
+                    )) || <p class="text-slate-500">Metrics loading...</p>}
+                </div>
+
+                <div class="mt-8 pt-6 border-t border-slate-100 dark:border-white/5">
+                     <a href={project.link} class="block w-full py-3 bg-primary hover:bg-primary/90 text-white font-bold text-center rounded-xl transition-all shadow-lg shadow-primary/25">
+                        View Live Project
+                     </a>
+                </div>
+            </div>
+        </div>
+      </div>
+
+      <!-- Footer Action -->
+      <div class="mt-20 text-center">
         <a 
           href="/#projects" 
-          class="inline-flex items-center px-6 py-3 border border-terminal-slate text-slate-300 font-mono rounded hover:border-terminal-green hover:text-terminal-green transition-colors"
+          class="inline-flex items-center px-8 py-4 bg-white dark:bg-navy-800 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white font-bold rounded-xl hover:bg-slate-50 dark:hover:bg-navy-700 transition-all shadow-lg hover:shadow-xl hover:-translate-y-1"
         >
-          <span class="mr-2">←</span> cd ..
+          Close Case Study
         </a>
       </div>
+
     </div>
   </main>
 </Layout>
