@@ -77,17 +77,18 @@ export const resume = {
             description: "Migrated a mission-critical employee portal from Liferay DXP 7.2 to 7.4 in a high-security, air-gapped environment. Achieved high availability with a Layer 7 clustered architecture.",
             category: "devops",
             tags: ["Liferay DXP", "Oracle DB", "On-Premise", "High Availability", "Migration"],
-            image: "/images/intranet-migration.jpg",
+            image: "/images/liferay-logo.png",
             link: "#",
             cta: "View Case Study",
             details: {
                 challenge: "Migrating a mission-critical portal in a strict air-gapped environment with no CI/CD or observability. Incompatible Oracle database schemas and custom locale requirements (ar_AE) posed significant risks.",
                 strategy: "Pivoted from automation-first to a process-first governance approach. Implemented a two-stage migration protocol (Baseline + Verification) and a Layer 7 clustered architecture for high availability.",
                 implementation: [
-                    "Architecture: Designed a two-node Liferay DXP 7.4 cluster behind a Layer 7 Load Balancer.",
-                    "Migration: Executed a two-stage protocol: Native Liferay upgrade followed by custom SQL integrity checks.",
-                    "Localization: Manually configured and verified custom ar_AE locale support.",
-                    "Governance: Established strict manual deployment checklists validated by the Change Advisory Board (CAB)."
+                    "Architecture: Designed a two-node Liferay DXP 7.4 cluster behind a Layer 7 Load Balancer for active-active redundancy.",
+                    "Database Migration: Executed a two-stage protocol using the Liferay Data Migration Tool followed by custom SQL integrity checks to resolve schema incompatibilities.",
+                    "Localization: Manually configured and verified custom ar_AE (Arabic - UAE) locale support, ensuring full UI/UX compliance.",
+                    "Governance: Established strict manual deployment checklists validated by the Change Advisory Board (CAB) to replace automated CI/CD pipelines.",
+                    "Quality Assurance: Conducted exhaustive Content Integrity Checks (Manual QA) on staging environments to guarantee 100% data fidelity before production cutover."
                 ],
                 metrics: [
                     { label: "Data Fidelity", value: "100%", change: "7.2 → 7.4" },
