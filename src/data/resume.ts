@@ -6,6 +6,7 @@ export const resume = {
         phone: "9638140640",
         location: "Ahmedabad, Gujarat",
         handle: "dev-joshi",
+        url: "/dev_joshi_resume.pdf",
         summary: "DevOps Engineer with proven experience managing and optimizing cloud infrastructure across AWS, GCP, and Azure. Skilled in building and maintaining CI/CD pipelines, automating deployments, implementing monitoring solutions, and ensuring security compliance. Adept at collaborating with cross-functional teams to deliver scalable, cost-efficient, and high-performance solutions.",
         profiles: [
             {
@@ -70,12 +71,15 @@ export const resume = {
             { name: "AWS (Advanced)", level: 95 },
             { name: "Azure", level: 80 },
             { name: "GCP", level: 70 },
+            { name: "Oracle Cloud", level: 60 },
         ],
-        containerization: ["Docker", "Kubernetes (K8s)", "Helm", "OpenShift", "EKS/AKS"],
+        containerization: ["Docker", "Kubernetes (K8s)", "Helm", "OpenShift", "EKS/AKS", "GKE AutoPilot"],
         iac: ["Terraform (Expert)", "Ansible", "CloudFormation", "Pulumi"],
-        cicd: ["Jenkins", "GitLab CI", "GitHub Actions"],
+        cicd: ["Jenkins", "GitLab CI", "GitHub Actions", "ArgoCD"],
         scripting: ["Python", "Bash"],
         observability: ["Prometheus", "Grafana", "Datadog", "ELK Stack"],
+        databases: ["Oracle DB", "MongoDB", "PostgreSQL"],
+        platforms: ["Liferay DXP", "Kafka"],
     },
 
     projects: [
@@ -84,7 +88,7 @@ export const resume = {
             description: "Migrated a mission-critical employee portal from Liferay DXP 7.2 to 7.4 in a high-security, air-gapped environment. Achieved high availability with a Layer 7 clustered architecture.",
             category: "devops",
             tags: ["Liferay DXP", "Oracle DB", "On-Premise", "High Availability", "Migration"],
-            image: "/images/liferay-logo.png",
+            image: "/images/liferay-vector-logo.svg",
             link: "#",
             cta: "View Case Study",
             details: {

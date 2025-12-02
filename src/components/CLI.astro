@@ -72,7 +72,9 @@ import { resume } from '../data/resume';
                     ...resume.skills.cloud.map(s => s.name),
                     ...resume.skills.containerization,
                     ...resume.skills.iac,
-                    ...resume.skills.cicd
+                    ...resume.skills.cicd,
+                    ...(resume.skills.databases || []),
+                    ...(resume.skills.platforms || [])
                 ];
                 return `<div class="text-slate-300 flex flex-wrap gap-2">
                     ${allSkills.map(s => `<span class="px-2 py-0.5 bg-slate-800 rounded text-green-400">${s}</span>`).join('')}
@@ -96,10 +98,10 @@ import { resume } from '../data/resume';
         contact: {
             desc: 'Get in touch',
             action: () => {
+                const linkedIn = resume.basics.profiles.find(p => p.network === 'LinkedIn');
                 return `<div class="text-slate-300">
                     <div><span class="text-yellow-400 w-20 inline-block">Email:</span> <a href="mailto:${resume.basics.email}" class="text-blue-400 hover:underline">${resume.basics.email}</a></div>
-                    <div><span class="text-yellow-400 w-20 inline-block">GitHub:</span> <a href="${resume.basics.profiles.find(p => p.network === 'GitHub')?.url}" target="_blank" class="text-blue-400 hover:underline">github.com/alex</a></div>
-                    <div><span class="text-yellow-400 w-20 inline-block">LinkedIn:</span> <a href="${resume.basics.profiles.find(p => p.network === 'LinkedIn')?.url}" target="_blank" class="text-blue-400 hover:underline">linkedin.com/in/alex</a></div>
+                    ${linkedIn ? `<div><span class="text-yellow-400 w-20 inline-block">LinkedIn:</span> <a href="${linkedIn.url}" target="_blank" class="text-blue-400 hover:underline">${linkedIn.username}</a></div>` : ''}
                 </div>`;
             }
         },
