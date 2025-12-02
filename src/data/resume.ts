@@ -70,13 +70,86 @@ export const resume = {
         scripting: ["Python", "Bash"],
         observability: ["Prometheus", "Grafana", "Datadog", "ELK Stack"],
     },
+
     projects: [
+        {
+            name: "Intranet Portal Migration & Platform Modernization",
+            description: "Migrated a mission-critical employee portal from Liferay DXP 7.2 to 7.4 in a high-security, air-gapped environment. Achieved high availability with a Layer 7 clustered architecture.",
+            category: "devops",
+            tags: ["Liferay DXP", "Oracle DB", "On-Premise", "High Availability", "Migration"],
+            image: "/images/intranet-migration.jpg",
+            link: "#",
+            cta: "View Case Study",
+            details: {
+                challenge: "Migrating a mission-critical portal in a strict air-gapped environment with no CI/CD or observability. Incompatible Oracle database schemas and custom locale requirements (ar_AE) posed significant risks.",
+                strategy: "Pivoted from automation-first to a process-first governance approach. Implemented a two-stage migration protocol (Baseline + Verification) and a Layer 7 clustered architecture for high availability.",
+                implementation: [
+                    "Architecture: Designed a two-node Liferay DXP 7.4 cluster behind a Layer 7 Load Balancer.",
+                    "Migration: Executed a two-stage protocol: Native Liferay upgrade followed by custom SQL integrity checks.",
+                    "Localization: Manually configured and verified custom ar_AE locale support.",
+                    "Governance: Established strict manual deployment checklists validated by the Change Advisory Board (CAB)."
+                ],
+                metrics: [
+                    { label: "Data Fidelity", value: "100%", change: "7.2 → 7.4" },
+                    { label: "Availability", value: "High", change: "Clustered Setup" },
+                    { label: "Downtime Risk", value: "Minimized", change: "Resilient Arch" }
+                ]
+            }
+        },
+        {
+            name: "Cloud Architecture & Cost Optimization",
+            description: "Re-architected a fintech AI platform to eliminate 100% of external database costs and standardize deployments using GitOps on GKE AutoPilot.",
+            category: "cloud",
+            tags: ["GCP", "GKE AutoPilot", "ArgoCD", "MongoDB", "GitOps"],
+            image: "/images/cloud-architecture.jpg",
+            link: "#",
+            cta: "View Case Study",
+            details: {
+                challenge: "Ferret.ai faced bloated database spending due to vendor lock-in and operational inconsistency across environments. Deployments were prone to drift, requiring manual oversight.",
+                strategy: "Migrated to a self-managed, sharded MongoDB on GCE to slash costs to $0. Standardized deployments using GitOps (ArgoCD) on GKE AutoPilot for consistency and rapid deployment.",
+                implementation: [
+                    "Database: Architected self-managed MongoDB on GCE, reducing external vendor costs to $0.",
+                    "Orchestration: Migrated to GKE AutoPilot to offload node management and patching.",
+                    "GitOps: Implemented ArgoCD for consistent, automated deployments across 4 environments.",
+                    "Scaling: Configured HPA for auto-scaling based on CPU and custom metrics to ensure 99.99% uptime."
+                ],
+                metrics: [
+                    { label: "DB Cost Reduction", value: "100%", change: "Vendor → Self-Hosted" },
+                    { label: "Deployment Errors", value: "~0%", change: "Manual → GitOps" },
+                    { label: "Uptime", value: "99.99%", change: "High Availability" }
+                ]
+            }
+        },
+        {
+            name: "Real-Time Event Streaming Platform",
+            description: "Architected a high-volume social media webhook platform on AWS using Kafka and Docker Swarm to process 1,000+ events/minute with 99.9% uptime.",
+            category: "cloud",
+            tags: ["AWS", "Docker Swarm", "Kafka", "Python"],
+            image: "/images/event-streaming.jpg",
+            link: "#",
+            cta: "View Case Study",
+            details: {
+                challenge: "Handling a high-velocity, unpredictable firehose of webhook data (1,000+ events/minute) from social media APIs. The goal was to build a highly available platform capable of real-time processing with zero data loss.",
+                strategy: "Implemented an event-driven architecture using a self-managed Apache Kafka cluster as the durable message bus. Leveraged Docker Swarm for lightweight microservices orchestration and AWS (EC2, ASG, ALB) for infrastructure resilience.",
+                implementation: [
+                    "Architecture: Deployed multi-AZ AWS infrastructure with EC2, Auto Scaling Groups, and ALB for high availability.",
+                    "Streaming: Built a self-managed Apache Kafka cluster to decouple producers from consumers and ensure data durability.",
+                    "Orchestration: Used Docker Swarm to manage Python-based microservices for real-time data processing.",
+                    "Observability: Implemented custom monitoring for Consumer Group Lag and Broker Disk I/O to prevent bottlenecks."
+                ],
+                metrics: [
+                    { label: "Throughput", value: "1k+ ev/min", change: "Zero Backpressure" },
+                    { label: "Uptime", value: "99.9%", change: "High Availability" },
+                    { label: "Latency", value: "Real-time", change: "Immediate Scaling" }
+                ]
+            }
+        },
         {
             name: "Enterprise Cloud Migration",
             description: "Migrated a monolithic on-prem legacy application to a microservices architecture on AWS. Reduced downtime by 40% and infrastructure costs by 25%.",
             category: "cloud",
             tags: ["Terraform", "EC2", "RDS"],
-            image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop",
+            image: "/images/enterprise-migration.jpg",
             link: "#",
             cta: "View Case Study",
             details: {
@@ -122,7 +195,7 @@ export const resume = {
             description: "Implemented a full GitOps workflow using ArgoCD and GitHub Actions. Enabled developers to deploy to production in under 5 minutes with automated rollbacks.",
             category: "cicd",
             tags: ["ArgoCD", "GitHub Actions", "Kustomize"],
-            image: "https://images.unsplash.com/photo-1618401471353-b98afee0b2eb?q=80&w=2088&auto=format&fit=crop",
+            image: "/images/gitops-pipeline.jpg",
             link: "#",
             cta: "View Pipeline",
             details: {
