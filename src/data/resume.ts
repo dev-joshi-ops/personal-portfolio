@@ -7,6 +7,13 @@ export const resume = {
         location: "Ahmedabad, Gujarat",
         handle: "dev-joshi",
         summary: "DevOps Engineer with proven experience managing and optimizing cloud infrastructure across AWS, GCP, and Azure. Skilled in building and maintaining CI/CD pipelines, automating deployments, implementing monitoring solutions, and ensuring security compliance. Adept at collaborating with cross-functional teams to deliver scalable, cost-efficient, and high-performance solutions.",
+        profiles: [
+            {
+                network: "LinkedIn",
+                username: "dev-joshi",
+                url: "https://www.linkedin.com/in/dev-joshi-b82a04150"
+            }
+        ]
     },
     education: [
         {
