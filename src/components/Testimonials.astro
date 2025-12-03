@@ -1,0 +1,86 @@
+---
+const testimonials = [
+  {
+    quote: "Alex transformed our legacy infrastructure into a modern, auto-scaling masterpiece. Our cloud costs dropped by 25% while uptime hit 99.99%.",
+    author: "Marcus Chen",
+    role: "CTO, FinTech Pulse",
+    image: "https://i.pravatar.cc/150?u=marcus"
+  },
+  {
+    quote: "The GitOps pipeline Alex built is a game-changer. Our deployment frequency went from weekly to daily, with zero downtime.",
+    author: "Sarah Jenkins",
+    role: "VP of Engineering, CloudScale",
+    image: "https://i.pravatar.cc/150?u=sarah"
+  },
+  {
+    quote: "Reliability was our biggest pain point. Alex implemented a robust monitoring stack that gives us visibility we never thought possible.",
+    author: "David Ross",
+    role: "Director of Ops, OmniStream",
+    image: "https://i.pravatar.cc/150?u=david"
+  }
+];
+---
+
+<section id="testimonials" class="py-20 bg-slate-50 dark:bg-navy-900 transition-colors duration-300 overflow-hidden relative">
+    <!-- Background Elements -->
+    <div class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+        <div class="absolute top-[-10%] right-[-5%] w-96 h-96 bg-blue-500/5 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-[-10%] left-[-5%] w-96 h-96 bg-purple-500/5 rounded-full blur-3xl"></div>
+    </div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <!-- Section Header -->
+    <div class="text-center mb-16">
+      <h2 class="text-3xl md:text-5xl font-bold text-slate-900 dark:text-white mb-4 tracking-tight">
+        Trusted by Engineering Teams
+      </h2>
+      <p class="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
+        Collaborating with industry leaders to deliver robust infrastructure solutions.
+      </p>
+    </div>
+
+    <!-- Testimonials Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      {testimonials.map((testimonial) => (
+        <div class="bg-white dark:bg-navy-800 rounded-2xl p-8 shadow-lg shadow-slate-200/50 dark:shadow-none border border-slate-100 dark:border-white/5 relative group hover:-translate-y-1 transition-all duration-300">
+          
+          <!-- Large Quote Icon -->
+          <div class="absolute top-6 right-8 text-blue-100 dark:text-blue-500/10 font-serif text-8xl leading-none select-none pointer-events-none group-hover:scale-110 transition-transform duration-300">
+            &rdquo;
+          </div>
+
+          <!-- Content -->
+          <div class="relative z-10 h-full flex flex-col justify-between">
+            <p class="text-slate-700 dark:text-slate-300 text-lg italic mb-8 leading-relaxed">
+              "{testimonial.quote}"
+            </p>
+
+            <div class="flex items-center gap-4">
+              <div class="relative">
+                <div class="w-12 h-12 rounded-full overflow-hidden border-2 border-white dark:border-navy-700 shadow-md">
+                  <img 
+                    src={testimonial.image} 
+                    alt={testimonial.author}
+                    class="w-full h-full object-cover"
+                    loading="lazy"
+                  />
+                </div>
+                <!-- Online Indicator -->
+                <div class="absolute bottom-0 right-0 w-3 h-3 bg-green-500 border-2 border-white dark:border-navy-800 rounded-full"></div>
+              </div>
+              
+              <div>
+                <h4 class="font-bold text-slate-900 dark:text-white text-base">
+                  {testimonial.author}
+                </h4>
+                <p class="text-sm text-slate-500 dark:text-slate-400">
+                  {testimonial.role}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
