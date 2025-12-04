@@ -2,6 +2,22 @@
 import { resume } from '../data/resume';
 
 const categories = ["All", "Cloud", "DevOps"];
+
+// Reorder and modify projects
+let projects = [...resume.projects];
+const targetProjectName = "Cloud Architecture & Cost Optimization";
+const targetIndex = projects.findIndex(p => p.name === targetProjectName);
+
+if (targetIndex > -1) {
+  const targetProject = { ...projects[targetIndex] };
+  // Update description
+  targetProject.description = "Achieved 100% cost reduction on external DB dependencies and implemented automated scale-down policies, significantly improving cost-efficiency for a major finance client.";
+  
+  // Remove from current position
+  projects.splice(targetIndex, 1);
+  // Add to front
+  projects.unshift(targetProject);
+}
 ---
 
 <section id="projects" class="py-24 bg-slate-50 dark:bg-navy-900 transition-colors duration-300">
@@ -27,7 +43,9 @@ const categories = ["All", "Cloud", "DevOps"];
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="projects-grid">
-      {resume.projects.map((project) => (
+      {projects.map((project) => {
+        const isRoiProject = project.name === "Cloud Architecture & Cost Optimization";
+        return (
         <div class="project-card group bg-white dark:bg-navy-800 rounded-2xl overflow-hidden border border-slate-200 dark:border-white/5 hover:border-primary/30 transition-all duration-300 shadow-lg shadow-slate-200/50 dark:shadow-none hover:shadow-2xl hover:shadow-primary/5 flex flex-col" data-category={project.category}>
           
           <!-- Image Container -->
@@ -38,7 +56,19 @@ const categories = ["All", "Cloud", "DevOps"];
               alt={project.name} 
               class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
             />
-            <div class="absolute top-4 right-4 z-20">
+            
+            {isRoiProject && (
+                <div class="absolute top-0 right-0 z-30">
+                    <div class="bg-green-500 text-white text-xs font-bold px-3 py-2 rounded-bl-xl shadow-lg flex items-center gap-1 animate-pulse">
+                        <span>ROI FOCUS</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                        </svg>
+                    </div>
+                </div>
+            )}
+
+            <div class={`absolute top-4 ${isRoiProject ? 'left-4' : 'right-4'} z-20`}>
               <span class="px-3 py-1 bg-white/90 dark:bg-navy-900/90 backdrop-blur-md text-xs font-mono text-slate-900 dark:text-white rounded-full border border-slate-200 dark:border-white/10 shadow-sm">
                 {project.category}
               </span>
@@ -65,12 +95,19 @@ const categories = ["All", "Cloud", "DevOps"];
             </div>
 
             <!-- CTA -->
-            <a href={`/projects/${project.name.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, '')}`} class="w-full py-3 rounded-xl border border-slate-200 dark:border-white/10 text-slate-600 dark:text-slate-300 text-sm font-medium hover:bg-slate-50 dark:hover:bg-white hover:text-primary dark:hover:text-navy-900 transition-all text-center group-hover:border-primary/30">
+            <a 
+                href={`/projects/${project.name.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, '')}`} 
+                class={`w-full py-3 rounded-xl border text-sm font-medium transition-all text-center group-hover:border-primary/30 ${
+                    isRoiProject 
+                    ? 'bg-primary/10 border-primary text-primary hover:bg-primary hover:text-white shadow-lg shadow-primary/20' 
+                    : 'border-slate-200 dark:border-white/10 text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-white hover:text-primary dark:hover:text-navy-900'
+                }`}
+            >
               {project.cta}
             </a>
           </div>
         </div>
-      ))}
+      )})}
     </div>
   </div>
 </section>

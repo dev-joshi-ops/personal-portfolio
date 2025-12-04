@@ -11,12 +11,6 @@ const testimonials = [
     author: "Gavin Wang",
     role: "CTO | Head of Engineering",
     image: "https://ui-avatars.com/api/?name=Gavin+Wang&background=10B981&color=fff"
-  },
-  {
-    quote: "Reliability was our biggest pain point. Dev implemented a robust monitoring stack that gives us visibility we never thought possible.",
-    author: "David Ross",
-    role: "Director of Ops, OmniStream",
-    image: "https://i.pravatar.cc/150?u=david"
   }
 ];
 
@@ -47,7 +41,7 @@ const allTestimonials = [...testimonials, ...testimonials];
         <div class="carousel-container overflow-hidden">
             <div class="carousel-track flex transition-transform duration-500 ease-out cursor-grab active:cursor-grabbing">
                 {allTestimonials.map((testimonial) => (
-                    <div class="carousel-slide w-full md:w-1/3 flex-shrink-0 p-4 select-none">
+                    <div class="carousel-slide w-full md:w-1/2 flex-shrink-0 p-4 select-none">
                         <div class="bg-white dark:bg-navy-800 rounded-2xl p-8 shadow-lg shadow-slate-200/50 dark:shadow-none border border-slate-200 dark:border-white/5 relative group/card hover:-translate-y-1 transition-all duration-300 h-full flex flex-col justify-between">
                         
                             <!-- Large Quote Icon -->
@@ -121,11 +115,11 @@ const allTestimonials = [...testimonials, ...testimonials];
         if (!track || slides.length === 0) return;
 
         let currentIndex = 0;
-        const totalOriginalSlides = 3; 
+        const totalOriginalSlides = 2; 
         const totalSlides = slides.length;
         let autoPlayInterval;
 
-        const getSlidesPerView = () => window.innerWidth >= 768 ? 3 : 1;
+        const getSlidesPerView = () => window.innerWidth >= 768 ? 2 : 1;
 
         function updateCarousel(index) {
             const slidesPerView = getSlidesPerView();
