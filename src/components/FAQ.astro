@@ -1,0 +1,102 @@
+---
+const faqs = [
+  {
+    question: "Are you available for full-time roles or just consulting?",
+    answer: "I am currently open to both freelance consulting contracts and high-impact full-time opportunities. My ideal role involves cloud architecture design, Kubernetes orchestration, or leading DevOps transformations.",
+    isOpen: true
+  },
+  {
+    question: "What is your primary tech stack?",
+    answer: "My core stack includes AWS/Azure, Kubernetes, Terraform, Docker, and CI/CD pipelines using GitHub Actions or Jenkins. I'm also proficient in Python and Go for automation.",
+    isOpen: false
+  },
+  {
+    question: "Do you offer infrastructure audits?",
+    answer: "Yes, I conduct comprehensive infrastructure audits to identify security vulnerabilities, cost optimization opportunities, and performance bottlenecks.",
+    isOpen: false
+  },
+  {
+    question: "Can you work with legacy on-prem systems?",
+    answer: "Absolutely. I have extensive experience modernizing legacy systems and migrating on-premise infrastructure to the cloud using hybrid approaches.",
+    isOpen: false
+  }
+];
+---
+
+<section id="faq" class="py-24 bg-slate-50 dark:bg-navy-900 transition-colors duration-300">
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+    <h2 class="text-3xl md:text-4xl font-bold text-center text-slate-900 dark:text-white mb-12 tracking-tight">
+      Frequently Asked Questions
+    </h2>
+
+    <div class="space-y-4">
+      {faqs.map((faq, index) => (
+        <div class="faq-item group">
+          <button
+            class={`w-full flex items-center justify-between p-6 text-left bg-white dark:bg-navy-800 border border-slate-200 dark:border-white/5 hover:border-primary/30 dark:hover:border-primary/30 transition-all duration-300 focus:outline-none shadow-sm dark:shadow-none ${faq.isOpen ? 'rounded-t-xl border-b-0' : 'rounded-xl'}`}
+            aria-expanded={faq.isOpen}
+            aria-controls={`faq-answer-${index}`}
+          >
+            <span class="text-lg font-semibold text-slate-900 dark:text-white group-hover:text-primary transition-colors">
+              {faq.question}
+            </span>
+            <span class="ml-6 flex-shrink-0 text-primary">
+              <svg 
+                class={`w-6 h-6 transform transition-transform duration-300 ${faq.isOpen ? 'rotate-180' : ''} icon-chevron`} 
+                fill="none" 
+                viewBox="0 0 24 24" 
+                stroke="currentColor"
+              >
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </span>
+          </button>
+          <div 
+            id={`faq-answer-${index}`}
+            class={`overflow-hidden transition-all duration-300 ease-in-out ${faq.isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}
+          >
+            <div class="p-6 pt-0 text-slate-600 dark:text-slate-400 leading-relaxed border-x border-b border-slate-200 dark:border-white/5 rounded-b-xl bg-white dark:bg-navy-800">
+              {faq.answer}
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const faqItems = document.querySelectorAll('.faq-item');
+
+    faqItems.forEach(item => {
+      const button = item.querySelector('button');
+      const answer = item.querySelector('div[id^="faq-answer-"]');
+      const icon = item.querySelector('.icon-chevron');
+
+      button.addEventListener('click', () => {
+        const isExpanded = button.getAttribute('aria-expanded') === 'true';
+        
+        button.setAttribute('aria-expanded', !isExpanded);
+        
+        if (!isExpanded) {
+            answer.classList.remove('max-h-0', 'opacity-0');
+            answer.classList.add('max-h-96', 'opacity-100');
+            icon.classList.add('rotate-180');
+            
+            // Update button styles for open state
+            button.classList.remove('rounded-xl');
+            button.classList.add('rounded-t-xl', 'border-b-0');
+        } else {
+            answer.classList.add('max-h-0', 'opacity-0');
+            answer.classList.remove('max-h-96', 'opacity-100');
+            icon.classList.remove('rotate-180');
+            
+            // Revert button styles
+            button.classList.remove('rounded-t-xl', 'border-b-0');
+            button.classList.add('rounded-xl');
+        }
+      });
+    });
+  });
+</script>
