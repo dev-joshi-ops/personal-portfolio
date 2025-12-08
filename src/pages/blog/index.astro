@@ -1,0 +1,128 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Footer from '../../components/Footer.astro';
+import { resume } from '../../data/resume';
+
+const posts = await Astro.glob('./*.md');
+posts.sort((a, b) => new Date(b.frontmatter.date).valueOf() - new Date(a.frontmatter.date).valueOf());
+
+const featuredPost = posts.find(post => post.frontmatter.featured) || posts[0];
+const otherPosts = posts.filter(post => post !== featuredPost);
+---
+
+<Layout title={`Blog | ${resume.basics.name}`}>
+  <!-- Custom Blog Header -->
+  <nav class="fixed top-0 w-full z-50 bg-slate-50/80 dark:bg-navy-900/80 backdrop-blur-md border-b border-slate-200 dark:border-white/5 transition-colors duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        <!-- Back Link -->
+        <a href="/" class="flex items-center gap-2 text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-white transition-colors group">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="group-hover:-translate-x-1 transition-transform"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
+            <span class="font-medium">Back to Portfolio</span>
+        </a>
+
+        <!-- Search Bar -->
+        <div class="relative hidden sm:block w-64">
+            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-slate-400"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+            </div>
+            <input 
+                type="text" 
+                id="search-input"
+                placeholder="Search articles..." 
+                class="block w-full pl-10 pr-3 py-2 border border-slate-200 dark:border-white/10 rounded-full leading-5 bg-white dark:bg-navy-800 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary sm:text-sm transition-all shadow-sm"
+            >
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main class="pt-32 pb-16 min-h-screen bg-slate-50 dark:bg-navy-900 transition-colors duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Header Text -->
+      <div class="text-center mb-16 max-w-3xl mx-auto">
+        <h1 class="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white mb-4 tracking-tight">Engineering Insights</h1>
+        <p class="text-slate-600 dark:text-slate-400 text-lg leading-relaxed">
+            Deep dives into cloud architecture, scalable infrastructure, and modern DevOps practices. Sharing real-world solutions to complex engineering challenges.
+        </p>
+      </div>
+
+      <!-- Post Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="posts-grid">
+        {posts.map((post) => (
+          <article class="post-card group flex flex-col h-full">
+            <!-- Image Container -->
+            <a href={post.url} class="block relative h-44 rounded-2xl overflow-hidden mb-5 shadow-md shadow-slate-200/30 dark:shadow-none hover:shadow-lg hover:shadow-slate-200/50 dark:hover:shadow-none transition-shadow">
+              {post.frontmatter.image ? (
+                  <img 
+                  src={post.frontmatter.image} 
+                  alt={post.frontmatter.title} 
+                  class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
+                  />
+              ) : (
+                  <div class="w-full h-full bg-gradient-to-br from-slate-100 to-slate-200 dark:from-navy-800 dark:to-navy-900 flex items-center justify-center">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-slate-400 dark:text-slate-600"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg>
+                  </div>
+              )}
+            </a>
+
+            <!-- Content -->
+            <div class="flex flex-col flex-grow">
+              <div class="flex items-center gap-3 mb-4">
+                  <span class="px-2.5 py-0.5 rounded text-xs font-bold uppercase tracking-wide {post.frontmatter.category === 'Database' ? 'bg-purple-500/10 text-purple-500' : post.frontmatter.category === 'CI/CD' ? 'bg-orange-500/10 text-orange-500' : post.frontmatter.category === 'Security' ? 'bg-red-500/10 text-red-500' : 'bg-indigo-500/10 text-indigo-500'}">
+                    {post.frontmatter.category || 'Tech'}
+                  </span>
+                  <span class="text-slate-500 dark:text-slate-500 text-xs">
+                    {post.frontmatter.date}
+                  </span>
+              </div>
+
+              <h3 class="post-title text-lg font-bold text-slate-900 dark:text-white mb-3 leading-tight line-clamp-2">
+                <a href={post.url} class="hover:text-primary transition-colors">
+                  {post.frontmatter.title}
+                </a>
+              </h3>
+              
+              <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-5 flex-grow line-clamp-3">
+                {post.frontmatter.description}
+              </p>
+
+              <!-- CTA -->
+              <a 
+                  href={post.url} 
+                  class="inline-flex items-center gap-2 text-sm font-bold text-primary hover:text-sky-400 transition-colors mt-auto group"
+              >
+                Read Article
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-x-1 transition-transform"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+              </a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </main>
+  <Footer />
+</Layout>
+
+<script>
+    // Simple client-side search
+    const searchInput = document.getElementById('search-input');
+    const postsGrid = document.getElementById('posts-grid');
+    const posts = document.querySelectorAll('.post-card');
+
+    if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+            const searchTerm = (e.target as HTMLInputElement).value.toLowerCase();
+
+            posts.forEach(post => {
+                const title = post.querySelector('.post-title')?.textContent?.toLowerCase() || '';
+                if (title.includes(searchTerm)) {
+                    (post as HTMLElement).style.display = 'flex';
+                } else {
+                    (post as HTMLElement).style.display = 'none';
+                }
+            });
+        });
+    }
+</script>

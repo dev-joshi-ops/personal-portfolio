@@ -1,0 +1,94 @@
+---
+import Layout from './Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+
+const { frontmatter } = Astro.props;
+---
+
+<Layout title={frontmatter.title}>
+  <Navbar />
+  <main class="pt-24 pb-16">
+    <article class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Back and Actions Bar -->
+      <div class="flex items-center justify-between py-8 border-b border-slate-200 dark:border-white/5 mb-10">
+        <a href="/blog" class="flex items-center gap-2 text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-white transition-colors group">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="group-hover:-translate-x-1 transition-transform"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
+            <span class="font-medium">Back to Blogs</span>
+        </a>
+        
+        <div class="flex items-center gap-4">
+            <button id="share-btn" class="text-slate-500 dark:text-slate-400 hover:text-primary dark:hover:text-white transition-colors p-2 rounded-full hover:bg-slate-100 dark:hover:bg-white/5" aria-label="Share">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" x2="15.42" y1="13.51" y2="17.49"/><line x1="15.41" x2="8.59" y1="6.51" y2="10.49"/></svg>
+            </button>
+        </div>
+      </div>
+      <header class="mb-10 text-left">
+        <div class="flex items-center justify-start gap-4 text-sm text-slate-600 dark:text-slate-400 mb-4">
+          <span class="bg-primary/10 text-primary px-3 py-1 rounded-full font-medium">{frontmatter.category || 'Tech'}</span>
+          <span>{frontmatter.date}</span>
+          <span>•</span>
+          <span>{frontmatter.readTime}</span>
+        </div>
+        <h1 class="text-3xl md:text-5xl font-bold text-slate-900 dark:text-white mb-6 tracking-tight">{frontmatter.title}</h1>
+        <div class="flex items-center justify-start gap-3">
+            <div class="w-10 h-10 rounded-full bg-slate-200 dark:bg-navy-800 overflow-hidden">
+                <!-- Placeholder avatar or user image -->
+                <svg class="w-full h-full text-slate-400" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+                </svg>
+            </div>
+            <div class="text-left">
+                <p class="text-sm font-medium text-slate-900 dark:text-white">{frontmatter.author}</p>
+                <p class="text-xs text-slate-500 dark:text-slate-400">DevOps Engineer</p>
+            </div>
+        </div>
+      </header>
+
+      <div class="prose prose-lg prose-slate dark:prose-invert max-w-none">
+        <slot />
+      </div>
+
+      <!-- Medium Link -->
+      <div class="mt-12 pt-8 border-t border-slate-200 dark:border-white/5">
+        <a href="https://tinyurl.com/devjoshimedium" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 p-4 rounded-xl transition-all group shadow-lg hover:shadow-xl hover:-translate-y-0.5 bg-slate-900 text-white shadow-slate-900/20 hover:bg-slate-800 dark:bg-white dark:text-slate-900 dark:hover:bg-slate-100">
+            <span class="font-medium opacity-90">Read more articles on</span>
+            <span class="font-bold flex items-center gap-1">
+                Medium
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-x-1 transition-transform"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></svg>
+            </span>
+        </a>
+      </div>
+    </article>
+  </main>
+  <Footer />
+</Layout>
+
+<script>
+    const shareBtn = document.getElementById('share-btn');
+    
+    if (shareBtn) {
+        shareBtn.addEventListener('click', async () => {
+            if (navigator.share) {
+                try {
+                    await navigator.share({
+                        title: document.title,
+                        text: `Check out this article: ${document.title}`,
+                        url: window.location.href
+                    });
+                } catch (err) {
+                    console.error('Error sharing:', err);
+                }
+            } else {
+                // Fallback to clipboard copy
+                try {
+                    await navigator.clipboard.writeText(window.location.href);
+                    // Optional: Show a toast or tooltip here
+                    alert('Link copied to clipboard!');
+                } catch (err) {
+                    console.error('Failed to copy:', err);
+                }
+            }
+        });
+    }
+</script>
