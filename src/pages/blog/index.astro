@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
 import Footer from '../../components/Footer.astro';
 import { resume } from '../../data/resume';
 
@@ -12,30 +13,7 @@ const otherPosts = posts.filter(post => post !== featuredPost);
 
 <Layout title={`Blog | ${resume.basics.name}`}>
   <!-- Custom Blog Header -->
-  <nav class="fixed top-0 w-full z-50 bg-slate-50/80 dark:bg-navy-900/80 backdrop-blur-md border-b border-slate-200 dark:border-white/5 transition-colors duration-300">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex items-center justify-between h-20">
-        <!-- Back Link -->
-        <a href="/" class="flex items-center gap-2 text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-white transition-colors group">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="group-hover:-translate-x-1 transition-transform"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
-            <span class="font-medium">Back to Portfolio</span>
-        </a>
-
-        <!-- Search Bar -->
-        <div class="relative hidden sm:block w-64">
-            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-slate-400"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-            </div>
-            <input 
-                type="text" 
-                id="search-input"
-                placeholder="Search articles..." 
-                class="block w-full pl-10 pr-3 py-2 border border-slate-200 dark:border-white/10 rounded-full leading-5 bg-white dark:bg-navy-800 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary sm:text-sm transition-all shadow-sm"
-            >
-        </div>
-      </div>
-    </div>
-  </nav>
+  <Navbar />
 
   <main class="pt-32 pb-16 min-h-screen bg-slate-50 dark:bg-navy-900 transition-colors duration-300">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -43,9 +21,22 @@ const otherPosts = posts.filter(post => post !== featuredPost);
       <!-- Header Text -->
       <div class="text-center mb-16 max-w-3xl mx-auto">
         <h1 class="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white mb-4 tracking-tight">Engineering Insights</h1>
-        <p class="text-slate-600 dark:text-slate-400 text-lg leading-relaxed">
+        <p class="text-slate-600 dark:text-slate-400 text-lg leading-relaxed mb-8">
             Deep dives into cloud architecture, scalable infrastructure, and modern DevOps practices. Sharing real-world solutions to complex engineering challenges.
         </p>
+
+        <!-- Search Bar -->
+        <div class="relative max-w-md mx-auto">
+            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-slate-400"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+            </div>
+            <input 
+                type="text" 
+                id="search-input"
+                placeholder="Search articles..." 
+                class="block w-full pl-10 pr-4 py-3 border border-slate-200 dark:border-white/10 rounded-full leading-5 bg-white dark:bg-navy-800 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all shadow-sm"
+            >
+        </div>
       </div>
 
       <!-- Post Grid -->
