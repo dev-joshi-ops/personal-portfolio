@@ -13,6 +13,11 @@ export const resume = {
                 network: "LinkedIn",
                 username: "dev-joshi",
                 url: "https://www.linkedin.com/in/dev-joshi-b82a04150"
+            },
+            {
+                network: "GitHub",
+                username: "dev-joshi-ops",
+                url: "https://github.com/dev-joshi-ops"
             }
         ]
     },
