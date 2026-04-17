@@ -28,7 +28,8 @@ posts.sort((a, b) => new Date(b.frontmatter.date).valueOf() - new Date(a.frontma
             {post.frontmatter.image ? (
                 <img 
                 src={post.frontmatter.image} 
-                alt={post.frontmatter.title} 
+                alt={`Cover image for article: ${post.frontmatter.title}`} 
+                loading="lazy"
                 class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
                 />
             ) : (

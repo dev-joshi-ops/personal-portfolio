@@ -11,7 +11,10 @@ const featuredPost = posts.find(post => post.frontmatter.featured) || posts[0];
 const otherPosts = posts.filter(post => post !== featuredPost);
 ---
 
-<Layout title={`Blog | ${resume.basics.name}`}>
+<Layout
+  title={`DevOps Blog — Cloud, Kubernetes & Infrastructure Insights | ${resume.basics.name}`}
+  description="Engineering articles on cloud architecture, Kubernetes, CI/CD, database scaling, and DevOps best practices by Dev Joshi."
+>
   <!-- Custom Blog Header -->
   <Navbar />
 
@@ -48,7 +51,8 @@ const otherPosts = posts.filter(post => post !== featuredPost);
               {post.frontmatter.image ? (
                   <img 
                   src={post.frontmatter.image} 
-                  alt={post.frontmatter.title} 
+                  alt={`Cover image for article: ${post.frontmatter.title}`} 
+                  loading="lazy"
                   class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
                   />
               ) : (
@@ -69,11 +73,11 @@ const otherPosts = posts.filter(post => post !== featuredPost);
                   </span>
               </div>
 
-              <h3 class="post-title text-lg font-bold text-slate-900 dark:text-white mb-3 leading-tight line-clamp-2">
+              <h2 class="post-title text-lg font-bold text-slate-900 dark:text-white mb-3 leading-tight line-clamp-2">
                 <a href={post.url} class="hover:text-primary transition-colors">
                   {post.frontmatter.title}
                 </a>
-              </h3>
+              </h2>
               
               <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-5 flex-grow line-clamp-3">
                 {post.frontmatter.description}
