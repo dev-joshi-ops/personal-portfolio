@@ -46,10 +46,11 @@ const fullOgImage = ogImage.startsWith("http") ? ogImage : `${siteUrl}${ogImage}
 		<meta name="twitter:image" content={fullOgImage} />
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
         <script is:inline>
             // Check for saved theme preference or system preference
-            if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            // Note: For Editorial DevOps, we default to Light mode as per design system focus
+            if (localStorage.theme === 'dark') {
                 document.documentElement.classList.add('dark');
             } else {
                 document.documentElement.classList.remove('dark');
@@ -86,12 +87,22 @@ const fullOgImage = ogImage.startsWith("http") ? ogImage : `${siteUrl}${ogImage}
             });
         </script>
 	</head>
-	<body class="bg-slate-50 text-slate-900 dark:bg-navy-900 dark:text-slate-300 font-sans antialiased selection:bg-primary selection:text-white">
+	<body class="bg-editorial-surface text-editorial-text dark:bg-editorial-surface-dark dark:text-editorial-text-dark font-sans antialiased selection:bg-editorial-primary selection:text-white dark:selection:bg-editorial-primary-dark">
 		<slot />
 	</body>
 </html>
 
 <style is:global>
+    /* Strictly Square Rule */
+    * {
+        border-radius: 0 !important;
+    }
+
+    /* Offset for fixed navbar when scrolling to sections */
+    section[id] {
+        scroll-margin-top: 6rem;
+    }
+
     html.lenis {
         height: auto;
     }
@@ -128,19 +139,21 @@ const fullOgImage = ogImage.startsWith("http") ? ogImage : `${siteUrl}${ogImage}
 		width: 10px;
 	}
 	::-webkit-scrollbar-track {
-		background: #f1f5f9;
+		background: #fcf9f8;
 	}
     :global(.dark) ::-webkit-scrollbar-track {
-        background: #0B1120;
+        background: #0f0f0f;
     }
 	::-webkit-scrollbar-thumb {
-		background: #cbd5e1;
-		border-radius: 5px;
+		background: #e4e2e2;
 	}
     :global(.dark) ::-webkit-scrollbar-thumb {
-        background: #1e293b;
+        background: #2d2d2d;
     }
 	::-webkit-scrollbar-thumb:hover {
-		background: #0EA5E9;
+		background: #4d44e3;
 	}
+    :global(.dark) ::-webkit-scrollbar-thumb:hover {
+        background: #7c73ff;
+    }
 </style>
