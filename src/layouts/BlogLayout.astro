@@ -6,7 +6,12 @@ import Footer from '../components/Footer.astro';
 const { frontmatter } = Astro.props;
 ---
 
-<Layout title={frontmatter.title}>
+<Layout
+  title={frontmatter.title}
+  description={frontmatter.description}
+  ogImage={frontmatter.image || "/images/hero-devops.png"}
+  ogType="article"
+>
   <Navbar />
   <main class="pt-24 pb-16">
     <article class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">

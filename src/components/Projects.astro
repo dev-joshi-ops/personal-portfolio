@@ -53,7 +53,8 @@ if (targetIndex > -1) {
             <div class="absolute inset-0 bg-navy-900/20 group-hover:bg-transparent transition-colors z-10"></div>
             <img 
               src={project.image} 
-              alt={project.name} 
+              alt={`${project.name} — project screenshot`} 
+              loading="lazy"
               class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
             />
             

@@ -1,20 +1,49 @@
 ---
 interface Props {
 	title: string;
+	description?: string;
+	canonicalUrl?: string;
+	ogImage?: string;
+	ogType?: string;
 }
 
-const { title } = Astro.props;
+const {
+	title,
+	description = "Dev Joshi — DevOps Engineer specializing in cloud infrastructure, Kubernetes, CI/CD pipelines, and scalable automation. Available for consulting and full-time roles.",
+	canonicalUrl,
+	ogImage = "/images/hero-devops.png",
+	ogType = "website",
+} = Astro.props;
+
+const siteUrl = "https://dev-joshi.pages.dev";
+const fullOgImage = ogImage.startsWith("http") ? ogImage : `${siteUrl}${ogImage}`;
 ---
 
 <!doctype html>
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="description" content="DevOps Engineer Portfolio" />
+		<meta name="description" content={description} />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/png" href="/favicon.png" />
 		<meta name="generator" content={Astro.generator} />
+		<meta name="google-site-verification" content="mfo8Gb1-h3iqKGtmhlsTgF9q8d0ZoVo3EgnUVcoL57k" />
 		<title>{title}</title>
+		{canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
+
+		<!-- Open Graph / Facebook -->
+		<meta property="og:type" content={ogType} />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:image" content={fullOgImage} />
+		<meta property="og:url" content={canonicalUrl || siteUrl} />
+		<meta property="og:site_name" content="Dev Joshi — DevOps Portfolio" />
+
+		<!-- Twitter Card -->
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={fullOgImage} />
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
