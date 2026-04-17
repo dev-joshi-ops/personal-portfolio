@@ -5,18 +5,26 @@ interface Props {
 	canonicalUrl?: string;
 	ogImage?: string;
 	ogType?: string;
+	keywords?: string;
+	jsonLd?: Record<string, any> | Record<string, any>[];
 }
 
 const {
 	title,
-	description = "Dev Joshi — DevOps Engineer specializing in cloud infrastructure, Kubernetes, CI/CD pipelines, and scalable automation. Available for consulting and full-time roles.",
+	description = "Dev Joshi — DevOps Engineer. Cloud infrastructure, Kubernetes, CI/CD & automation specialist. Available for consulting.",
 	canonicalUrl,
 	ogImage = "/images/hero-devops.png",
 	ogType = "website",
+	keywords = "DevOps Engineer, Cloud Infrastructure, Kubernetes, CI/CD, AWS, GCP, Azure, Terraform, Docker, DevOps Portfolio, Site Reliability, Infrastructure as Code, DevOps Consultant, Scalable Automation, Dev Joshi",
+	jsonLd,
 } = Astro.props;
 
 const siteUrl = "https://dev-joshi.pages.dev";
+const currentUrl = canonicalUrl || new URL(Astro.url.pathname, siteUrl).href;
 const fullOgImage = ogImage.startsWith("http") ? ogImage : `${siteUrl}${ogImage}`;
+
+// Normalize JSON-LD to array
+const jsonLdArray = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
 ---
 
 <!doctype html>
@@ -25,18 +33,22 @@ const fullOgImage = ogImage.startsWith("http") ? ogImage : `${siteUrl}${ogImage}
 		<meta charset="UTF-8" />
 		<meta name="description" content={description} />
 		<meta name="viewport" content="width=device-width" />
+		<meta name="keywords" content={keywords} />
+		<meta name="author" content="Dev Joshi" />
 		<link rel="icon" type="image/png" href="/favicon.png" />
 		<meta name="generator" content={Astro.generator} />
 		<meta name="google-site-verification" content="mfo8Gb1-h3iqKGtmhlsTgF9q8d0ZoVo3EgnUVcoL57k" />
 		<title>{title}</title>
-		{canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
+		<link rel="canonical" href={currentUrl} />
+		<link rel="sitemap" href="/sitemap-index.xml" />
+		<link rel="alternate" hreflang="en" href={currentUrl} />
 
 		<!-- Open Graph / Facebook -->
 		<meta property="og:type" content={ogType} />
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description} />
 		<meta property="og:image" content={fullOgImage} />
-		<meta property="og:url" content={canonicalUrl || siteUrl} />
+		<meta property="og:url" content={currentUrl} />
 		<meta property="og:site_name" content="Dev Joshi — DevOps Portfolio" />
 
 		<!-- Twitter Card -->
@@ -44,6 +56,11 @@ const fullOgImage = ogImage.startsWith("http") ? ogImage : `${siteUrl}${ogImage}
 		<meta name="twitter:title" content={title} />
 		<meta name="twitter:description" content={description} />
 		<meta name="twitter:image" content={fullOgImage} />
+
+		{/* JSON-LD Structured Data */}
+		{jsonLdArray.map((ld) => (
+			<script type="application/ld+json" set:html={JSON.stringify(ld)} />
+		))}
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -56,7 +73,7 @@ const fullOgImage = ogImage.startsWith("http") ? ogImage : `${siteUrl}${ogImage}
                 document.documentElement.classList.remove('dark');
             }
         </script>
-        <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script> 
+        <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js" defer></script>
         <script is:inline>
             document.addEventListener('DOMContentLoaded', () => {
                 const lenis = new Lenis({

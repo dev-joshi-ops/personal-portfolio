@@ -11,11 +11,92 @@ import CLI from '../components/CLI.astro';
 import Certifications from '../components/Certifications.astro';
 import Footer from '../components/Footer.astro';
 import { resume } from '../data/resume';
+
+const siteUrl = "https://dev-joshi.pages.dev";
+
+// Person Schema — enables Knowledge Panel
+const personSchema = {
+	"@context": "https://schema.org",
+	"@type": "Person",
+	"name": "Dev Joshi",
+	"jobTitle": "DevOps Engineer",
+	"url": siteUrl,
+	"image": `${siteUrl}/images/hero-devops.png`,
+	"email": "mailto:joshid647@gmail.com",
+	"address": {
+		"@type": "PostalAddress",
+		"addressLocality": "Ahmedabad",
+		"addressRegion": "Gujarat",
+		"addressCountry": "IN"
+	},
+	"sameAs": [
+		resume.basics.profiles.find(p => p.network === 'LinkedIn')?.url,
+		resume.basics.profiles.find(p => p.network === 'GitHub')?.url
+	].filter(Boolean),
+	"knowsAbout": [
+		"DevOps", "Cloud Infrastructure", "AWS", "GCP", "Azure",
+		"Kubernetes", "Docker", "Terraform", "CI/CD", "Jenkins",
+		"GitHub Actions", "SOC 2 Compliance", "Infrastructure as Code",
+		"Site Reliability Engineering"
+	],
+	"description": resume.basics.summary
+};
+
+// FAQPage Schema — enables FAQ rich results
+const faqSchema = {
+	"@context": "https://schema.org",
+	"@type": "FAQPage",
+	"mainEntity": [
+		{
+			"@type": "Question",
+			"name": "Are you available for full-time roles or just consulting?",
+			"acceptedAnswer": {
+				"@type": "Answer",
+				"text": "I am currently open to both freelance consulting contracts and high-impact full-time opportunities. My ideal role involves cloud architecture design, Kubernetes orchestration, or leading DevOps transformations."
+			}
+		},
+		{
+			"@type": "Question",
+			"name": "What is your primary tech stack?",
+			"acceptedAnswer": {
+				"@type": "Answer",
+				"text": "My core stack includes AWS/Azure, Kubernetes, Terraform, Docker, and CI/CD pipelines using GitHub Actions or Jenkins. I'm also proficient in Python and Go for automation."
+			}
+		},
+		{
+			"@type": "Question",
+			"name": "Do you offer infrastructure audits?",
+			"acceptedAnswer": {
+				"@type": "Answer",
+				"text": "Yes, I conduct comprehensive infrastructure audits to identify security vulnerabilities, cost optimization opportunities, and performance bottlenecks."
+			}
+		},
+		{
+			"@type": "Question",
+			"name": "Can you work with legacy on-prem systems?",
+			"acceptedAnswer": {
+				"@type": "Answer",
+				"text": "Absolutely. I have extensive experience modernizing legacy systems and migrating on-premise infrastructure to the cloud using hybrid approaches."
+			}
+		}
+	]
+};
+
+// WebSite Schema — enables sitelinks
+const websiteSchema = {
+	"@context": "https://schema.org",
+	"@type": "WebSite",
+	"name": "Dev Joshi — DevOps Portfolio",
+	"url": siteUrl,
+	"description": "DevOps Engineer portfolio showcasing cloud infrastructure, Kubernetes, CI/CD pipelines, and scalable automation projects.",
+	"author": { "@type": "Person", "name": "Dev Joshi" }
+};
 ---
 
 <Layout
 	title={`${resume.basics.name} | DevOps Engineer — Cloud, Kubernetes & CI/CD`}
-	description="Dev Joshi is a DevOps Engineer building scalable cloud infrastructure on AWS, GCP & Azure. Expert in Kubernetes, Terraform, CI/CD pipelines, and SOC 2 compliance. View projects and case studies."
+	description="Dev Joshi — DevOps Engineer building scalable cloud infrastructure on AWS, GCP & Azure. Kubernetes, Terraform, CI/CD & SOC 2 expert."
+	jsonLd={[personSchema, faqSchema, websiteSchema]}
 >
 	<Navbar />
 	<main>

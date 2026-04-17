@@ -5,7 +5,8 @@ import { resume } from '../data/resume';
 <section id="certifications" class="py-20 bg-editorial-surface dark:bg-editorial-surface-dark border-t border-editorial-surface-highest dark:border-editorial-surface-highest-dark">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-left mb-16 max-w-2xl">
-      <h2 class="text-4xl md:text-6xl font-bold text-editorial-text dark:text-editorial-text-dark mb-6 tracking-tight font-serif italic border-l-4 border-editorial-primary dark:border-editorial-primary-dark pl-8">Validation</h2>
+      <h2 class="sr-only">Professional Certifications & Validations</h2>
+      <h2 aria-hidden="true" class="text-4xl md:text-6xl font-bold text-editorial-text dark:text-editorial-text-dark mb-6 tracking-tight font-serif italic border-l-4 border-editorial-primary dark:border-editorial-primary-dark pl-8">Validation</h2>
       <p class="text-editorial-secondary dark:text-editorial-secondary-dark text-xl font-sans font-light leading-relaxed">
         Professional endorsements and technical validations from leading industry authorities.
       </p>
@@ -13,7 +14,7 @@ import { resume } from '../data/resume';
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-0 border-t border-l border-editorial-surface-highest dark:border-editorial-surface-highest-dark">
       {resume.certifications?.map((cert) => (
-        <a href={cert.link} target="_blank" class="bg-editorial-surface dark:bg-editorial-surface-dark p-10 border-r border-b border-editorial-surface-highest dark:border-editorial-surface-highest-dark hover:bg-editorial-surface-low dark:hover:bg-editorial-surface-low-dark transition-colors group block">
+        <a href={cert.link} target="_blank" rel="noopener noreferrer" class="bg-editorial-surface dark:bg-editorial-surface-dark p-10 border-r border-b border-editorial-surface-highest dark:border-editorial-surface-highest-dark hover:bg-editorial-surface-low dark:hover:bg-editorial-surface-low-dark transition-colors group block">
           <div class="flex items-start justify-between mb-8">
             <div class="flex items-center gap-4">
               <div class="w-10 h-10 bg-editorial-surface-highest dark:bg-editorial-surface-highest-dark flex items-center justify-center grayscale group-hover:grayscale-0 transition-all duration-700">
@@ -21,7 +22,7 @@ import { resume } from '../data/resume';
               </div>
               <div>
                 <p class="text-[10px] font-mono font-bold text-editorial-primary dark:text-editorial-primary-dark uppercase tracking-[0.2em]">{cert.issuer}</p>
-                <p class="text-[9px] text-editorial-secondary dark:text-editorial-secondary-dark font-mono uppercase tracking-widest">{cert.date}</p>
+                <p class="text-[9px] text-editorial-secondary dark:text-editorial-secondary-dark font-mono uppercase tracking-widest"><time datetime={cert.date}>{cert.date}</time></p>
               </div>
             </div>
             <div class="text-editorial-primary dark:text-editorial-primary-dark opacity-0 group-hover:opacity-100 transition-opacity">

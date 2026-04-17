@@ -51,7 +51,7 @@ const otherPosts = posts.filter(post => post !== featuredPost);
               {post.frontmatter.image ? (
                   <img 
                   src={post.frontmatter.image} 
-                  alt={post.frontmatter.title} 
+                  alt={`Cover image for ${post.frontmatter.title}`} 
                   loading="lazy"
                   class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
                   />
@@ -70,7 +70,7 @@ const otherPosts = posts.filter(post => post !== featuredPost);
                   </span>
                   <span class="w-1 h-1 bg-editorial-outline dark:bg-editorial-secondary-dark"></span>
                   <span>
-                    {post.frontmatter.date}
+                    <time datetime={post.frontmatter.date}>{post.frontmatter.date}</time>
                   </span>
               </div>
 
