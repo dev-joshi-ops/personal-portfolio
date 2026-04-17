@@ -2,171 +2,177 @@
 import { resume } from '../data/resume';
 ---
 
-<section id="stack" class="py-24 bg-slate-50 dark:bg-navy-900 relative overflow-hidden transition-colors duration-300">
-  <!-- Background Glow -->
-  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-primary/5 rounded-full blur-3xl -z-10"></div>
-
+<section id="stack" class="py-20 bg-editorial-surface dark:bg-editorial-surface-dark border-t border-editorial-surface-highest dark:border-editorial-surface-highest-dark">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <!-- Section Header -->
-    <div class="text-center mb-16">
-      <h2 class="text-3xl md:text-5xl font-bold text-slate-900 dark:text-white mb-4 tracking-tight">Technical Arsenal</h2>
-      <p class="text-slate-600 dark:text-slate-400 max-w-2xl mx-auto text-lg">
-        The tools and technologies I use to build scalable, automated, and secure platforms.
-      </p>
+    <div class="text-left mb-16">
+      <h2 class="text-5xl md:text-7xl font-bold text-editorial-text dark:text-editorial-text-dark mb-12 font-serif italic tracking-tighter border-l-4 border-editorial-primary dark:border-editorial-primary-dark pl-8">Stack</h2>
     </div>
 
-    <!-- Grid Layout -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      
-      <!-- Cloud Platforms (Progress Bars) -->
-      <div class="bg-white dark:bg-navy-800 rounded-2xl p-8 border border-slate-200 dark:border-white/5 hover:border-primary/30 transition-all duration-300 shadow-lg shadow-slate-200/50 dark:shadow-none group">
-        <div class="flex items-center gap-3 mb-6">
-          <div class="p-2 bg-blue-500/10 rounded-lg text-blue-500 dark:text-blue-400">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-cloud"><path d="M17.5 19c0-1.7-1.3-3-3-3h-1.1c-.1-2.9-2.4-5.2-5.3-5.2-2.3 0-4.3 1.5-5 3.6-2.4.3-4.2 2.3-4.2 4.7 0 2.7 2.2 4.9 4.9 4.9h10.6c1.7 0 3.1-1.4 3.1-3.1z"/></svg>
-          </div>
-          <h3 class="text-xl font-bold text-slate-900 dark:text-white">Cloud Platforms</h3>
-        </div>
-        <div class="grid grid-cols-2 gap-4">
-          {resume.skills.cloud.map((skill) => {
-             let logo = '';
-             if (skill.name.includes('AWS')) logo = '/images/logos/aws.svg';
-             else if (skill.name.includes('Azure')) logo = '/images/logos/azure.svg';
-             else if (skill.name.includes('GCP')) logo = '/images/logos/gcp.svg';
-             else if (skill.name.includes('Oracle')) logo = '/images/logos/oracle.svg';
-
-             return (
-                <div class="flex flex-col items-center justify-center p-4 bg-slate-50 dark:bg-navy-900 rounded-xl border border-slate-200 dark:border-white/5 hover:border-blue-400/30 transition-all group/item h-32">
-                  <img src={logo} alt={`${skill.name} cloud platform logo`} loading="lazy" class="h-12 w-auto mb-3 opacity-80 group-hover/item:opacity-100 transition-opacity" />
-                  <span class="text-sm font-medium text-slate-700 dark:text-slate-300">{skill.name.split('(')[0].trim()}</span>
-                </div>
-             );
-          })}
-        </div>
+    <!-- Tabs Container -->
+    <div class="skills-tabs relative">
+      <!-- Tab Headers -->
+      <div class="flex flex-wrap gap-x-8 gap-y-4 mb-12 relative pb-2">
+        {[
+          { id: 'cloud', label: 'Cloud' },
+          { id: 'orchestration', label: 'Containers' },
+          { id: 'iac', label: 'IaC' },
+          { id: 'cicd', label: 'CI/CD' },
+          { id: 'observability', label: 'Observability' },
+          { id: 'governance', label: 'Security' }
+        ].map((tab, index) => (
+          <button
+            class={`skill-tab-btn font-sans text-[16px] transition-all relative pb-2 group ${index === 0 ? 'active text-editorial-text dark:text-editorial-text-dark font-medium' : 'text-[#888] dark:text-editorial-secondary-dark hover:text-editorial-text'}`}
+            data-tab={tab.id}
+          >
+            {tab.label}
+            {/* Per-tab indicator for robust multi-line support */}
+            <div class="absolute bottom-[-1px] left-0 h-[2px] bg-black dark:bg-white transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] w-0 opacity-0 group-[.active]:w-full group-[.active]:opacity-100"></div>
+          </button>
+        ))}
       </div>
 
-      <!-- Containerization (Tags) -->
-      <div class="bg-white dark:bg-navy-800 rounded-2xl p-8 border border-slate-200 dark:border-white/5 hover:border-primary/30 transition-all duration-300 shadow-lg shadow-slate-200/50 dark:shadow-none group">
-        <div class="flex items-center gap-3 mb-6">
-          <div class="p-2 bg-indigo-500/10 rounded-lg text-indigo-500 dark:text-indigo-400">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-box"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" x2="12" y1="22.08" y2="12"/></svg>
-          </div>
-          <h3 class="text-xl font-bold text-slate-900 dark:text-white">Containerization</h3>
+      <!-- Tab Content -->
+      <div class="tab-contents min-h-[300px]">
+        <!-- Cloud -->
+        <div id="tab-cloud" class="skill-content grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+          {resume.skills.cloud.map((skill) => (
+            <div class="skill-item py-5 px-6 border border-[#eee] dark:border-editorial-surface-highest-dark bg-white dark:bg-editorial-surface-low-dark group hover:border-editorial-primary transition-colors opacity-0 translate-y-2">
+              <span class="block text-[17px] font-sans font-bold text-editorial-text dark:text-editorial-text-dark tracking-tight">{skill.name.split('(')[0].trim()}</span>
+            </div>
+          ))}
         </div>
-        <div class="flex flex-wrap gap-2">
+
+        <!-- Orchestration -->
+        <div id="tab-orchestration" class="skill-content hidden grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
           {resume.skills.containerization.map((skill) => (
-            <span class="px-3 py-1.5 bg-slate-100 dark:bg-navy-900 border border-slate-200 dark:border-white/10 rounded-lg text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-indigo-600 dark:hover:text-white hover:border-indigo-400/50 transition-colors cursor-default">
-              {skill}
-            </span>
+            <div class="skill-item py-5 px-6 border border-[#eee] dark:border-editorial-surface-highest-dark bg-white dark:bg-editorial-surface-low-dark group hover:border-editorial-primary transition-colors opacity-0 translate-y-2">
+              <span class="block text-[15px] font-sans font-medium text-editorial-text dark:text-editorial-text-dark">{skill}</span>
+            </div>
           ))}
         </div>
-      </div>
 
-      <!-- IaC & Config (Checklist) -->
-      <div class="bg-white dark:bg-navy-800 rounded-2xl p-8 border border-slate-200 dark:border-white/5 hover:border-primary/30 transition-all duration-300 shadow-lg shadow-slate-200/50 dark:shadow-none group">
-        <div class="flex items-center gap-3 mb-6">
-          <div class="p-2 bg-purple-500/10 rounded-lg text-purple-500 dark:text-purple-400">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-settings-2"><path d="M20 7h-9"/><path d="M14 17H5"/><circle cx="17" cy="17" r="3"/><circle cx="7" cy="7" r="3"/></svg>
-          </div>
-          <h3 class="text-xl font-bold text-slate-900 dark:text-white">IaC & Config</h3>
-        </div>
-        <ul class="space-y-3">
+        <!-- IaC -->
+        <div id="tab-iac" class="skill-content hidden grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
           {resume.skills.iac.map((skill) => (
-            <li class="flex items-center gap-3 text-slate-700 dark:text-slate-300">
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-green-500 dark:text-green-400"><polyline points="20 6 9 17 4 12"/></svg>
-              <span>{skill}</span>
-            </li>
+            <div class="skill-item py-5 px-6 border border-[#eee] dark:border-editorial-surface-highest-dark bg-white dark:bg-editorial-surface-low-dark group hover:border-editorial-primary transition-colors opacity-0 translate-y-2">
+              <span class="block text-[17px] font-sans font-bold text-editorial-text dark:text-editorial-text-dark tracking-tight">{skill}</span>
+            </div>
           ))}
-        </ul>
-      </div>
-
-      <!-- CI/CD Pipelines (Tags) -->
-      <div class="bg-white dark:bg-navy-800 rounded-2xl p-8 border border-slate-200 dark:border-white/5 hover:border-primary/30 transition-all duration-300 shadow-lg shadow-slate-200/50 dark:shadow-none group">
-        <div class="flex items-center gap-3 mb-6">
-          <div class="p-2 bg-orange-500/10 rounded-lg text-orange-500 dark:text-orange-400">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-git-merge"><circle cx="18" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><path d="M6 21V9a9 9 0 0 0 9 9"/></svg>
-          </div>
-          <h3 class="text-xl font-bold text-slate-900 dark:text-white">CI/CD Pipelines</h3>
         </div>
-        <div class="flex flex-wrap gap-2">
+
+        <!-- CI/CD -->
+        <div id="tab-cicd" class="skill-content hidden grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
           {resume.skills.cicd.map((skill) => (
-            <span class="px-3 py-1.5 bg-slate-100 dark:bg-navy-900 border border-slate-200 dark:border-white/10 rounded-lg text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-orange-600 dark:hover:text-white hover:border-orange-400/50 transition-colors cursor-default">
-              {skill}
-            </span>
-          ))}
-        </div>
-      </div>
-
-      <!-- Scripting (Cards) -->
-      <div class="bg-white dark:bg-navy-800 rounded-2xl p-8 border border-slate-200 dark:border-white/5 hover:border-primary/30 transition-all duration-300 shadow-lg shadow-slate-200/50 dark:shadow-none group">
-        <div class="flex items-center gap-3 mb-6">
-          <div class="p-2 bg-yellow-500/10 rounded-lg text-yellow-500 dark:text-yellow-400">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-terminal-square"><path d="m7 11 2-2-2-2"/><path d="M11 13h4"/><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/></svg>
-          </div>
-          <h3 class="text-xl font-bold text-slate-900 dark:text-white">Scripting</h3>
-        </div>
-        <div class="grid grid-cols-2 gap-4">
-          {resume.skills.scripting.map((skill) => (
-            <div class="bg-slate-50 dark:bg-navy-900 p-4 rounded-xl border border-slate-200 dark:border-white/5 text-center hover:border-yellow-400/30 transition-colors">
-              <span class="font-bold text-slate-900 dark:text-white block mb-1">{skill}</span>
-              <span class="text-xs text-slate-500">Automation</span>
+            <div class="skill-item py-5 px-6 border border-[#eee] dark:border-editorial-surface-highest-dark bg-white dark:bg-editorial-surface-low-dark group hover:border-editorial-primary transition-colors opacity-0 translate-y-2">
+              <span class="block text-[15px] font-sans font-medium text-editorial-text dark:text-editorial-text-dark">{skill}</span>
             </div>
           ))}
         </div>
-      </div>
 
-      <!-- Observability (List) -->
-      <div class="bg-white dark:bg-navy-800 rounded-2xl p-8 border border-slate-200 dark:border-white/5 hover:border-primary/30 transition-all duration-300 shadow-lg shadow-slate-200/50 dark:shadow-none group">
-        <div class="flex items-center gap-3 mb-6">
-          <div class="p-2 bg-red-500/10 rounded-lg text-red-500 dark:text-red-400">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-activity"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-          </div>
-          <h3 class="text-xl font-bold text-slate-900 dark:text-white">Observability</h3>
-        </div>
-        <div class="grid grid-cols-2 gap-x-4 gap-y-2">
+        <!-- Observability -->
+        <div id="tab-observability" class="skill-content hidden grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
           {resume.skills.observability.map((skill) => (
-            <div class="flex items-center gap-2 text-slate-700 dark:text-slate-300">
-               <div class="w-1.5 h-1.5 rounded-full bg-red-400"></div>
-               <span>{skill}</span>
+            <div class="skill-item py-5 px-6 border border-[#eee] dark:border-editorial-surface-highest-dark bg-white dark:bg-editorial-surface-low-dark group hover:border-editorial-primary transition-colors opacity-0 translate-y-2">
+              <span class="block text-[15px] font-sans font-medium text-editorial-text dark:text-editorial-text-dark">{skill}</span>
+            </div>
+          ))}
+        </div>
+
+        <!-- Governance -->
+        <div id="tab-governance" class="skill-content hidden grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+          {resume.skills.security?.map((skill) => (
+            <div class="skill-item py-5 px-6 border border-[#eee] dark:border-editorial-surface-highest-dark bg-white dark:bg-editorial-surface-low-dark group hover:border-editorial-primary transition-colors opacity-0 translate-y-2">
+              <span class="block text-[15px] font-sans font-medium text-editorial-text dark:text-editorial-text-dark">{skill}</span>
             </div>
           ))}
         </div>
       </div>
-
-      <!-- Emerging Tech (AI/Agentic) -->
-      <div class="bg-white dark:bg-navy-800 rounded-2xl p-8 border border-slate-200 dark:border-white/5 hover:border-primary/30 transition-all duration-300 shadow-lg shadow-slate-200/50 dark:shadow-none group">
-        <div class="flex items-center gap-3 mb-6">
-          <div class="p-2 bg-cyan-500/10 rounded-lg text-cyan-500 dark:text-cyan-400">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-zap"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-          </div>
-          <h3 class="text-xl font-bold text-slate-900 dark:text-white">Emerging Tech</h3>
-        </div>
-        <div class="flex flex-wrap gap-2">
-          {resume.skills.emerging?.map((skill) => (
-            <span class="px-3 py-1.5 bg-slate-100 dark:bg-navy-900 border border-slate-200 dark:border-white/10 rounded-lg text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-cyan-600 dark:hover:text-white hover:border-cyan-400/50 transition-colors cursor-default">
-              {skill}
-            </span>
-          ))}
-        </div>
-      </div>
-
-      <!-- Security & Compliance -->
-      <div class="bg-white dark:bg-navy-800 rounded-2xl p-8 border border-slate-200 dark:border-white/5 hover:border-primary/30 transition-all duration-300 shadow-lg shadow-slate-200/50 dark:shadow-none group">
-        <div class="flex items-center gap-3 mb-6">
-          <div class="p-2 bg-emerald-500/10 rounded-lg text-emerald-500 dark:text-emerald-400">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shield-check"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
-          </div>
-          <h3 class="text-xl font-bold text-slate-900 dark:text-white">Security & Compliance</h3>
-        </div>
-        <ul class="space-y-3">
-          {resume.skills.security?.map((skill) => (
-            <li class="flex items-center gap-3 text-slate-700 dark:text-slate-300">
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-emerald-500 dark:text-emerald-400"><polyline points="20 6 9 17 4 12"/></svg>
-              <span>{skill}</span>
-            </li>
-          ))}
-        </ul>
-      </div>
-
     </div>
   </div>
 </section>
+
+<style>
+  .skill-item {
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out, border-color 0.2s ease-in-out;
+  }
+</style>
+
+<script>
+  function setupTabs() {
+    const buttons = document.querySelectorAll('.skill-tab-btn');
+    const contents = document.querySelectorAll('.skill-content');
+    const indicator = document.getElementById('tab-indicator');
+
+    function updateIndicator(tab) {
+      // Logic handled via Tailwind group classes for mobile robustness
+    }
+
+    function animateItems(container) {
+      const items = container.querySelectorAll('.skill-item');
+      items.forEach((item, i) => {
+        item.style.opacity = '0';
+        item.style.transform = 'translateY(10px)';
+        item.style.transitionDelay = '0s';
+        
+        // Trigger reflow
+        void item.offsetWidth;
+
+        setTimeout(() => {
+          item.style.opacity = '1';
+          item.style.transform = 'translateY(0)';
+          item.style.transitionDelay = `${i * 0.04}s`;
+        }, 50);
+      });
+    }
+
+    // Initialize first tab
+    const initialActive = document.querySelector('.skill-tab-btn.active');
+    if (initialActive) {
+      updateIndicator(initialActive);
+      const initialContent = document.getElementById(`tab-${initialActive.getAttribute('data-tab')}`);
+      if (initialContent) animateItems(initialContent);
+    }
+
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const tabId = btn.getAttribute('data-tab');
+
+        // Update buttons
+        buttons.forEach(b => {
+          b.classList.remove('active', 'text-editorial-text', 'dark:text-editorial-text-dark');
+          b.classList.add('text-[#888]', 'dark:text-editorial-secondary-dark');
+        });
+
+        btn.classList.add('active', 'text-editorial-text', 'dark:text-editorial-text-dark');
+        btn.classList.remove('text-[#888]', 'dark:text-editorial-secondary-dark');
+        
+        updateIndicator(btn);
+
+        // Update content
+        contents.forEach(content => {
+          if (content.id === `tab-${tabId}`) {
+            content.classList.remove('hidden');
+            content.classList.add('grid');
+            animateItems(content);
+          } else {
+            content.classList.add('hidden');
+            content.classList.remove('grid');
+          }
+        });
+      });
+    });
+
+    // Handle window resize to keep indicator aligned
+    window.addEventListener('resize', () => {
+      const activeBtn = document.querySelector('.skill-tab-btn.active');
+      if (activeBtn) updateIndicator(activeBtn);
+    });
+  }
+
+  // Run on initial load
+  setupTabs();
+
+  // Run on view transition if needed (Astro specifics)
+  document.addEventListener('astro:after-swap', setupTabs);
+</script>
