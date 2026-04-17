@@ -18,78 +18,79 @@ const otherPosts = posts.filter(post => post !== featuredPost);
   <!-- Custom Blog Header -->
   <Navbar />
 
-  <main class="pt-32 pb-16 min-h-screen bg-slate-50 dark:bg-navy-900 transition-colors duration-300">
+  <main class="pt-32 pb-16 min-h-screen bg-editorial-surface dark:bg-editorial-surface-dark transition-colors duration-500">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
       <!-- Header Text -->
-      <div class="text-center mb-16 max-w-3xl mx-auto">
-        <h1 class="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white mb-4 tracking-tight">Engineering Insights</h1>
-        <p class="text-slate-600 dark:text-slate-400 text-lg leading-relaxed mb-8">
-            Deep dives into cloud architecture, scalable infrastructure, and modern DevOps practices. Sharing real-world solutions to complex engineering challenges.
+      <div class="text-left mb-20 max-w-4xl border-l-4 border-editorial-primary dark:border-editorial-primary-dark pl-8">
+        <h1 class="text-5xl md:text-7xl font-bold text-editorial-text dark:text-editorial-text-dark mb-6 tracking-tight font-serif italic leading-tight">Engineering Insights</h1>
+        <p class="text-editorial-secondary dark:text-editorial-secondary-dark text-xl leading-relaxed mb-10 font-sans max-w-2xl">
+            Deep dives into cloud architecture, scalable infrastructure, and modern DevOps practices. A technical monograph on solving real-world challenges.
         </p>
 
         <!-- Search Bar -->
-        <div class="relative max-w-md mx-auto">
-            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-slate-400"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        <div class="relative max-w-md">
+            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-editorial-outline dark:text-editorial-secondary-dark"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
             </div>
             <input 
                 type="text" 
                 id="search-input"
-                placeholder="Search articles..." 
-                class="block w-full pl-10 pr-4 py-3 border border-slate-200 dark:border-white/10 rounded-full leading-5 bg-white dark:bg-navy-800 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all shadow-sm"
+                placeholder="SEARCH ARCHIVES..." 
+                class="block w-full pl-12 pr-4 py-4 border border-editorial-surface-highest dark:border-editorial-surface-highest-dark bg-editorial-surface-low dark:bg-editorial-surface-low-dark text-editorial-text dark:text-editorial-text-dark font-mono text-xs tracking-widest focus:outline-none focus:border-editorial-primary dark:focus:border-editorial-primary-dark transition-all"
             >
         </div>
       </div>
 
       <!-- Post Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="posts-grid">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12" id="posts-grid">
         {posts.map((post) => (
-          <article class="post-card group flex flex-col h-full">
+          <article class="post-card group flex flex-col h-full bg-editorial-surface-low dark:bg-editorial-surface-low-dark p-8 border border-transparent hover:border-editorial-surface-highest dark:hover:border-editorial-surface-highest-dark transition-all duration-300">
             <!-- Image Container -->
-            <a href={post.url} class="block relative h-44 rounded-2xl overflow-hidden mb-5 shadow-md shadow-slate-200/30 dark:shadow-none hover:shadow-lg hover:shadow-slate-200/50 dark:hover:shadow-none transition-shadow">
+            <a href={post.url} class="block relative h-56 overflow-hidden mb-8 grayscale hover:grayscale-0 transition-all duration-500">
               {post.frontmatter.image ? (
                   <img 
                   src={post.frontmatter.image} 
-                  alt={`Cover image for article: ${post.frontmatter.title}`} 
+                  alt={post.frontmatter.title} 
                   loading="lazy"
-                  class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
+                  class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
                   />
               ) : (
-                  <div class="w-full h-full bg-gradient-to-br from-slate-100 to-slate-200 dark:from-navy-800 dark:to-navy-900 flex items-center justify-center">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-slate-400 dark:text-slate-600"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg>
+                  <div class="w-full h-full bg-editorial-surface-highest dark:bg-editorial-surface-highest-dark flex items-center justify-center">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="text-editorial-outline dark:text-editorial-secondary-dark"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg>
                   </div>
               )}
             </a>
 
             <!-- Content -->
             <div class="flex flex-col flex-grow">
-              <div class="flex items-center gap-3 mb-4">
-                  <span class="px-2.5 py-0.5 rounded text-xs font-bold uppercase tracking-wide {post.frontmatter.category === 'Database' ? 'bg-purple-500/10 text-purple-500' : post.frontmatter.category === 'CI/CD' ? 'bg-orange-500/10 text-orange-500' : post.frontmatter.category === 'Security' ? 'bg-red-500/10 text-red-500' : 'bg-indigo-500/10 text-indigo-500'}">
+              <div class="flex items-center gap-4 mb-6 font-mono text-[10px] uppercase tracking-[0.2em] text-editorial-secondary dark:text-editorial-secondary-dark">
+                  <span class="text-editorial-primary dark:text-editorial-primary-dark font-bold">
                     {post.frontmatter.category || 'Tech'}
                   </span>
-                  <span class="text-slate-500 dark:text-slate-500 text-xs">
+                  <span class="w-1 h-1 bg-editorial-outline dark:bg-editorial-secondary-dark"></span>
+                  <span>
                     {post.frontmatter.date}
                   </span>
               </div>
 
-              <h2 class="post-title text-lg font-bold text-slate-900 dark:text-white mb-3 leading-tight line-clamp-2">
-                <a href={post.url} class="hover:text-primary transition-colors">
+              <h2 class="post-title text-2xl font-bold text-editorial-text dark:text-editorial-text-dark mb-4 leading-snug font-serif group-hover:text-editorial-primary dark:group-hover:text-editorial-primary-dark transition-colors">
+                <a href={post.url}>
                   {post.frontmatter.title}
                 </a>
               </h2>
               
-              <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-5 flex-grow line-clamp-3">
+              <p class="text-editorial-secondary dark:text-editorial-secondary-dark text-sm leading-relaxed mb-8 flex-grow line-clamp-3 font-sans">
                 {post.frontmatter.description}
               </p>
 
               <!-- CTA -->
               <a 
                   href={post.url} 
-                  class="inline-flex items-center gap-2 text-sm font-bold text-primary hover:text-sky-400 transition-colors mt-auto group"
+                  class="inline-flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.2em] text-editorial-text dark:text-editorial-text-dark font-bold group/link mt-auto"
               >
-                Read Article
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-x-1 transition-transform"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                <span>Read Analysis</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="group-hover/link:translate-x-1 transition-transform"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
               </a>
             </div>
           </article>
