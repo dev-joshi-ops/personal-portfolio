@@ -23,14 +23,22 @@ const navItems = [
       <!-- Desktop Menu -->
       <div class="hidden md:block">
         <div class="ml-10 flex items-center space-x-8">
-          {navItems.map((item) => (
-            <a
-              href={item.href}
-              class="text-[12px] font-medium text-editorial-secondary dark:text-editorial-secondary-dark hover:text-editorial-primary dark:hover:text-editorial-primary-dark transition-colors duration-200 font-mono"
-            >
-              {item.name}
-            </a>
-          ))}
+          {navItems.map((item) => {
+            const isActive = pathname === item.href || (item.href !== '/' && pathname.startsWith(item.href));
+            return (
+              <a
+                href={item.href}
+                data-nav={item.href}
+                class={`text-[12px] font-medium transition-colors duration-200 font-mono ${
+                  isActive 
+                    ? 'text-editorial-primary dark:text-editorial-primary-dark' 
+                    : 'text-editorial-secondary dark:text-editorial-secondary-dark hover:text-editorial-primary dark:hover:text-editorial-primary-dark'
+                }`}
+              >
+                {item.name}
+              </a>
+            );
+          })}
           
           <!-- Theme Toggle Slider -->
           <button id="theme-toggle" class="relative inline-flex items-center h-8 w-14 rounded-full p-1 bg-editorial-outline/10 dark:bg-editorial-surface-highest-dark/50 transition-colors duration-300 group overflow-hidden border border-editorial-outline/20 dark:border-editorial-surface-highest-dark" aria-label="Toggle theme">
@@ -103,14 +111,22 @@ const navItems = [
   <!-- Mobile Menu -->
   <div class="md:hidden hidden bg-editorial-surface dark:bg-editorial-surface-dark border-b border-editorial-surface-highest dark:border-editorial-surface-highest-dark" id="mobile-menu">
     <div class="px-4 pt-2 pb-6 space-y-1">
-      {navItems.map((item) => (
-        <a
-          href={item.href}
-          class="block px-3 py-4 text-[10px] font-bold uppercase tracking-[0.2em] text-editorial-secondary dark:text-editorial-secondary-dark hover:text-editorial-primary dark:hover:text-editorial-primary-dark font-mono transition-colors duration-200 border-b border-editorial-surface-highest dark:border-editorial-surface-highest-dark last:border-0"
-        >
-          {item.name}
-        </a>
-      ))}
+      {navItems.map((item) => {
+        const isActive = pathname === item.href || (item.href !== '/' && pathname.startsWith(item.href));
+        return (
+          <a
+            href={item.href}
+            data-nav={item.href}
+            class={`block px-3 py-4 text-[10px] font-bold uppercase tracking-[0.2em] font-mono transition-colors duration-200 border-b border-editorial-surface-highest dark:border-editorial-surface-highest-dark last:border-0 ${
+              isActive 
+                ? 'text-editorial-primary dark:text-editorial-primary-dark' 
+                : 'text-editorial-secondary dark:text-editorial-secondary-dark hover:text-editorial-primary dark:hover:text-editorial-primary-dark'
+            }`}
+          >
+            {item.name}
+          </a>
+        );
+      })}
       <div class="pt-6 px-3">
          <a href="mailto:joshid647@gmail.com" class="block w-full text-center bg-editorial-text dark:bg-editorial-primary-dark text-editorial-surface dark:text-editorial-surface-dark px-6 py-3 font-mono text-[10px] uppercase tracking-[0.2em] font-bold hover:bg-editorial-primary dark:hover:bg-editorial-text-dark transition-colors duration-200">
             Let's Talk
@@ -119,6 +135,49 @@ const navItems = [
     </div>
   </div>
 </nav>
+
+<script>
+  // Active Navigation Scroll Logic
+  const navLinks = document.querySelectorAll('a[data-nav]');
+  const sections = Array.from(navLinks)
+    .map(link => {
+      const href = link.getAttribute('href');
+      if (href.includes('#')) {
+        const id = href.split('#')[1];
+        return document.getElementById(id);
+      }
+      return null;
+    })
+    .filter(section => section !== null);
+
+  if (sections.length > 0) {
+    const observerOptions = {
+      root: null,
+      rootMargin: '-40% 0px -40% 0px',
+      threshold: 0
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const id = entry.target.getAttribute('id');
+          navLinks.forEach((link) => {
+            const href = link.getAttribute('href');
+            if (href.includes(`#${id}`)) {
+              link.classList.add('text-editorial-primary', 'dark:text-editorial-primary-dark');
+              link.classList.remove('text-editorial-secondary', 'dark:text-editorial-secondary-dark');
+            } else if (href.includes('#')) {
+              link.classList.remove('text-editorial-primary', 'dark:text-editorial-primary-dark');
+              link.classList.add('text-editorial-secondary', 'dark:text-editorial-secondary-dark');
+            }
+          });
+        }
+      });
+    }, observerOptions);
+
+    sections.forEach((section) => observer.observe(section));
+  }
+</script>
 
 <style>
   #theme-toggle svg, #mobile-theme-toggle svg {
