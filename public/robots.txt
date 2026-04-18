@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://dev-joshi.pages.dev/sitemap-index.xml
+Sitemap: https://dev-joshi.pages.dev/sitemap-0.xml

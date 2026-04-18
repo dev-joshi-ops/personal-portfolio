@@ -2,37 +2,37 @@
 import { resume } from '../data/resume';
 ---
 
-<section id="certifications" class="py-24 bg-white dark:bg-navy-900 transition-colors duration-300">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="text-center mb-16">
-      <h2 class="text-3xl md:text-5xl font-bold text-slate-900 dark:text-white mb-4 tracking-tight">Certifications</h2>
-      <p class="text-slate-600 dark:text-slate-400 max-w-2xl mx-auto text-lg">
-        Recognized expertise in emerging technologies and industry standards.
+<section id="certifications" class="py-20 bg-editorial-surface dark:bg-editorial-surface-dark border-t border-editorial-surface-highest dark:border-editorial-surface-highest-dark">
+  <div class="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-left mb-16 max-w-2xl">
+      <h2 class="sr-only">Professional Certifications & Validations</h2>
+      <h2 aria-hidden="true" class="text-4xl md:text-6xl font-bold text-editorial-text dark:text-editorial-text-dark mb-6 tracking-tight font-serif italic border-l-4 border-editorial-primary dark:border-editorial-primary-dark pl-8">Validation</h2>
+      <p class="text-editorial-secondary dark:text-editorial-secondary-dark text-xl font-sans font-light leading-relaxed">
+        Professional endorsements and technical validations from leading industry authorities.
       </p>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-0 border-t border-l border-editorial-surface-highest dark:border-editorial-surface-highest-dark">
       {resume.certifications?.map((cert) => (
-        <a href={cert.link} target="_blank" class="bg-slate-50 dark:bg-navy-800 p-8 rounded-2xl border border-slate-200 dark:border-white/5 hover:border-primary/30 hover:shadow-xl hover:shadow-primary/5 transition-all group block">
-          <div class="flex items-start justify-between mb-6">
-            <div class="flex items-center gap-3">
-              <div class="w-10 h-10 bg-white dark:bg-navy-900 rounded-lg p-2 flex items-center justify-center border border-slate-200 dark:border-white/5 group-hover:border-primary/30 transition-colors">
-                <img src="/images/logos/anthropic_dark.svg" alt={`${cert.issuer} certification logo`} loading="lazy" class="w-full h-full dark:hidden" />
-                <img src="/images/logos/anthropic_light.svg" alt={`${cert.issuer} certification logo`} loading="lazy" class="w-full h-full hidden dark:block" />
+        <a href={cert.link} target="_blank" rel="noopener noreferrer" class="bg-editorial-surface dark:bg-editorial-surface-dark p-10 border-r border-b border-editorial-surface-highest dark:border-editorial-surface-highest-dark hover:bg-editorial-surface-low dark:hover:bg-editorial-surface-low-dark transition-colors group block">
+          <div class="flex items-start justify-between mb-8">
+            <div class="flex items-center gap-4">
+              <div class="w-10 h-10 bg-editorial-surface-highest dark:bg-editorial-surface-highest-dark flex items-center justify-center grayscale group-hover:grayscale-0 transition-all duration-700">
+                <img src="/images/logos/anthropic_dark.svg" alt={`${cert.issuer} logotype`} loading="lazy" class="w-6 h-6" />
               </div>
               <div>
-                <p class="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider">{cert.issuer}</p>
-                <p class="text-xs text-slate-500 font-mono">{cert.date}</p>
+                <p class="text-[10px] font-mono font-bold text-editorial-primary dark:text-editorial-primary-dark uppercase tracking-[0.2em]">{cert.issuer}</p>
+                <p class="text-[9px] text-editorial-secondary dark:text-editorial-secondary-dark font-mono uppercase tracking-widest"><time datetime={cert.date}>{cert.date}</time></p>
               </div>
             </div>
-            <div class="text-primary opacity-0 group-hover:opacity-100 transition-opacity">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-external-link"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></svg>
+            <div class="text-editorial-primary dark:text-editorial-primary-dark opacity-0 group-hover:opacity-100 transition-opacity">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></svg>
             </div>
           </div>
-          <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-primary transition-colors">{cert.name}</h3>
-          <div class="flex items-center gap-2 text-primary font-medium text-sm">
-             <span>Verify Certificate</span>
-             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          <h3 class="text-2xl font-bold text-editorial-text dark:text-editorial-text-dark mb-6 group-hover:text-editorial-primary dark:group-hover:text-editorial-primary-dark transition-colors font-serif italic">{cert.name}</h3>
+          <div class="flex items-center gap-4 text-editorial-primary dark:text-editorial-primary-dark font-mono text-[9px] uppercase tracking-[0.2em] font-bold">
+             <span class="w-4 h-[1px] bg-editorial-primary dark:bg-editorial-primary-dark"></span>
+             <span>Verify Credential</span>
           </div>
         </a>
       ))}

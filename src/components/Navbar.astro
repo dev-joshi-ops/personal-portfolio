@@ -6,69 +6,102 @@ const navItems = [
   { name: 'About', href: isHome ? '#about' : '/#about' },
   { name: 'Stack', href: isHome ? '#stack' : '/#stack' },
   { name: 'Projects', href: isHome ? '#projects' : '/#projects' },
+  { name: 'Open Source', href: isHome ? '#open-source' : '/#open-source' },
   { name: 'Blogs', href: '/blog' },
   { name: 'CLI', href: isHome ? '#cli' : '/#cli' },
 ];
 ---
 
-<nav class="fixed top-0 w-full z-50 bg-white/80 dark:bg-navy-900/80 backdrop-blur-md border-b border-slate-200 dark:border-white/5 transition-colors duration-300">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<nav class="fixed top-0 w-full z-50 bg-editorial-surface/90 dark:bg-editorial-surface-dark/90 backdrop-blur-md border-b border-editorial-surface-highest dark:border-editorial-surface-highest-dark transition-colors duration-300">
+  <div class="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between h-20">
       <!-- Logo -->
-      <!-- Logo -->
-      <a href="/" class="flex-shrink-0 flex items-center gap-2 cursor-pointer hover:opacity-80 transition-opacity">
-        <div class="text-primary">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-terminal"><polyline points="4 17 10 11 4 5"/><line x1="12" x2="20" y1="19" y2="19"/></svg>
-        </div>
-        <span class="font-bold text-xl tracking-tight text-slate-900 dark:text-white">Dev<span class="text-primary">.DevOps</span></span>
+      <a href="/" class="flex-shrink-0 flex items-center gap-2 cursor-pointer hover:opacity-80 transition-opacity whitespace-nowrap">
+        <span class="font-bold text-xl tracking-tight text-editorial-text dark:text-editorial-text-dark font-mono">Dev <span class="text-editorial-primary dark:text-editorial-primary-dark">Joshi</span></span>
       </a>
       
       <!-- Desktop Menu -->
       <div class="hidden md:block">
         <div class="ml-10 flex items-center space-x-8">
-          {navItems.map((item) => (
-            <a
-              href={item.href}
-              class="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-white transition-colors duration-200"
-            >
-              {item.name}
-            </a>
-          ))}
+          {navItems.map((item) => {
+            const isActive = pathname === item.href || (item.href !== '/' && pathname.startsWith(item.href));
+            return (
+              <a
+                href={item.href}
+                data-nav={item.href}
+                class={`text-[12px] font-medium transition-colors duration-200 font-mono ${
+                  isActive 
+                    ? 'text-editorial-primary dark:text-editorial-primary-dark' 
+                    : 'text-editorial-secondary dark:text-editorial-secondary-dark hover:text-editorial-primary dark:hover:text-editorial-primary-dark'
+                }`}
+              >
+                {item.name}
+              </a>
+            );
+          })}
           
-          <!-- Theme Toggle -->
-          <button id="theme-toggle" class="text-slate-500 dark:text-slate-400 hover:text-primary dark:hover:text-white transition-colors p-2 rounded-full hover:bg-slate-100 dark:hover:bg-white/5">
-            <!-- Sun Icon -->
-            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-            </svg>
-            <!-- Moon Icon -->
-            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-            </svg>
+          <!-- Theme Toggle Slider -->
+          <button id="theme-toggle" class="relative inline-flex items-center h-8 w-14 rounded-full p-1 bg-editorial-outline/10 dark:bg-editorial-surface-highest-dark/50 transition-colors duration-300 group overflow-hidden border border-editorial-outline/20 dark:border-editorial-surface-highest-dark" aria-label="Toggle theme">
+            <!-- Background Icons (Fixed) -->
+            <div class="absolute left-1.5 z-0 text-editorial-secondary/20 dark:text-editorial-secondary-dark/20 transition-colors">
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+              </svg>
+            </div>
+            <div class="absolute right-1.5 z-0 text-editorial-secondary/20 dark:text-editorial-secondary-dark/20 transition-colors">
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+              </svg>
+            </div>
+            <!-- Slider Thumb -->
+            <div id="theme-slider-thumb" class="z-10 h-6 w-6 rounded-full bg-[#4d44e3] dark:bg-editorial-primary-dark transition-all duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] flex items-center justify-center transform translate-x-0 dark:translate-x-6 shadow-sm">
+              <div class="relative w-full h-full flex items-center justify-center">
+                <svg id="thumb-sun-icon" class="w-3.5 h-3.5 text-white transition-all duration-300 opacity-100 dark:opacity-0 dark:scale-0 absolute" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                </svg>
+                <svg id="thumb-moon-icon" class="w-3.5 h-3.5 text-white transition-all duration-300 opacity-0 scale-0 dark:opacity-100 dark:scale-100 absolute" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                </svg>
+              </div>
+            </div>
+          </button>
+ 
+           <!-- CTA Button -->
+           <a href="mailto:joshid647@gmail.com" class="bg-[#4d44e3] dark:bg-editorial-primary-dark text-white dark:text-editorial-surface-dark px-6 py-2 font-mono text-[11px] font-bold hover:opacity-90 transition-all">
+             Let's Talk
+           </a>
+         </div>
+       </div>
+ 
+       <!-- Mobile Menu Button -->
+       <div class="md:hidden flex items-center gap-4">
+         <!-- Mobile Theme Toggle -->
+          <button id="mobile-theme-toggle" class="relative inline-flex items-center h-8 w-14 rounded-full p-1 bg-editorial-outline/10 dark:bg-editorial-surface-highest-dark/50 transition-colors duration-300 group overflow-hidden border border-editorial-outline/20 dark:border-editorial-surface-highest-dark" aria-label="Toggle theme">
+            <div class="absolute left-1.5 z-0 text-editorial-secondary/20 dark:text-editorial-secondary-dark/20 transition-colors">
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+              </svg>
+            </div>
+            <div class="absolute right-1.5 z-0 text-editorial-secondary/20 dark:text-editorial-secondary-dark/20 transition-colors">
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+              </svg>
+            </div>
+            <div class="z-10 h-6 w-6 rounded-full bg-[#4d44e3] dark:bg-editorial-primary-dark transition-all duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] flex items-center justify-center transform translate-x-0 dark:translate-x-6 shadow-sm">
+              <div class="relative w-full h-full flex items-center justify-center">
+                <svg class="w-3.5 h-3.5 text-white transition-all duration-300 opacity-100 dark:opacity-0 dark:scale-0 absolute" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                </svg>
+                <svg class="w-3.5 h-3.5 text-white transition-all duration-300 opacity-0 scale-0 dark:opacity-100 dark:scale-100 absolute" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                </svg>
+              </div>
+            </div>
           </button>
 
-          <!-- CTA Button -->
-          <a href="mailto:joshid647@gmail.com" class="bg-primary hover:bg-sky-400 text-white px-5 py-2 rounded-md font-medium transition-colors duration-200 shadow-lg shadow-primary/20">
-            Let's Talk
-          </a>
-        </div>
-      </div>
-
-      <!-- Mobile Menu Button -->
-      <div class="md:hidden flex items-center gap-4">
-        <!-- Mobile Theme Toggle -->
-         <button id="mobile-theme-toggle" class="text-slate-500 dark:text-slate-400 hover:text-primary dark:hover:text-white transition-colors">
-            <svg id="mobile-theme-toggle-light-icon" class="hidden w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-            </svg>
-            <svg id="mobile-theme-toggle-dark-icon" class="hidden w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-            </svg>
-         </button>
-
-        <button type="button" id="mobile-menu-btn" class="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-white focus:outline-none">
+        <button type="button" id="mobile-menu-btn" class="text-editorial-text dark:text-editorial-text-dark hover:text-editorial-primary focus:outline-none">
           <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16" />
           </svg>
         </button>
       </div>
@@ -76,18 +109,26 @@ const navItems = [
   </div>
 
   <!-- Mobile Menu -->
-  <div class="md:hidden hidden bg-white dark:bg-navy-900 border-b border-slate-200 dark:border-white/5" id="mobile-menu">
-    <div class="px-4 pt-2 pb-4 space-y-1">
-      {navItems.map((item) => (
-        <a
-          href={item.href}
-          class="block px-3 py-2 rounded-md text-base font-medium text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-white hover:bg-slate-50 dark:hover:bg-white/5 transition-colors duration-200"
-        >
-          {item.name}
-        </a>
-      ))}
-      <div class="pt-4 flex items-center gap-4 px-3">
-         <a href="mailto:joshid647@gmail.com" class="block w-full text-center bg-primary hover:bg-sky-400 text-white px-5 py-2 rounded-md font-medium transition-colors duration-200 shadow-lg shadow-primary/20">
+  <div class="md:hidden hidden bg-editorial-surface dark:bg-editorial-surface-dark border-b border-editorial-surface-highest dark:border-editorial-surface-highest-dark" id="mobile-menu">
+    <div class="px-4 pt-2 pb-6 space-y-1">
+      {navItems.map((item) => {
+        const isActive = pathname === item.href || (item.href !== '/' && pathname.startsWith(item.href));
+        return (
+          <a
+            href={item.href}
+            data-nav={item.href}
+            class={`block px-3 py-4 text-[10px] font-bold uppercase tracking-[0.2em] font-mono transition-colors duration-200 border-b border-editorial-surface-highest dark:border-editorial-surface-highest-dark last:border-0 ${
+              isActive 
+                ? 'text-editorial-primary dark:text-editorial-primary-dark' 
+                : 'text-editorial-secondary dark:text-editorial-secondary-dark hover:text-editorial-primary dark:hover:text-editorial-primary-dark'
+            }`}
+          >
+            {item.name}
+          </a>
+        );
+      })}
+      <div class="pt-6 px-3">
+         <a href="mailto:joshid647@gmail.com" class="block w-full text-center bg-editorial-text dark:bg-editorial-primary-dark text-editorial-surface dark:text-editorial-surface-dark px-6 py-3 font-mono text-[10px] uppercase tracking-[0.2em] font-bold hover:bg-editorial-primary dark:hover:bg-editorial-text-dark transition-colors duration-200">
             Let's Talk
           </a>
       </div>
@@ -96,44 +137,174 @@ const navItems = [
 </nav>
 
 <script>
+  // Active Navigation Scroll Logic
+  const navLinks = document.querySelectorAll('a[data-nav]');
+  const sections = Array.from(navLinks)
+    .map(link => {
+      const href = link.getAttribute('href');
+      if (href.includes('#')) {
+        const id = href.split('#')[1];
+        return document.getElementById(id);
+      }
+      return null;
+    })
+    .filter(section => section !== null);
+
+  if (sections.length > 0) {
+    const observerOptions = {
+      root: null,
+      rootMargin: '-40% 0px -40% 0px',
+      threshold: 0
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const id = entry.target.getAttribute('id');
+          navLinks.forEach((link) => {
+            const href = link.getAttribute('href');
+            if (href.includes(`#${id}`)) {
+              link.classList.add('text-editorial-primary', 'dark:text-editorial-primary-dark');
+              link.classList.remove('text-editorial-secondary', 'dark:text-editorial-secondary-dark');
+            } else if (href.includes('#')) {
+              link.classList.remove('text-editorial-primary', 'dark:text-editorial-primary-dark');
+              link.classList.add('text-editorial-secondary', 'dark:text-editorial-secondary-dark');
+            }
+          });
+        }
+      });
+    }, observerOptions);
+
+    sections.forEach((section) => observer.observe(section));
+  }
+</script>
+
+<style>
+  #theme-toggle svg, #mobile-theme-toggle svg {
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  #theme-toggle:active svg, #mobile-theme-toggle:active svg {
+    transform: scale(0.7);
+  }
+</style>
+
+<style is:global>
+  /* View Transition API styles for Circular Reveal */
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none;
+    mix-blend-mode: normal;
+  }
+
+  ::view-transition-old(root) {
+    z-index: 1;
+  }
+
+  ::view-transition-new(root) {
+    z-index: 999;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    ::view-transition-old(root),
+    ::view-transition-new(root) {
+      animation-duration: 220ms;
+      animation-timing-function: ease;
+    }
+  }
+</style>
+
+<script>
   // Theme Toggle Logic
   const themeToggleBtn = document.getElementById('theme-toggle');
-  const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
-  const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
-  
   const mobileThemeToggleBtn = document.getElementById('mobile-theme-toggle');
-  const mobileThemeToggleDarkIcon = document.getElementById('mobile-theme-toggle-dark-icon');
-  const mobileThemeToggleLightIcon = document.getElementById('mobile-theme-toggle-light-icon');
 
-  function updateIcons() {
-      if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-          themeToggleLightIcon.classList.remove('hidden');
-          themeToggleDarkIcon.classList.add('hidden');
-          mobileThemeToggleLightIcon.classList.remove('hidden');
-          mobileThemeToggleDarkIcon.classList.add('hidden');
-      } else {
-          themeToggleLightIcon.classList.add('hidden');
-          themeToggleDarkIcon.classList.remove('hidden');
-          mobileThemeToggleLightIcon.classList.add('hidden');
-          mobileThemeToggleDarkIcon.classList.remove('hidden');
+  function applyTheme() {
+      document.documentElement.classList.toggle('dark');
+      localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+  }
+
+  function getToggleOrigin(event) {
+      const button = event.currentTarget;
+      const rect = button.getBoundingClientRect();
+      const prefersTouchOrigin = window.matchMedia('(pointer: coarse)').matches;
+
+      if (!prefersTouchOrigin && typeof event.clientX === 'number' && typeof event.clientY === 'number') {
+          return { x: event.clientX, y: event.clientY };
+      }
+
+      return {
+          x: rect.left + rect.width / 2,
+          y: rect.top + rect.height / 2,
+      };
+  }
+
+  async function toggleTheme(event) {
+      const { x, y } = getToggleOrigin(event);
+      const prefersTouchOrigin = window.matchMedia('(pointer: coarse)').matches;
+      const endRadius = Math.hypot(
+        Math.max(x, window.innerWidth - x),
+        Math.max(y, window.innerHeight - y)
+      ) + 24;
+      const animationDuration = prefersTouchOrigin ? 420 : 500;
+
+      if (!document.startViewTransition) {
+          applyTheme();
+          return;
+      }
+
+      document.documentElement.classList.add('is-transitioning');
+
+      const transition = document.startViewTransition(() => {
+          applyTheme();
+      });
+
+      const cleanup = () => {
+          document.documentElement.classList.remove('is-transitioning');
+      };
+
+      try {
+          await transition.ready;
+
+          const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+          if (prefersReducedMotion) {
+              const fade = document.documentElement.animate(
+                {
+                  opacity: [0, 1],
+                },
+                {
+                  duration: 220,
+                  easing: 'ease',
+                  pseudoElement: '::view-transition-new(root)',
+                }
+              );
+
+              await fade.finished;
+              return;
+          }
+
+          const reveal = document.documentElement.animate(
+            {
+              clipPath: [
+                `circle(0px at ${x}px ${y}px)`,
+                `circle(${endRadius}px at ${x}px ${y}px)`,
+              ],
+            },
+            {
+              duration: animationDuration,
+              easing: 'cubic-bezier(0.4, 0, 0.2, 1)',
+              pseudoElement: '::view-transition-new(root)',
+            }
+          );
+
+          await reveal.finished;
+      } finally {
+          cleanup();
       }
   }
 
-  updateIcons();
-
-  function toggleTheme() {
-      if (document.documentElement.classList.contains('dark')) {
-          document.documentElement.classList.remove('dark');
-          localStorage.setItem('theme', 'light');
-      } else {
-          document.documentElement.classList.add('dark');
-          localStorage.setItem('theme', 'dark');
-      }
-      updateIcons();
-  }
-
-  themeToggleBtn.addEventListener('click', toggleTheme);
-  mobileThemeToggleBtn.addEventListener('click', toggleTheme);
+  themeToggleBtn.addEventListener('click', (e) => toggleTheme(e));
+  mobileThemeToggleBtn.addEventListener('click', (e) => toggleTheme(e));
 </script>
 
 <script>

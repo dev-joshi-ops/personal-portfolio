@@ -1,0 +1,36 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout
+	title="404: Page Not Found | Dev Joshi"
+	description="The page you are looking for does not exist or has been moved."
+>
+	<Navbar />
+	<main class="min-h-screen bg-editorial-surface dark:bg-editorial-surface-dark transition-colors duration-500 flex items-center justify-center pt-20">
+		<div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-8xl md:text-9xl font-bold text-editorial-primary dark:text-editorial-primary-dark mb-8 font-serif italic opacity-20">404</h1>
+            <h2 class="text-3xl md:text-5xl font-bold text-editorial-text dark:text-editorial-text-dark mb-6 tracking-tight font-serif">Path Not Found</h2>
+            <p class="text-editorial-secondary dark:text-editorial-secondary-dark text-xl leading-relaxed mb-10 font-sans font-light">
+                The resource you are looking for has been moved, deleted, or never existed in this topology.
+            </p>
+            <div class="flex flex-wrap items-center justify-center gap-6">
+                <a 
+                    href="/" 
+                    class="px-8 py-4 bg-editorial-text dark:bg-editorial-primary-dark text-editorial-surface dark:text-editorial-surface-dark font-mono text-[11px] font-bold uppercase tracking-widest hover:opacity-90 transition-all"
+                >
+                    Return Home
+                </a>
+                <a 
+                    href="/#projects" 
+                    class="px-8 py-4 border border-editorial-surface-highest dark:border-editorial-surface-highest-dark bg-transparent text-editorial-text dark:text-editorial-text-dark font-mono text-[11px] font-bold uppercase tracking-widest hover:bg-editorial-surface-low dark:hover:bg-editorial-surface-low-dark transition-all"
+                >
+                    View Archives
+                </a>
+            </div>
+		</div>
+	</main>
+    <Footer />
+</Layout>

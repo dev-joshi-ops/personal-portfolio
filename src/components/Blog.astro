@@ -5,81 +5,80 @@ const posts = await Astro.glob('../pages/blog/*.md');
 posts.sort((a, b) => new Date(b.frontmatter.date).valueOf() - new Date(a.frontmatter.date).valueOf());
 ---
 
-<section id="blog" class="py-24 bg-white dark:bg-navy-800 transition-colors duration-300">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
-      <div>
-        <h2 class="text-3xl md:text-5xl font-bold text-slate-900 dark:text-white mb-4 tracking-tight">Latest Articles</h2>
-        <p class="text-slate-600 dark:text-slate-400 text-lg">Thoughts on engineering, infrastructure, and scaling.</p>
+<section id="blog" class="py-20 bg-editorial-surface dark:bg-editorial-surface-dark border-t border-editorial-surface-highest dark:border-editorial-surface-highest-dark transition-colors duration-500">
+  <div class="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-12">
+      <div class="max-w-2xl">
+        <h2 class="text-4xl md:text-6xl font-bold text-editorial-text dark:text-editorial-text-dark mb-6 tracking-tight font-serif italic border-l-4 border-editorial-primary dark:border-editorial-primary-dark pl-8">Latest Articles</h2>
+        <p class="text-editorial-secondary dark:text-editorial-secondary-dark text-xl font-sans font-light leading-relaxed">Thoughts on engineering, infrastructure, and scaling.</p>
       </div>
       
-      <a href="/blog" class="hidden md:flex items-center gap-2 text-primary font-medium hover:text-sky-400 transition-colors">
-        View all articles
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      <a href="/blog" class="hidden md:flex items-center gap-3 text-[10px] font-mono font-bold uppercase tracking-[0.2em] text-editorial-primary dark:text-editorial-primary-dark hover:text-editorial-text dark:hover:text-editorial-text-dark transition-colors group">
+        View full index
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-x-1 transition-transform"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
       </a>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-0 border-t border-l border-editorial-surface-highest dark:border-editorial-surface-highest-dark">
       {posts.map((post) => (
-        <article class="group bg-slate-50 dark:bg-navy-900 rounded-2xl overflow-hidden border border-slate-200 dark:border-white/5 hover:border-primary/30 transition-all duration-300 shadow-lg shadow-slate-200/50 dark:shadow-none hover:shadow-2xl hover:shadow-primary/5 flex flex-col h-full">
+        <article class="group bg-editorial-surface dark:bg-editorial-surface-dark border-r border-b border-editorial-surface-highest dark:border-editorial-surface-highest-dark hover:bg-editorial-surface-low dark:hover:bg-editorial-surface-low-dark transition-all duration-500 flex flex-col h-full">
           <!-- Image Container -->
-          <div class="relative h-48 overflow-hidden bg-navy-900">
-            <div class="absolute inset-0 bg-navy-900/20 group-hover:bg-transparent transition-colors z-10"></div>
+          <div class="relative h-64 overflow-hidden border-b border-editorial-surface-highest dark:border-editorial-surface-highest-dark">
+            <div class="absolute inset-0 bg-editorial-text/5 group-hover:bg-transparent transition-colors z-10"></div>
             {post.frontmatter.image ? (
                 <img 
                 src={post.frontmatter.image} 
                 alt={`Cover image for article: ${post.frontmatter.title}`} 
                 loading="lazy"
-                class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
+                class="w-full h-full object-cover grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105 transition-all duration-1000"
                 />
             ) : (
-                <div class="w-full h-full bg-gradient-to-br from-navy-800 to-navy-900 flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-slate-600 dark:text-slate-500 group-hover:text-primary transition-colors"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg>
+                <div class="w-full h-full bg-editorial-surface-highest dark:bg-editorial-surface-highest-dark flex items-center justify-center group-hover:scale-105 transition-all duration-1000">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-editorial-outline dark:text-editorial-secondary-dark group-hover:text-editorial-primary dark:group-hover:text-editorial-primary-dark transition-colors"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg>
                 </div>
             )}
             
             <div class="absolute top-4 left-4 z-20">
-              <span class="px-3 py-1 bg-white/90 dark:bg-navy-900/90 backdrop-blur-md text-xs font-mono text-slate-900 dark:text-white rounded-full border border-slate-200 dark:border-white/10 shadow-sm">
+              <span class="px-3 py-1 bg-editorial-text dark:bg-editorial-text-dark text-[9px] font-mono text-editorial-surface dark:text-editorial-surface-dark font-bold uppercase tracking-widest">
                 {post.frontmatter.category || 'Tech'}
               </span>
             </div>
           </div>
 
           <!-- Content -->
-          <div class="p-6 flex flex-col flex-grow">
-            <div class="flex items-center gap-3 text-xs text-slate-500 dark:text-slate-400 mb-3 font-mono">
+          <div class="p-10 flex flex-col flex-grow space-y-6">
+            <div class="flex items-center gap-3 text-[10px] font-mono uppercase tracking-widest text-editorial-secondary dark:text-editorial-secondary-dark">
                 <span>{post.frontmatter.date}</span>
-                <span>•</span>
+                <span class="w-4 h-[1px] bg-editorial-surface-highest dark:bg-editorial-surface-highest-dark"></span>
                 <span>{post.frontmatter.readTime}</span>
             </div>
 
-            <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3 group-hover:text-primary transition-colors line-clamp-2">
+            <h3 class="text-2xl font-bold text-editorial-text dark:text-editorial-text-dark group-hover:text-editorial-primary dark:group-hover:text-editorial-primary-dark transition-colors font-serif italic">
               <a href={post.url}>
                 {post.frontmatter.title}
               </a>
             </h3>
             
-            <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-6 flex-grow line-clamp-3">
+            <p class="text-editorial-secondary dark:text-editorial-secondary-dark text-sm font-sans font-light leading-relaxed flex-grow line-clamp-3">
               {post.frontmatter.description}
             </p>
 
             <!-- CTA -->
             <a 
                 href={post.url} 
-                class="inline-flex items-center gap-2 text-sm font-medium text-primary hover:text-sky-400 transition-colors mt-auto"
+                class="w-full py-4 border border-editorial-text dark:border-editorial-text-dark text-[10px] font-mono uppercase tracking-[0.2em] font-bold text-center transition-all bg-transparent text-editorial-text dark:text-editorial-text-dark hover:bg-editorial-text dark:hover:bg-editorial-primary-dark hover:text-editorial-surface dark:hover:text-editorial-surface-dark"
             >
               Read Article
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
             </a>
           </div>
         </article>
       ))}
     </div>
     
-    <div class="mt-12 text-center md:hidden">
-        <a href="/blog" class="inline-flex items-center gap-2 text-primary font-medium hover:text-sky-400 transition-colors">
-            View all articles
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+    <div class="mt-16 text-center md:hidden">
+        <a href="/blog" class="inline-flex items-center gap-3 text-[10px] font-mono font-bold uppercase tracking-[0.2em] text-editorial-primary dark:text-editorial-primary-dark hover:text-editorial-text dark:hover:text-editorial-text-dark transition-colors group">
+            View full index
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-x-1 transition-transform"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
         </a>
     </div>
   </div>

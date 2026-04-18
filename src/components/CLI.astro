@@ -2,38 +2,38 @@
 import { resume } from '../data/resume';
 ---
 
-<section id="cli" class="py-20 bg-slate-50 dark:bg-navy-900 transition-colors duration-300">
+<section id="cli" class="py-20 bg-editorial-surface dark:bg-editorial-surface-dark border-t border-editorial-surface-highest dark:border-editorial-surface-highest-dark">
   <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="text-center mb-12">
-        <h2 class="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">Interactive Terminal</h2>
-        <p class="text-slate-600 dark:text-slate-400">Get to know me via CLI. Type <code class="bg-white dark:bg-navy-800 px-2 py-1 rounded text-primary font-mono text-sm border border-slate-200 dark:border-white/10">help</code> to start.</p>
+    <div class="text-left mb-16">
+        <h2 class="text-4xl md:text-6xl font-bold text-editorial-text dark:text-editorial-text-dark tracking-tight font-serif italic italic border-l-4 border-editorial-primary dark:border-editorial-primary-dark pl-8">Interactive Terminal</h2>
+        <p class="text-editorial-secondary dark:text-editorial-secondary-dark text-lg font-sans font-light mt-6">Get to know me via CLI. Type <code class="bg-editorial-surface-highest dark:bg-editorial-surface-highest-dark px-2 py-0.5 text-editorial-primary dark:text-editorial-primary-dark font-mono text-sm">help</code> to start.</p>
     </div>
 
-    <div class="bg-[#1e1e1e] rounded-lg shadow-2xl overflow-hidden border border-slate-200 dark:border-white/10 font-mono text-sm md:text-base transform transition-transform hover:scale-[1.01] duration-300">
+    <div class="bg-[#111111] shadow-none overflow-hidden border border-editorial-surface-highest dark:border-editorial-surface-highest-dark font-mono text-sm md:text-base">
       <!-- Terminal Header -->
-      <div class="bg-[#2d2d2d] px-4 py-2 flex items-center gap-2 border-b border-[#3d3d3d]">
+      <div class="bg-[#1a1a1a] px-6 py-3 flex items-center gap-4 border-b border-[#2d2d2d] dark:border-editorial-surface-highest-dark">
         <div class="flex gap-2">
-            <div class="w-3 h-3 rounded-full bg-[#ff5f56]"></div>
-            <div class="w-3 h-3 rounded-full bg-[#ffbd2e]"></div>
-            <div class="w-3 h-3 rounded-full bg-[#27c93f]"></div>
+            <div class="w-2.5 h-2.5 bg-[#ff5f56]"></div>
+            <div class="w-2.5 h-2.5 bg-[#ffbd2e]"></div>
+            <div class="w-2.5 h-2.5 bg-[#27c93f]"></div>
         </div>
-        <div class="ml-4 text-slate-400 text-xs flex-1 text-center font-sans">user@dev-portfolio: ~</div>
+        <div class="text-[#888] text-[10px] uppercase tracking-[0.2em] flex-1 text-center font-mono">operational-shell v3.0</div>
       </div>
 
       <!-- Terminal Body -->
-      <div class="p-4 h-[400px] overflow-y-auto scrollbar-thin scrollbar-thumb-slate-700 scrollbar-track-transparent" id="terminal-container" onclick="document.getElementById('terminal-input').focus()">
+      <div class="p-8 h-[450px] overflow-y-auto scrollbar-thin scrollbar-thumb-[#444] scrollbar-track-transparent" id="terminal-container" onclick="document.getElementById('terminal-input').focus()">
         <div id="terminal-output" class="mb-2">
-          <div class="mb-4 text-slate-300">
-            <span class="text-green-400">➜</span> <span class="text-blue-400">~</span> <span class="text-slate-400"># Welcome to Dev's Portfolio CLI v1.0.0</span><br/>
-            <span class="text-slate-400"># Type 'help' to see available commands.</span>
+          <div class="mb-6 text-slate-400">
+            <span class="text-editorial-primary dark:text-editorial-primary-dark">➜</span> <span class="text-editorial-primary dark:text-editorial-primary-dark font-bold">~</span> <span class="opacity-60"># Technical Monograph CLI Protocol Loaded</span><br/>
+            <span class="opacity-60"># Initialization complete. Type 'help' to begin inquiry.</span>
           </div>
         </div>
         
         <!-- Input Line -->
-        <div class="flex items-center gap-2 text-slate-300">
-            <span class="text-green-400">➜</span>
-            <span class="text-blue-400">~</span>
-            <input type="text" id="terminal-input" class="bg-transparent border-none outline-none flex-1 text-slate-100 focus:ring-0 p-0 font-mono caret-transparent" autocomplete="off" spellcheck="false" />
+        <div class="flex items-center gap-3 text-slate-300">
+            <span class="text-editorial-primary dark:text-editorial-primary-dark">➜</span>
+            <span class="text-editorial-primary dark:text-editorial-primary-dark font-bold">~</span>
+            <input type="text" id="terminal-input" class="bg-transparent border-none outline-none flex-1 text-slate-100 focus:ring-0 p-0 font-mono caret-editorial-primary dark:caret-editorial-primary-dark" autocomplete="off" spellcheck="false" />
         </div>
       </div>
     </div>
@@ -51,18 +51,18 @@ import { resume } from '../data/resume';
             action: () => {
                 return `
 <div class="grid grid-cols-[100px_1fr] gap-2 text-slate-300">
-    <span class="text-yellow-400">about</span>    <span>Who am I?</span>
-    <span class="text-yellow-400">skills</span>   <span>My technical stack</span>
-    <span class="text-yellow-400">projects</span> <span>View recent work</span>
-    <span class="text-yellow-400">contact</span>  <span>Get in touch</span>
-    <span class="text-yellow-400">clear</span>    <span>Clear screen</span>
+    <span class="text-editorial-primary font-bold">about</span>    <span>Identity Summary</span>
+    <span class="text-editorial-primary font-bold">skills</span>   <span>Technical Inventory</span>
+    <span class="text-editorial-primary font-bold">projects</span> <span>Operational Archives</span>
+    <span class="text-editorial-primary font-bold">contact</span>  <span>Direct Inquiries</span>
+    <span class="text-editorial-primary font-bold">clear</span>    <span>Reset Interface</span>
 </div>`;
             }
         },
         about: {
             desc: 'Who am I?',
             action: () => {
-                return `<div class="text-slate-300 max-w-2xl leading-relaxed">${resume.basics.summary}</div>`;
+                return `<div class="text-slate-300 max-w-2xl leading-relaxed italic border-l border-editorial-primary pl-4">${resume.basics.summary}</div>`;
             }
         },
         skills: {
@@ -79,7 +79,7 @@ import { resume } from '../data/resume';
                     ...(resume.skills.security || [])
                 ];
                 return `<div class="text-slate-300 flex flex-wrap gap-2">
-                    ${allSkills.map(s => `<span class="px-2 py-0.5 bg-slate-800 rounded text-green-400">${s}</span>`).join('')}
+                    ${allSkills.map(s => `<span class="px-2 py-0.5 bg-[#2d2d2d] border border-[#3d3d3d] text-editorial-primary text-xs uppercase tracking-widest">${s}</span>`).join('')}
                 </div>`;
             }
         },
@@ -87,13 +87,14 @@ import { resume } from '../data/resume';
             desc: 'View recent work',
             action: () => {
                 const projectList = resume.projects.map(p => 
-                    `<div class="mb-2">
-                        <span class="text-blue-400 font-bold">${p.name}</span>: ${p.description}
+                    `<div class="mb-4">
+                        <span class="text-editorial-primary font-bold uppercase tracking-widest text-xs">${p.name}</span>
+                        <p class="text-slate-400 text-sm mt-1 italic">${p.description}</p>
                      </div>`
                 ).join('');
                 return `<div class="text-slate-300">
                     ${projectList}
-                    <div class="mt-2 text-slate-500 italic">Scroll up to the Projects section for more details!</div>
+                    <div class="mt-2 text-slate-500 italic text-[10px] uppercase tracking-widest">Reference Archives Section for Full Details</div>
                 </div>`;
             }
         },
@@ -101,9 +102,9 @@ import { resume } from '../data/resume';
             desc: 'Get in touch',
             action: () => {
                 const linkedIn = resume.basics.profiles.find(p => p.network === 'LinkedIn');
-                return `<div class="text-slate-300">
-                    <div><span class="text-yellow-400 w-20 inline-block">Email:</span> <a href="mailto:${resume.basics.email}" class="text-blue-400 hover:underline">${resume.basics.email}</a></div>
-                    ${linkedIn ? `<div><span class="text-yellow-400 w-20 inline-block">LinkedIn:</span> <a href="${linkedIn.url}" target="_blank" class="text-blue-400 hover:underline">${linkedIn.username}</a></div>` : ''}
+                return `<div class="text-slate-300 space-y-2">
+                    <div><span class="text-editorial-primary w-24 inline-block font-bold text-xs uppercase tracking-widest">Email:</span> <a href="mailto:${resume.basics.email}" class="hover:text-editorial-primary underline decoration-editorial-primary/30">${resume.basics.email}</a></div>
+                    ${linkedIn ? `<div><span class="text-editorial-primary w-24 inline-block font-bold text-xs uppercase tracking-widest">LinkedIn:</span> <a href="${linkedIn.url}" target="_blank" class="hover:text-editorial-primary underline decoration-editorial-primary/30">${linkedIn.username}</a></div>` : ''}
                 </div>`;
             }
         },
@@ -123,8 +124,8 @@ import { resume } from '../data/resume';
             // Add command to output
             if (cmd !== 'clear') {
                 output.innerHTML += `
-                    <div class="mb-2">
-                        <span class="text-green-400">➜</span> <span class="text-blue-400">~</span> <span class="text-slate-100">${input.value}</span>
+                    <div class="mb-4">
+                        <span class="text-editorial-primary">➜</span> <span class="text-editorial-primary font-bold">~</span> <span class="text-slate-100 italic">${input.value}</span>
                     </div>
                 `;
             }

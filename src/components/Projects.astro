@@ -1,7 +1,7 @@
 ---
 import { resume } from '../data/resume';
 
-const categories = ["All", "Cloud", "DevOps"];
+const categories = ["All", "Cloud", "Devops"];
 
 // Reorder and modify projects
 let projects = [...resume.projects];
@@ -10,135 +10,145 @@ const targetIndex = projects.findIndex(p => p.name === targetProjectName);
 
 if (targetIndex > -1) {
   const targetProject = { ...projects[targetIndex] };
-  // Update description
-  targetProject.description = "Achieved 100% cost reduction on external DB dependencies and implemented automated scale-down policies, significantly improving cost-efficiency for a major finance client.";
-  
-  // Remove from current position
+  targetProject.description = "Enterprise cloud infrastructure redesign";
   projects.splice(targetIndex, 1);
-  // Add to front
   projects.unshift(targetProject);
 }
+
+// Ensure Devops casing
+projects = projects.map(p => ({
+  ...p,
+  category: p.category === "DevOps" ? "Devops" : p.category
+}));
 ---
 
-<section id="projects" class="py-24 bg-slate-50 dark:bg-navy-900 transition-colors duration-300">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    
-    <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
-      <div>
-        <h2 class="text-3xl md:text-5xl font-bold text-slate-900 dark:text-white mb-4 tracking-tight">Featured Projects</h2>
-        <p class="text-slate-600 dark:text-slate-400 text-lg">Real-world infrastructure and automation challenges I've solved.</p>
+<section id="projects" class="py-20 bg-editorial-surface dark:bg-editorial-surface-dark">
+  <div class="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-16 gap-12">
+      <div class="max-w-2xl">
+        <h2 class="sr-only">DevOps Projects & Case Studies</h2>
+        <h2 aria-hidden="true" class="text-4xl md:text-6xl font-bold text-editorial-text dark:text-editorial-text-dark mb-6 tracking-tight font-serif italic border-l-4 border-editorial-primary dark:border-editorial-primary-dark pl-8">Project Archives</h2>
+        <p class="text-editorial-secondary dark:text-editorial-secondary-dark text-xl font-sans font-light leading-relaxed">A documented record of infrastructure engineering and operational automation across various cloud topologies.</p>
       </div>
       
-      <!-- Filter Pills -->
-      <div class="flex flex-wrap gap-2" id="project-filters">
+      <!-- Filter Tabs -->
+      <div class="flex flex-wrap gap-x-8 gap-y-4 relative pb-2" id="project-filters-container">
         {categories.map((cat, index) => (
           <button 
-            data-filter={cat === "All" ? "all" : cat === "CI/CD" ? "cicd" : cat.toLowerCase()}
-            class={`filter-btn px-4 py-2 rounded-full text-sm font-medium transition-all ${index === 0 ? 'bg-primary text-white shadow-lg shadow-primary/25 active' : 'bg-white dark:bg-navy-800 text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-white hover:bg-slate-50 dark:hover:bg-navy-700 border border-slate-200 dark:border-white/5'}`}
+            data-filter={cat.toLowerCase()}
+            class={`filter-btn font-sans text-[15px] transition-all relative pb-2 group ${index === 0 ? 'active text-editorial-text dark:text-editorial-text-dark font-medium' : 'text-[#999] dark:text-editorial-secondary-dark hover:text-editorial-text'}`}
           >
             {cat}
+            {/* Per-tab indicator for robust multi-line support */}
+            <div class="absolute bottom-[-1px] left-0 h-[2.5px] bg-black dark:bg-white transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] w-0 opacity-0 group-[.active]:w-full group-[.active]:opacity-100"></div>
           </button>
         ))}
       </div>
     </div>
+  </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="projects-grid">
+  <div class="max-w-screen-2xl mx-auto">
+    <!-- Project Grid (Gap-px logic with bleed-to-edge borders on mobile) -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-px bg-[#f0f0f0] dark:bg-editorial-surface-highest-dark overflow-hidden md:px-0" id="projects-grid">
       {projects.map((project) => {
-        const isRoiProject = project.name === "Cloud Architecture & Cost Optimization";
+        const slug = project.name.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, '');
         return (
-        <div class="project-card group bg-white dark:bg-navy-800 rounded-2xl overflow-hidden border border-slate-200 dark:border-white/5 hover:border-primary/30 transition-all duration-300 shadow-lg shadow-slate-200/50 dark:shadow-none hover:shadow-2xl hover:shadow-primary/5 flex flex-col" data-category={project.category}>
-          
-          <!-- Image Container -->
-          <div class="relative h-48 overflow-hidden">
-            <div class="absolute inset-0 bg-navy-900/20 group-hover:bg-transparent transition-colors z-10"></div>
-            <img 
-              src={project.image} 
-              alt={`${project.name} — project screenshot`} 
-              loading="lazy"
-              class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
-            />
-            
-            {isRoiProject && (
-                <div class="absolute top-4 right-4 z-30">
-                    <div class="bg-lime-400 text-navy-900 text-sm font-extrabold px-4 py-1.5 rounded-full shadow-lg shadow-lime-400/20 flex items-center gap-1 transform hover:scale-105 transition-transform">
-                        <span>$$$ SAVED</span>
-                    </div>
-                </div>
-            )}
+          <div 
+            class="project-card group bg-editorial-surface dark:bg-editorial-surface-dark transition-all duration-300 flex flex-col" 
+            data-category={project.category}
+          >
+            <a href={`/projects/${slug}`} class="block py-16 px-6 md:px-12 flex flex-col h-full group-hover:bg-[#fcfcfc] dark:group-hover:bg-editorial-surface-low-dark transition-colors">
+              <h3 class="text-3xl font-bold text-editorial-text dark:text-editorial-text-dark font-serif italic mb-4 group-hover:text-editorial-primary dark:group-hover:text-editorial-primary-dark transition-colors">
+                {project.name}
+              </h3>
+              
+              <p class="text-editorial-secondary dark:text-editorial-secondary-dark text-[17px] font-sans font-light mb-8 leading-relaxed">
+                {project.description}
+              </p>
 
-            <div class={`absolute top-4 ${isRoiProject ? 'left-4' : 'right-4'} z-20`}>
-              <span class="px-3 py-1 bg-white/90 dark:bg-navy-900/90 backdrop-blur-md text-xs font-mono text-slate-900 dark:text-white rounded-full border border-slate-200 dark:border-white/10 shadow-sm">
-                {project.category}
-              </span>
-            </div>
-          </div>
+              <!-- Tags -->
+              <div class="flex flex-wrap gap-x-4 gap-y-1 mb-8">
+                {project.tags.slice(0, 3).map(tag => (
+                  <span class="text-[13px] font-sans text-[#aaa] dark:text-editorial-secondary-dark font-light">
+                    {tag}
+                  </span>
+                ))}
+              </div>
 
-          <!-- Content -->
-          <div class="p-6 flex flex-col flex-grow">
-            <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3 group-hover:text-primary transition-colors">
-              {project.name}
-            </h3>
-            
-            <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-6 flex-grow">
-              {project.description}
-            </p>
-
-            <!-- Tags -->
-            <div class="flex flex-wrap gap-2 mb-6">
-               {project.tags.map(tag => (
-                   <span class="px-2 py-1 bg-slate-100 dark:bg-navy-900 rounded text-xs font-medium text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-white/5">
-                      {tag}
-                   </span>
-               ))}
-            </div>
-
-            <!-- CTA -->
-            <a 
-                href={`/projects/${project.name.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, '')}`} 
-                class={`w-full py-3 rounded-xl border text-sm font-medium transition-all text-center group-hover:border-primary/30 ${
-                    isRoiProject 
-                    ? 'bg-primary/10 border-primary text-primary hover:bg-primary hover:text-white shadow-lg shadow-primary/20' 
-                    : 'border-slate-200 dark:border-white/10 text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-white hover:text-primary dark:hover:text-navy-900'
-                }`}
-            >
-              {project.cta}
+              <!-- View Link -->
+              <div class="flex items-center gap-2 text-[15px] font-sans font-medium text-editorial-text dark:text-editorial-text-dark mt-auto group-hover:gap-3 transition-all group-hover:text-editorial-primary dark:group-hover:text-editorial-primary-dark">
+                View Case Study 
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+              </div>
             </a>
           </div>
-        </div>
-      )})}
+        )
+      })}
+      <!-- Filler div for odd counts -->
+      <div id="project-filler" class="hidden md:block bg-editorial-surface dark:bg-editorial-surface-dark"></div>
     </div>
   </div>
 </section>
 
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
+  function setupProjectFilters() {
     const filters = document.querySelectorAll('.filter-btn');
     const projects = document.querySelectorAll('.project-card');
+    const indicator = document.getElementById('project-indicator');
+    const filler = document.getElementById('project-filler');
+
+    function updateIndicator(btn) {
+      // Logic handled via Tailwind group classes for mobile robustness
+    }
+
+    function updateFillerVisibility() {
+        if (!filler) return;
+        const visibleProjects = Array.from(projects).filter(p => (p as HTMLElement).style.display !== 'none');
+        if (visibleProjects.length % 2 !== 0) {
+            filler.style.display = 'block';
+        } else {
+            filler.style.display = 'none';
+        }
+    }
+
+    // Initialize
+    const initialActive = document.querySelector('.filter-btn.active');
+    if (initialActive) updateIndicator(initialActive as HTMLElement);
+    updateFillerVisibility();
 
     filters.forEach(btn => {
       btn.addEventListener('click', () => {
-        // Remove active class from all
-        filters.forEach(f => {
-            f.classList.remove('bg-primary', 'text-white', 'shadow-lg', 'shadow-primary/25', 'active');
-            f.classList.add('bg-white', 'dark:bg-navy-800', 'text-slate-600', 'dark:text-slate-400', 'hover:text-primary', 'dark:hover:text-white', 'hover:bg-slate-50', 'dark:hover:bg-navy-700', 'border', 'border-slate-200', 'dark:border-white/5');
-        });
-
-        // Add active class to clicked
-        btn.classList.remove('bg-white', 'dark:bg-navy-800', 'text-slate-600', 'dark:text-slate-400', 'hover:text-primary', 'dark:hover:text-white', 'hover:bg-slate-50', 'dark:hover:bg-navy-700', 'border', 'border-slate-200', 'dark:border-white/5');
-        btn.classList.add('bg-primary', 'text-white', 'shadow-lg', 'shadow-primary/25', 'active');
-
         const filterValue = btn.getAttribute('data-filter');
 
-        projects.forEach(project => {
-            const category = (project as HTMLElement).dataset.category;
-            if (filterValue === 'all' || category === filterValue) {
-                (project as HTMLElement).style.display = 'flex';
-                // Add a small animation or fade-in could go here
-            } else {
-                (project as HTMLElement).style.display = 'none';
-            }
+        filters.forEach(f => {
+          f.classList.remove('active', 'text-editorial-text', 'dark:text-editorial-text-dark', 'font-medium');
+          f.classList.add('text-[#999]', 'dark:text-editorial-secondary-dark');
         });
+
+        btn.classList.add('active', 'text-editorial-text', 'dark:text-editorial-text-dark', 'font-medium');
+        btn.classList.remove('text-[#999]', 'dark:text-editorial-secondary-dark');
+        
+        updateIndicator(btn as HTMLElement);
+
+        projects.forEach(project => {
+          const category = (project as HTMLElement).dataset.category;
+          if (filterValue === 'all' || category?.toLowerCase() === filterValue?.toLowerCase()) {
+            (project as HTMLElement).style.display = 'flex';
+          } else {
+            (project as HTMLElement).style.display = 'none';
+          }
+        });
+
+        updateFillerVisibility();
       });
     });
-  });
+
+    window.addEventListener('resize', () => {
+      const activeBtn = document.querySelector('.filter-btn.active');
+      if (activeBtn) updateIndicator(activeBtn as HTMLElement);
+    });
+  }
+
+  setupProjectFilters();
+  document.addEventListener('astro:after-swap', setupProjectFilters);
 </script>

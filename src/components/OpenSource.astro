@@ -1,0 +1,46 @@
+---
+import { resume } from '../data/resume';
+
+const topProjects = resume.openSource.slice(0, 2);
+---
+<section id="open-source" class="py-24 relative overflow-hidden bg-editorial-surface dark:bg-editorial-surface-dark transition-colors duration-500">
+  <div class="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <div class="flex items-center justify-between mb-16">
+      <div class="flex items-center gap-4 flex-grow">
+        <h2 class="text-[12px] font-bold uppercase tracking-[0.2em] text-editorial-text dark:text-editorial-text-dark font-mono">
+          Open Source
+        </h2>
+        <div class="h-px bg-editorial-surface-highest dark:bg-editorial-surface-highest-dark flex-grow"></div>
+      </div>
+      <a href="/open-source" class="ml-8 font-mono text-[10px] uppercase tracking-widest text-editorial-primary dark:text-editorial-primary-dark hover:underline transition-all font-bold whitespace-nowrap">
+        View All <span class="text-sm">→</span>
+      </a>
+    </div>
+    
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      {topProjects.map((project) => (
+        <article class="bg-editorial-surface-low dark:bg-editorial-surface-low-dark p-8 lg:p-12 transition-all duration-500 hover:bg-editorial-surface-highest dark:hover:bg-editorial-surface-highest-dark flex flex-col h-full group border border-transparent hover:border-editorial-surface-highest dark:hover:border-editorial-surface-highest-dark">
+          <div class="flex justify-between items-start mb-6">
+            <h3 class="font-serif text-3xl tracking-tight text-editorial-text dark:text-editorial-text-dark group-hover:text-editorial-primary dark:group-hover:text-editorial-primary-dark transition-colors">{project.name}</h3>
+            <span class="bg-editorial-surface dark:bg-editorial-surface-dark text-editorial-secondary dark:text-editorial-secondary-dark font-mono text-[10px] px-3 py-1 border border-editorial-outline/20 dark:border-editorial-secondary-dark/20 uppercase tracking-widest font-bold">{project.category.slice(0, -1)}</span>
+          </div>
+          <p class="font-sans text-sm md:text-base text-editorial-secondary dark:text-editorial-secondary-dark leading-relaxed mb-12 flex-grow">
+            {project.description}
+          </p>
+          <div class="mt-auto">
+            <div class="flex flex-wrap gap-3 mb-8">
+              {project.tags.map((tag, tIndex) => (
+                <span class={`font-mono text-[10px] tracking-widest text-editorial-secondary dark:text-editorial-secondary-dark uppercase font-bold ${tIndex > 0 ? 'border-l border-editorial-outline/30 dark:border-editorial-secondary-dark/30 pl-3' : ''}`}>
+                  {tag}
+                </span>
+              ))}
+            </div>
+            <a class="font-mono text-[10px] tracking-widest uppercase text-editorial-text dark:text-editorial-text-dark hover:text-editorial-primary dark:hover:text-editorial-primary-dark transition-colors flex items-center gap-1 font-bold" href={project.github} target="_blank" rel="noopener noreferrer">
+              Source <span class="text-sm">↗</span>
+            </a>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

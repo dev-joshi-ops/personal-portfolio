@@ -1,7 +1,7 @@
 export const resume = {
     basics: {
         name: "Dev Joshi",
-        label: "DevOps Engineer",
+        label: "DevOps & AI Tooling Engineer",
         email: "joshid647@gmail.com",
         phone: "9638140640",
         location: "Ahmedabad, Gujarat",
@@ -41,6 +41,7 @@ export const resume = {
                 "Spearheaded DevOps efforts for major Abu Dhabi Government client projects.",
                 "Established and enforced SOC 2 Type II controls within CI/CD and cloud environments.",
                 "Designed and maintained robust CI/CD pipelines (Jenkins, GitHub Workflow) with integrated security.",
+                "Published two open-source MCP tools to enhance AI agent capabilities and developer productivity.",
                 "Collaborated with client technical teams to translate business requirements into secure infrastructure designs.",
             ],
         },
@@ -271,5 +272,35 @@ export const resume = {
             date: "Apr 2026",
             link: "https://verify.skilljar.com/c/kfnmw7tzs8fr"
         }
-    ]
+    ],
+    openSource: [
+        {
+          name: "PipelineIQ",
+          category: "Tools",
+          description: "MCP Server for Jenkins build log analysis and actionable failure prediction. Automates the discovery of build pipeline errors using AI agents.",
+          tags: ["Python", "AI", "CI/CD"],
+          github: "https://github.com/dev-joshi-ops/PipelineIQ"
+        },
+        {
+          name: "local-llm-hosting",
+          category: "Templates",
+          description: "Robust, containerized local LLM hosting infrastructure using Apache APISIX and Ollama. Implements VRAM-efficient configurations and high-volume token rate limits.",
+          tags: ["Docker", "APISIX", "Ollama"],
+          github: "https://github.com/dev-joshi-ops/local-llm-hosting"
+        },
+        {
+          name: "docmost-mcp-server",
+          category: "Tools",
+          description: "MCP Server integration for Docmost to enable AI agents to read, search, and manage documentation across the organization's workspaces.",
+          tags: ["Python", "MCP"],
+          github: "https://github.com/dev-joshi-ops/docmost-mcp-server"
+        },
+        {
+          name: "fastapi-react-agentic-scaffold",
+          category: "Templates",
+          description: "Production-ready scaffolding for building agentic AI applications with a robust FastAPI backend and an interactive React frontend.",
+          tags: ["Python", "FastAPI", "React"],
+          github: "https://github.com/dev-joshi-ops/fastapi-react-agentic-scaffold"
+        }
+      ]
 };

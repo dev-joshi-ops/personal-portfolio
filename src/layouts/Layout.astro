@@ -5,18 +5,26 @@ interface Props {
 	canonicalUrl?: string;
 	ogImage?: string;
 	ogType?: string;
+	keywords?: string;
+	jsonLd?: Record<string, any> | Record<string, any>[];
 }
 
 const {
 	title,
-	description = "Dev Joshi — DevOps Engineer specializing in cloud infrastructure, Kubernetes, CI/CD pipelines, and scalable automation. Available for consulting and full-time roles.",
+	description = "Dev Joshi — DevOps Engineer. Cloud infrastructure, Kubernetes, CI/CD & automation specialist. Available for consulting.",
 	canonicalUrl,
 	ogImage = "/images/hero-devops.png",
 	ogType = "website",
+	keywords = "DevOps Engineer, Cloud Infrastructure, Kubernetes, CI/CD, AWS, GCP, Azure, Terraform, Docker, DevOps Portfolio, Site Reliability, Infrastructure as Code, DevOps Consultant, Scalable Automation, Dev Joshi",
+	jsonLd,
 } = Astro.props;
 
 const siteUrl = "https://dev-joshi.pages.dev";
+const currentUrl = canonicalUrl || new URL(Astro.url.pathname, siteUrl).href;
 const fullOgImage = ogImage.startsWith("http") ? ogImage : `${siteUrl}${ogImage}`;
+
+// Normalize JSON-LD to array
+const jsonLdArray = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
 ---
 
 <!doctype html>
@@ -25,18 +33,22 @@ const fullOgImage = ogImage.startsWith("http") ? ogImage : `${siteUrl}${ogImage}
 		<meta charset="UTF-8" />
 		<meta name="description" content={description} />
 		<meta name="viewport" content="width=device-width" />
+		<meta name="keywords" content={keywords} />
+		<meta name="author" content="Dev Joshi" />
 		<link rel="icon" type="image/png" href="/favicon.png" />
 		<meta name="generator" content={Astro.generator} />
 		<meta name="google-site-verification" content="mfo8Gb1-h3iqKGtmhlsTgF9q8d0ZoVo3EgnUVcoL57k" />
 		<title>{title}</title>
-		{canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
+		<link rel="canonical" href={currentUrl} />
+		<link rel="sitemap" href="/sitemap-index.xml" />
+		<link rel="alternate" hreflang="en" href={currentUrl} />
 
 		<!-- Open Graph / Facebook -->
 		<meta property="og:type" content={ogType} />
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description} />
 		<meta property="og:image" content={fullOgImage} />
-		<meta property="og:url" content={canonicalUrl || siteUrl} />
+		<meta property="og:url" content={currentUrl} />
 		<meta property="og:site_name" content="Dev Joshi — DevOps Portfolio" />
 
 		<!-- Twitter Card -->
@@ -44,18 +56,24 @@ const fullOgImage = ogImage.startsWith("http") ? ogImage : `${siteUrl}${ogImage}
 		<meta name="twitter:title" content={title} />
 		<meta name="twitter:description" content={description} />
 		<meta name="twitter:image" content={fullOgImage} />
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+		{/* JSON-LD Structured Data */}
+		{jsonLdArray.map((ld) => (
+			<script type="application/ld+json" set:html={JSON.stringify(ld)} />
+		))}
+		{/* Preload critical fonts */}
+        <link rel="preload" href="/fonts/Inter-Regular.ttf" as="font" type="font/ttf" crossorigin>
+        <link rel="preload" href="/fonts/Newsreader-Italic.ttf" as="font" type="font/ttf" crossorigin>
         <script is:inline>
             // Check for saved theme preference or system preference
-            if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            // Note: For Editorial DevOps, we default to Light mode as per design system focus
+            if (localStorage.theme === 'dark') {
                 document.documentElement.classList.add('dark');
             } else {
                 document.documentElement.classList.remove('dark');
             }
         </script>
-        <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script> 
+        <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js" defer></script>
         <script is:inline>
             document.addEventListener('DOMContentLoaded', () => {
                 const lenis = new Lenis({
@@ -86,12 +104,51 @@ const fullOgImage = ogImage.startsWith("http") ? ogImage : `${siteUrl}${ogImage}
             });
         </script>
 	</head>
-	<body class="bg-slate-50 text-slate-900 dark:bg-navy-900 dark:text-slate-300 font-sans antialiased selection:bg-primary selection:text-white">
+	<body class="bg-editorial-surface text-editorial-text dark:bg-editorial-surface-dark dark:text-editorial-text-dark font-sans antialiased selection:bg-editorial-primary selection:text-white dark:selection:bg-editorial-primary-dark">
 		<slot />
 	</body>
 </html>
 
 <style is:global>
+    @font-face {
+        font-family: 'Inter';
+        src: url('/fonts/Inter-Regular.ttf') format('truetype');
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+    }
+    @font-face {
+        font-family: 'Inter';
+        src: url('/fonts/Inter-Bold.ttf') format('truetype');
+        font-weight: 700;
+        font-style: normal;
+        font-display: swap;
+    }
+    @font-face {
+        font-family: 'Newsreader';
+        src: url('/fonts/Newsreader-Italic.ttf') format('truetype');
+        font-weight: 400;
+        font-style: italic;
+        font-display: swap;
+    }
+    @font-face {
+        font-family: 'JetBrains Mono';
+        src: url('/fonts/JetBrainsMono-Regular.ttf') format('truetype');
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+    }
+
+    /* Strictly Square Rule */
+    * {
+        border-radius: 0 !important;
+    }
+
+    /* Offset for fixed navbar when scrolling to sections */
+    section[id] {
+        scroll-margin-top: 6rem;
+    }
+
     html.lenis {
         height: auto;
     }
@@ -111,6 +168,12 @@ const fullOgImage = ogImage.startsWith("http") ? ogImage : `${siteUrl}${ogImage}
     .lenis.lenis-scrolling iframe {
         pointer-events: none;
     }
+    
+    html.is-transitioning *,
+    html.is-transitioning *::before,
+    html.is-transitioning *::after {
+        transition: none !important;
+    }
 
 	body {
         transition: background-color 0.5s cubic-bezier(0.25, 0.8, 0.25, 1), color 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
@@ -119,8 +182,8 @@ const fullOgImage = ogImage.startsWith("http") ? ogImage : `${siteUrl}${ogImage}
     /* Smooth theme transition for all elements */
     *, *::before, *::after {
         transition-property: background-color, border-color, color, fill, stroke;
-        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-        transition-duration: 500ms;
+        transition-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
+        transition-duration: 300ms;
     }
 
 	/* Custom Scrollbar */
@@ -128,19 +191,21 @@ const fullOgImage = ogImage.startsWith("http") ? ogImage : `${siteUrl}${ogImage}
 		width: 10px;
 	}
 	::-webkit-scrollbar-track {
-		background: #f1f5f9;
+		background: #fcf9f8;
 	}
     :global(.dark) ::-webkit-scrollbar-track {
-        background: #0B1120;
+        background: #0f0f0f;
     }
 	::-webkit-scrollbar-thumb {
-		background: #cbd5e1;
-		border-radius: 5px;
+		background: #e4e2e2;
 	}
     :global(.dark) ::-webkit-scrollbar-thumb {
-        background: #1e293b;
+        background: #2d2d2d;
     }
 	::-webkit-scrollbar-thumb:hover {
-		background: #0EA5E9;
+		background: #4d44e3;
 	}
+    :global(.dark) ::-webkit-scrollbar-thumb:hover {
+        background: #7c73ff;
+    }
 </style>
