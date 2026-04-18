@@ -5,37 +5,7 @@ import Footer from '../../components/Footer.astro';
 import { resume } from '../../data/resume';
 
 const categories = ["All", "Tools", "Templates"];
-
-const projects = [
-  {
-    name: "PipelineIQ",
-    category: "Tools",
-    description: "MCP Server for Jenkins build log analysis and actionable failure prediction. Automates the discovery of build pipeline errors using AI agents.",
-    tags: ["Python", "AI", "CI/CD"],
-    github: "https://github.com/dev-joshi-ops/PipelineIQ"
-  },
-  {
-    name: "local-llm-hosting",
-    category: "Templates",
-    description: "Robust, containerized local LLM hosting infrastructure using Apache APISIX and Ollama. Implements VRAM-efficient configurations and high-volume token rate limits.",
-    tags: ["Docker", "APISIX", "Ollama"],
-    github: "https://github.com/dev-joshi-ops/local-llm-hosting"
-  },
-  {
-    name: "docmost-mcp-server",
-    category: "Tools",
-    description: "MCP Server integration for Docmost to enable AI agents to read, search, and manage documentation across the organization's workspaces.",
-    tags: ["Python", "MCP"],
-    github: "https://github.com/dev-joshi-ops/docmost-mcp-server"
-  },
-  {
-    name: "fastapi-react-agentic-scaffold",
-    category: "Templates",
-    description: "Production-ready scaffolding for building agentic AI applications with a robust FastAPI backend and an interactive React frontend.",
-    tags: ["Python", "FastAPI", "React"],
-    github: "https://github.com/dev-joshi-ops/fastapi-react-agentic-scaffold"
-  }
-];
+const projects = resume.openSource;
 ---
 
 <Layout
@@ -127,7 +97,7 @@ const projects = [
         <h2 class="font-serif text-4xl md:text-5xl text-editorial-text dark:text-editorial-text-dark tracking-tight max-w-2xl leading-tight">
           Have an idea for a tool? Let's build it together.
         </h2>
-        <a class="inline-flex items-center justify-center px-8 py-4 border border-editorial-text dark:border-editorial-text-dark text-editorial-text dark:text-editorial-text-dark font-mono text-[10px] uppercase tracking-[0.2em] font-bold hover:bg-editorial-text dark:hover:bg-editorial-text-dark hover:text-editorial-surface dark:hover:text-editorial-surface-dark transition-colors duration-300 shrink-0" href="mailto:joshid647@gmail.com">
+        <a class="inline-flex items-center justify-center px-8 py-4 bg-editorial-text dark:bg-editorial-primary-dark text-editorial-surface dark:text-editorial-surface-dark font-mono text-[10px] uppercase tracking-[0.2em] font-bold hover:bg-editorial-primary dark:hover:bg-editorial-text-dark transition-colors duration-300 shrink-0 shadow-lg shadow-editorial-primary/10" href="mailto:joshid647@gmail.com">
           Get in Touch <span class="ml-2 text-sm">↗</span>
         </a>
       </div>

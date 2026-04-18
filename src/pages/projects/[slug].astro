@@ -2,6 +2,18 @@
 import Layout from '../../layouts/Layout.astro';
 import Navbar from '../../components/Navbar.astro';
 import { resume } from '../../data/resume';
+import { Image } from 'astro:assets';
+
+// Import project images for optimization
+import liferayLogo from '../../assets/images/liferay-logo.png';
+import cloudArch from '../../assets/images/cloud-architecture.jpg';
+import eventStream from '../../assets/images/event-streaming.jpg';
+
+const imageMap = {
+  "/images/liferay-logo.png": liferayLogo,
+  "/images/cloud-architecture.jpg": cloudArch,
+  "/images/event-streaming.jpg": eventStream,
+};
 
 export function getStaticPaths() {
   return resume.projects.map((project) => ({
@@ -67,8 +79,24 @@ const breadcrumbSchema = {
       </div>
 
       <!-- Hero Image -->
-      <div class="overflow-hidden mb-24 border border-editorial-surface-highest dark:border-editorial-surface-highest-dark">
-        <img src={project.image} alt={`${project.name} specification visual`} loading="lazy" class="w-full h-64 md:h-[600px] object-cover grayscale hover:grayscale-0 transition-all duration-1000 ease-in-out" />
+      <div class="overflow-hidden mb-24 border border-editorial-surface-highest dark:border-editorial-surface-highest-dark bg-editorial-surface-low dark:bg-editorial-surface-low-dark">
+        {imageMap[project.image] ? (
+          <Image 
+            src={imageMap[project.image]} 
+            alt={`${project.name} specification visual`} 
+            class="w-full h-64 md:h-[600px] object-cover grayscale hover:grayscale-0 transition-all duration-1000 ease-in-out"
+            width={1200}
+            height={600}
+            loading="eager"
+          />
+        ) : (
+          <img 
+            src={project.image} 
+            alt={`${project.name} specification visual`} 
+            loading="lazy" 
+            class="w-full h-64 md:h-[600px] object-cover grayscale hover:grayscale-0 transition-all duration-1000 ease-in-out" 
+          />
+        )}
       </div>
 
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-24">

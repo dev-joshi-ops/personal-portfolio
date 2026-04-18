@@ -272,5 +272,35 @@ export const resume = {
             date: "Apr 2026",
             link: "https://verify.skilljar.com/c/kfnmw7tzs8fr"
         }
-    ]
+    ],
+    openSource: [
+        {
+          name: "PipelineIQ",
+          category: "Tools",
+          description: "MCP Server for Jenkins build log analysis and actionable failure prediction. Automates the discovery of build pipeline errors using AI agents.",
+          tags: ["Python", "AI", "CI/CD"],
+          github: "https://github.com/dev-joshi-ops/PipelineIQ"
+        },
+        {
+          name: "local-llm-hosting",
+          category: "Templates",
+          description: "Robust, containerized local LLM hosting infrastructure using Apache APISIX and Ollama. Implements VRAM-efficient configurations and high-volume token rate limits.",
+          tags: ["Docker", "APISIX", "Ollama"],
+          github: "https://github.com/dev-joshi-ops/local-llm-hosting"
+        },
+        {
+          name: "docmost-mcp-server",
+          category: "Tools",
+          description: "MCP Server integration for Docmost to enable AI agents to read, search, and manage documentation across the organization's workspaces.",
+          tags: ["Python", "MCP"],
+          github: "https://github.com/dev-joshi-ops/docmost-mcp-server"
+        },
+        {
+          name: "fastapi-react-agentic-scaffold",
+          category: "Templates",
+          description: "Production-ready scaffolding for building agentic AI applications with a robust FastAPI backend and an interactive React frontend.",
+          tags: ["Python", "FastAPI", "React"],
+          github: "https://github.com/dev-joshi-ops/fastapi-react-agentic-scaffold"
+        }
+      ]
 };
