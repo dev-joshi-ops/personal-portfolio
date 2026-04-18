@@ -1,7 +1,7 @@
 export const resume = {
     basics: {
         name: "Dev Joshi",
-        label: "DevOps Engineer",
+        label: "DevOps & AI Tooling Engineer",
         email: "joshid647@gmail.com",
         phone: "9638140640",
         location: "Ahmedabad, Gujarat",
@@ -41,6 +41,7 @@ export const resume = {
                 "Spearheaded DevOps efforts for major Abu Dhabi Government client projects.",
                 "Established and enforced SOC 2 Type II controls within CI/CD and cloud environments.",
                 "Designed and maintained robust CI/CD pipelines (Jenkins, GitHub Workflow) with integrated security.",
+                "Published two open-source MCP tools to enhance AI agent capabilities and developer productivity.",
                 "Collaborated with client technical teams to translate business requirements into secure infrastructure designs.",
             ],
         },
