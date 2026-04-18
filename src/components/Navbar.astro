@@ -167,8 +167,9 @@ const navItems = [
   function getToggleOrigin(event) {
       const button = event.currentTarget;
       const rect = button.getBoundingClientRect();
+      const prefersTouchOrigin = window.matchMedia('(pointer: coarse)').matches;
 
-      if (typeof event.clientX === 'number' && typeof event.clientY === 'number') {
+      if (!prefersTouchOrigin && typeof event.clientX === 'number' && typeof event.clientY === 'number') {
           return { x: event.clientX, y: event.clientY };
       }
 
@@ -180,10 +181,12 @@ const navItems = [
 
   async function toggleTheme(event) {
       const { x, y } = getToggleOrigin(event);
+      const prefersTouchOrigin = window.matchMedia('(pointer: coarse)').matches;
       const endRadius = Math.hypot(
         Math.max(x, window.innerWidth - x),
         Math.max(y, window.innerHeight - y)
-      );
+      ) + 24;
+      const animationDuration = prefersTouchOrigin ? 420 : 500;
 
       if (!document.startViewTransition) {
           applyTheme();
@@ -229,7 +232,7 @@ const navItems = [
               ],
             },
             {
-              duration: 500,
+              duration: animationDuration,
               easing: 'cubic-bezier(0.4, 0, 0.2, 1)',
               pseudoElement: '::view-transition-new(root)',
             }
