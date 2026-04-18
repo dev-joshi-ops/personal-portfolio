@@ -139,6 +139,12 @@ const jsonLdArray = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
     .lenis.lenis-scrolling iframe {
         pointer-events: none;
     }
+    
+    html.is-transitioning *,
+    html.is-transitioning *::before,
+    html.is-transitioning *::after {
+        transition: none !important;
+    }
 
 	body {
         transition: background-color 0.5s cubic-bezier(0.25, 0.8, 0.25, 1), color 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
