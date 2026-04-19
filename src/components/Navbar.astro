@@ -219,34 +219,20 @@ const navItems = [
   const mobileThemeToggleBtn = document.getElementById('mobile-theme-toggle');
 
   function applyTheme() {
-      document.documentElement.classList.toggle('dark');
-      localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
-  }
-
-  function getToggleOrigin(event) {
-      const button = event.currentTarget;
-      const rect = button.getBoundingClientRect();
-      const prefersTouchOrigin = window.matchMedia('(pointer: coarse)').matches;
-
-      if (!prefersTouchOrigin && typeof event.clientX === 'number' && typeof event.clientY === 'number') {
-          return { x: event.clientX, y: event.clientY };
-      }
-
-      return {
-          x: rect.left + rect.width / 2,
-          y: rect.top + rect.height / 2,
-      };
+      const isDark = document.documentElement.classList.toggle('dark');
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
   }
 
   async function toggleTheme(event) {
-      const { x, y } = getToggleOrigin(event);
-      const prefersTouchOrigin = window.matchMedia('(pointer: coarse)').matches;
+      const x = event.clientX ?? window.innerWidth / 2;
+      const y = event.clientY ?? window.innerHeight / 2;
+      
       const endRadius = Math.hypot(
         Math.max(x, window.innerWidth - x),
         Math.max(y, window.innerHeight - y)
-      ) + 24;
-      const animationDuration = prefersTouchOrigin ? 420 : 500;
+      );
 
+      // Fallback for browsers that don't support View Transition API
       if (!document.startViewTransition) {
           applyTheme();
           return;
@@ -258,32 +244,23 @@ const navItems = [
           applyTheme();
       });
 
-      const cleanup = () => {
-          document.documentElement.classList.remove('is-transitioning');
-      };
-
       try {
           await transition.ready;
-
+          
           const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
           if (prefersReducedMotion) {
-              const fade = document.documentElement.animate(
-                {
-                  opacity: [0, 1],
-                },
-                {
-                  duration: 220,
-                  easing: 'ease',
-                  pseudoElement: '::view-transition-new(root)',
-                }
+              document.documentElement.animate(
+                  { opacity: [0, 1] },
+                  {
+                      duration: 300,
+                      easing: 'ease-in',
+                      pseudoElement: '::view-transition-new(root)',
+                  }
               );
-
-              await fade.finished;
               return;
           }
 
-          const reveal = document.documentElement.animate(
+          document.documentElement.animate(
             {
               clipPath: [
                 `circle(0px at ${x}px ${y}px)`,
@@ -291,20 +268,20 @@ const navItems = [
               ],
             },
             {
-              duration: animationDuration,
+              duration: 500,
               easing: 'cubic-bezier(0.4, 0, 0.2, 1)',
               pseudoElement: '::view-transition-new(root)',
             }
           );
-
-          await reveal.finished;
       } finally {
-          cleanup();
+          transition.finished.finally(() => {
+              document.documentElement.classList.remove('is-transitioning');
+          });
       }
   }
 
-  themeToggleBtn.addEventListener('click', (e) => toggleTheme(e));
-  mobileThemeToggleBtn.addEventListener('click', (e) => toggleTheme(e));
+  themeToggleBtn?.addEventListener('click', toggleTheme);
+  mobileThemeToggleBtn?.addEventListener('click', toggleTheme);
 </script>
 
 <script>
