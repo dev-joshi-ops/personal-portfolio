@@ -4,7 +4,7 @@ import Navbar from '../../components/Navbar.astro';
 import Footer from '../../components/Footer.astro';
 import { resume } from '../../data/resume';
 
-const categories = ["All", "Tools", "Templates"];
+const categories = ["All", "Tools", "Templates", "Infrastructure"];
 const projects = resume.openSource;
 ---
 
@@ -31,11 +31,11 @@ const projects = resume.openSource;
       <section class="border-t border-b border-editorial-outline/30 dark:border-editorial-secondary-dark/30 py-8 mb-20">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div class="md:border-r border-editorial-outline/30 dark:border-editorial-secondary-dark/30 pr-8">
-            <span class="block font-serif text-4xl text-editorial-text dark:text-editorial-text-dark mb-2">4</span>
+            <span class="block font-serif text-4xl text-editorial-text dark:text-editorial-text-dark mb-2">{resume.openSource.length}</span>
             <span class="block font-mono text-[10px] uppercase tracking-widest text-editorial-secondary dark:text-editorial-secondary-dark font-bold">Public Repositories</span>
           </div>
           <div class="md:border-r border-editorial-outline/30 dark:border-editorial-secondary-dark/30 px-0 md:px-8">
-            <span class="block font-serif text-4xl text-editorial-text dark:text-editorial-text-dark mb-2">TypeScript, Python</span>
+            <span class="block font-serif text-2xl md:text-3xl lg:text-4xl text-editorial-text dark:text-editorial-text-dark mb-2">Python, Docker, TS</span>
             <span class="block font-mono text-[10px] uppercase tracking-widest text-editorial-secondary dark:text-editorial-secondary-dark font-bold">Primary Languages</span>
           </div>
           <div class="pl-0 md:pl-8">

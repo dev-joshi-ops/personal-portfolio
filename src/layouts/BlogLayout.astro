@@ -168,6 +168,13 @@ const breadcrumbSchema = {
 <script>
     // Inject copy buttons into code blocks
     document.querySelectorAll('.blog-content pre').forEach(pre => {
+        // Create a wrapper to keep the button fixed while the pre scrolls
+        const wrapper = document.createElement('div');
+        wrapper.className = 'code-block-wrapper';
+        
+        // Insert wrapper before pre and move pre inside it
+        pre.parentNode.insertBefore(wrapper, pre);
+        wrapper.appendChild(pre);
 
         const btn = document.createElement('button');
         btn.className = 'copy-btn';
@@ -189,7 +196,7 @@ const breadcrumbSchema = {
             }
         });
 
-        pre.appendChild(btn);
+        wrapper.appendChild(btn);
     });
 </script>
 <style is:global>
@@ -318,9 +325,13 @@ const breadcrumbSchema = {
   .dark .blog-content hr {
     border-color: #2d2d2d;
   }
-  /* Code block needs relative for copy button */
-  .blog-content pre {
+  /* Code block wrapper for copy button positioning */
+  .code-block-wrapper {
     position: relative !important;
+    margin: 1.5rem 0;
+  }
+  .blog-content pre {
+    margin: 0 !important;
   }
 
   /* Copy button */
@@ -348,7 +359,7 @@ const breadcrumbSchema = {
     .copy-btn {
       opacity: 0;
     }
-    .blog-content pre:hover .copy-btn {
+    .code-block-wrapper:hover .copy-btn {
       opacity: 1;
     }
   }

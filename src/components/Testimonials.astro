@@ -34,17 +34,17 @@ const allTestimonials = [...testimonials, ...testimonials];
     <!-- Static Grid (Editorial style often favors static content over carousels) -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-0 border-t border-l border-editorial-surface-highest dark:border-editorial-surface-highest-dark">
         {testimonials.map((testimonial) => (
-            <div class="p-12 border-r border-b border-editorial-surface-highest dark:border-editorial-surface-highest-dark bg-editorial-surface dark:bg-editorial-surface-dark hover:bg-editorial-surface-low dark:hover:bg-editorial-surface-low-dark transition-colors group flex flex-col justify-between">
+            <div class="p-6 sm:p-10 md:p-12 border-r border-b border-editorial-surface-highest dark:border-editorial-surface-highest-dark bg-editorial-surface dark:bg-editorial-surface-dark hover:bg-editorial-surface-low dark:hover:bg-editorial-surface-low-dark transition-colors group flex flex-col justify-between">
                 <!-- Content -->
                 <div class="relative mb-12">
-                    <span class="font-serif text-8xl text-editorial-primary dark:text-editorial-primary-dark opacity-10 absolute -top-8 -left-4">“</span>
-                    <p class="text-editorial-text dark:text-editorial-text-dark text-2xl font-serif italic leading-relaxed relative z-10">
+                    <span class="font-serif text-6xl md:text-8xl text-editorial-primary dark:text-editorial-primary-dark opacity-10 absolute -top-4 -left-2 md:-top-8 md:-left-4 select-none">“</span>
+                    <p class="text-editorial-text dark:text-editorial-text-dark text-xl sm:text-2xl font-serif italic leading-relaxed relative z-10">
                         {testimonial.quote}
                     </p>
                 </div>
 
-                <div class="flex items-center gap-6 mt-auto">
-                    <div class="w-16 h-16 bg-editorial-surface-highest dark:bg-editorial-surface-highest-dark overflow-hidden grayscale group-hover:grayscale-0 transition-all duration-700 border border-editorial-surface-highest dark:border-editorial-surface-highest-dark">
+                <div class="flex items-center gap-4 sm:gap-6 mt-auto">
+                    <div class="w-12 h-12 sm:w-16 sm:h-16 bg-editorial-surface-highest dark:bg-editorial-surface-highest-dark overflow-hidden grayscale group-hover:grayscale-0 transition-all duration-700 border border-editorial-surface-highest dark:border-editorial-surface-highest-dark flex-shrink-0">
                         <img 
                             src={testimonial.image} 
                             alt={testimonial.author}
@@ -56,10 +56,10 @@ const allTestimonials = [...testimonials, ...testimonials];
                     </div>
                     
                     <div class="space-y-1">
-                        <h3 class="font-serif font-bold text-xl text-editorial-text dark:text-editorial-text-dark leading-tight">
+                        <h3 class="font-serif font-bold text-lg sm:text-xl text-editorial-text dark:text-editorial-text-dark leading-tight">
                             {testimonial.author}
                         </h3>
-                        <p class="text-[10px] font-mono uppercase tracking-[0.2em] text-editorial-secondary dark:text-editorial-secondary-dark">
+                        <p class="text-[9px] sm:text-[10px] font-mono uppercase tracking-[0.1em] sm:tracking-[0.2em] text-editorial-secondary dark:text-editorial-secondary-dark">
                             {testimonial.role}
                         </p>
                     </div>

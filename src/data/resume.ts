@@ -92,26 +92,30 @@ export const resume = {
 
     projects: [
         {
-            name: "Government Customs Portal – Liferay Migration & Clustering",
-            description: "Managed the migration of a government customs portal from Liferay 7.2 to 7.4 and designed a highly available clustering setup for improved scalability.",
-            category: "devops",
-            tags: ["Liferay DXP", "Oracle DB", "Clustering", "Migration", "On-Premise"],
+            name: "Enterprise Intranet: On-Premises Liferay DXP Migration",
+            description: "Orchestrated a high-stakes Government IT Modernization project, migrating a mission-critical Enterprise Intranet from Liferay DXP 7.2 to 7.4. Ensured 100% data sovereignty and localized content integrity for a Middle East Authority.",
+            category: "Solutions Architecture",
+            tags: ["Bare Metal VMs", "Liferay DXP", "GitLab CI/CD", "Prometheus", "Grafana", "DevSecOps", "Zero Trust"],
             image: "/images/liferay-logo.png",
             link: "#",
             cta: "View Case Study",
             details: {
-                challenge: "Migrating a mission-critical portal in a strict security environment while ensuring zero data loss and achieving high availability through clustering.",
-                strategy: "Implemented a two-node Liferay DXP 7.4 cluster behind a Layer 7 Load Balancer and executed a rigorous two-stage database migration protocol.",
+                challenge: "Navigating strict on-premises infrastructure migration constraints, the Authority faced a critical roadblock: a vendor bug in standard upgrade scripts regarding the ar_AE (Arabic) locale. This defect threatened to corrupt the database schema of the entire Enterprise Intranet, risking data sovereignty breaches.",
+                strategy: "Engineered a Parallel-Environment Migration Pattern on bare-metal VMs to ensure a fail-safe transition. By leveraging CI/CD Pipeline Automation, I enforced Infrastructure Parity across all environments and secured a vendor-validated fix for the locale-specific schema transformation.",
                 implementation: [
-                    "Migration: Led the version upgrade from 7.2 to 7.4 including database schema reconciliation.",
-                    "Clustering: Designed and maintained a highly available Liferay setup for scalability.",
-                    "Optimization: Oversaw infrastructure provisioning and performance tuning during cutover.",
-                    "Collaboration: Worked with QA and dev teams to ensure minimal downtime."
+                    "Automated Infrastructure Parity: Leveraged modular GitLab CI/CD pipelines to guarantee absolute environment consistency across isolated Dev, UAT, and Production on-premises servers.",
+                    "DevSecOps Hardening: Implemented Zero Trust Security protocols and air-gapped network isolation, integrating SonarQube to scan custom modules for vulnerabilities before deployment.",
+                    "Strategic Vendor Collaboration: Diagnosed and escalated a critical product bug in the Liferay upgrade tool, securing a verified resolution that preserved 100% of localized Arabic metadata.",
+                    "Real-Time Telemetry: Established advanced observability using Prometheus and Grafana to monitor JVM heap and upgrade telemetry, ensuring a flawless 30-minute production cutover."
                 ],
                 metrics: [
-                    { label: "Data Fidelity", value: "100%", change: "7.2 → 7.4" },
-                    { label: "Availability", value: "High", change: "Clustered Setup" }
-                ]
+                    { label: "Migration Downtime", value: "30 Min", change: "vs 4h+ projected" },
+                    { label: "Locale Integrity", value: "100%", change: "Verified ar_AE" },
+                    { label: "Security Compliance", value: "Current", change: "7.4 Baseline" },
+                    { label: "Deployment Success", value: "100%", change: "Dry-Run Validated" }
+                ],
+                reflection: "This project demonstrated that an Architect must be as skilled in technical communication and vendor negotiation as they are in systems design. Working without the 'infinite' resources of the cloud breed a discipline in resource allocation and deployment timing that is essential for high-security government environments.",
+                future: "Strategizing for the next phase of modernization: transitioning the Liferay stack to Kubernetes for horizontal scalability and exploring Hybrid Cloud models to balance performance with strict data sovereignty requirements."
             }
         },
         {
@@ -301,6 +305,13 @@ export const resume = {
           description: "Production-ready scaffolding for building agentic AI applications with a robust FastAPI backend and an interactive React frontend.",
           tags: ["Python", "FastAPI", "React"],
           github: "https://github.com/dev-joshi-ops/fastapi-react-agentic-scaffold"
+        },
+        {
+          name: "liferay-docker",
+          category: "Infrastructure",
+          description: "Production-ready Docker configurations for Liferay DXP, including optimized JVM settings, clustering support, and multi-version database orchestration.",
+          tags: ["Docker", "Liferay", "DevOps"],
+          github: "https://github.com/dev-joshi-ops/liferay-docker"
         }
       ]
 };

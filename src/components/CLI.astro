@@ -9,7 +9,7 @@ import { resume } from '../data/resume';
         <p class="text-editorial-secondary dark:text-editorial-secondary-dark text-lg font-sans font-light mt-6">Get to know me via CLI. Type <code class="bg-editorial-surface-highest dark:bg-editorial-surface-highest-dark px-2 py-0.5 text-editorial-primary dark:text-editorial-primary-dark font-mono text-sm">help</code> to start.</p>
     </div>
 
-    <div class="bg-[#111111] shadow-none overflow-hidden border border-editorial-surface-highest dark:border-editorial-surface-highest-dark font-mono text-sm md:text-base">
+    <div class="bg-[#111111] shadow-none overflow-hidden border border-editorial-surface-highest dark:border-editorial-surface-highest-dark font-mono text-base">
       <!-- Terminal Header -->
       <div class="bg-[#1a1a1a] px-6 py-3 flex items-center gap-4 border-b border-[#2d2d2d] dark:border-editorial-surface-highest-dark">
         <div class="flex gap-2">
@@ -21,7 +21,7 @@ import { resume } from '../data/resume';
       </div>
 
       <!-- Terminal Body -->
-      <div class="p-8 h-[450px] overflow-y-auto scrollbar-thin scrollbar-thumb-[#444] scrollbar-track-transparent" id="terminal-container" onclick="document.getElementById('terminal-input').focus()">
+      <div class="p-8 h-[450px] overflow-y-auto overscroll-contain scrollbar-thin scrollbar-thumb-[#444] scrollbar-track-transparent" id="terminal-container" onclick="document.getElementById('terminal-input').focus()">
         <div id="terminal-output" class="mb-2">
           <div class="mb-6 text-slate-400">
             <span class="text-editorial-primary dark:text-editorial-primary-dark">➜</span> <span class="text-editorial-primary dark:text-editorial-primary-dark font-bold">~</span> <span class="opacity-60"># Technical Monograph CLI Protocol Loaded</span><br/>
@@ -29,11 +29,23 @@ import { resume } from '../data/resume';
           </div>
         </div>
         
+        <!-- Suggestions/Quick Actions -->
+        <div class="flex flex-wrap gap-2 mb-8 md:hidden" id="command-suggestions">
+            {['about', 'skills', 'projects', 'contact', 'clear'].map(cmd => (
+                <button 
+                    class="terminal-chip px-3 py-1.5 border border-[#3d3d3d] text-editorial-primary text-[10px] font-mono uppercase tracking-[0.2em] hover:bg-editorial-primary hover:text-white hover:border-editorial-primary transition-all duration-300"
+                    data-command={cmd}
+                >
+                    {cmd}
+                </button>
+            ))}
+        </div>
+
         <!-- Input Line -->
         <div class="flex items-center gap-3 text-slate-300">
             <span class="text-editorial-primary dark:text-editorial-primary-dark">➜</span>
             <span class="text-editorial-primary dark:text-editorial-primary-dark font-bold">~</span>
-            <input type="text" id="terminal-input" class="bg-transparent border-none outline-none flex-1 text-slate-100 focus:ring-0 p-0 font-mono caret-editorial-primary dark:caret-editorial-primary-dark" autocomplete="off" spellcheck="false" />
+            <input type="text" id="terminal-input" class="bg-transparent border-none outline-none flex-1 text-slate-100 focus:ring-0 p-0 font-mono caret-editorial-primary dark:caret-editorial-primary-dark text-base" autocomplete="off" spellcheck="false" placeholder="type here..." />
         </div>
       </div>
     </div>
@@ -44,8 +56,10 @@ import { resume } from '../data/resume';
     const input = document.getElementById('terminal-input');
     const output = document.getElementById('terminal-output');
     const container = document.getElementById('terminal-container');
+    const chips = document.querySelectorAll('.terminal-chip');
 
     const commands = {
+
         help: {
             desc: 'List available commands',
             action: () => {
@@ -117,37 +131,46 @@ import { resume } from '../data/resume';
         }
     };
 
+    function runTerminalCommand(cmd) {
+        cmd = cmd.trim().toLowerCase();
+        
+        // Add command to output
+        if (cmd !== 'clear') {
+            output.innerHTML += `
+                <div class="mb-4">
+                    <span class="text-editorial-primary">➜</span> <span class="text-editorial-primary font-bold">~</span> <span class="text-slate-100 italic">${cmd}</span>
+                </div>
+            `;
+        }
+
+        // Process command
+        if (cmd) {
+            if (commands[cmd]) {
+                const result = commands[cmd].action();
+                if (result) {
+                    output.innerHTML += `<div class="mb-4">${result}</div>`;
+                }
+            } else {
+                output.innerHTML += `<div class="mb-4 text-red-400">Command not found: ${cmd}. Type 'help' for available commands.</div>`;
+            }
+        }
+
+        // Scroll to bottom
+        setTimeout(() => {
+            container.scrollTop = container.scrollHeight;
+        }, 10);
+    }
+
     input.addEventListener('keydown', (e) => {
         if (e.key === 'Enter') {
-            const cmd = input.value.trim().toLowerCase();
-            
-            // Add command to output
-            if (cmd !== 'clear') {
-                output.innerHTML += `
-                    <div class="mb-4">
-                        <span class="text-editorial-primary">➜</span> <span class="text-editorial-primary font-bold">~</span> <span class="text-slate-100 italic">${input.value}</span>
-                    </div>
-                `;
-            }
-
-            // Process command
-            if (cmd) {
-                if (commands[cmd]) {
-                    const result = commands[cmd].action();
-                    if (result) {
-                        output.innerHTML += `<div class="mb-4">${result}</div>`;
-                    }
-                } else {
-                    output.innerHTML += `<div class="mb-4 text-red-400">Command not found: ${cmd}. Type 'help' for available commands.</div>`;
-                }
-            }
-
+            runTerminalCommand(input.value);
             input.value = '';
-            
-            // Scroll to bottom
-            setTimeout(() => {
-                container.scrollTop = container.scrollHeight;
-            }, 10);
         }
+    });
+
+    chips.forEach(chip => {
+        chip.addEventListener('click', () => {
+            runTerminalCommand(chip.getAttribute('data-command'));
+        });
     });
 </script>

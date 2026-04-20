@@ -120,7 +120,7 @@ const breadcrumbSchema = {
             </section>
 
             <!-- Implementation -->
-            <section class="border-t border-editorial-surface-highest dark:border-editorial-surface-highest-dark pt-12 pb-12">
+            <section class="border-t border-editorial-surface-highest dark:border-editorial-surface-highest-dark pt-12">
                 <h2 class="text-xs font-mono font-bold text-editorial-primary dark:text-editorial-primary-dark uppercase tracking-[0.3em] mb-8">Protocol Execution</h2>
                 <ul class="space-y-6">
                     {project.details?.implementation?.map((item) => (
@@ -132,26 +132,60 @@ const breadcrumbSchema = {
                 </ul>
             </section>
 
+            {project.details?.reflection && (
+                <section class="border-t border-editorial-surface-highest dark:border-editorial-surface-highest-dark pt-12">
+                    <h2 class="text-xs font-mono font-bold text-editorial-primary dark:text-editorial-primary-dark uppercase tracking-[0.3em] mb-8">Professional Reflection</h2>
+                    <p class="text-editorial-secondary dark:text-editorial-secondary-dark leading-relaxed text-xl font-sans font-light italic bg-editorial-surface-low dark:bg-editorial-surface-low-dark p-8 border-l-2 border-editorial-primary dark:border-editorial-primary-dark">
+                        "{project.details.reflection}"
+                    </p>
+                </section>
+            )}
+
+            {project.details?.future && (
+                <section class="border-t border-editorial-surface-highest dark:border-editorial-surface-highest-dark pt-12 pb-12">
+                    <h2 class="text-xs font-mono font-bold text-editorial-primary dark:text-editorial-primary-dark uppercase tracking-[0.3em] mb-8">Future Scalability</h2>
+                    <p class="text-editorial-secondary dark:text-editorial-secondary-dark leading-relaxed text-lg font-sans font-light">
+                        {project.details.future}
+                    </p>
+                </section>
+            )}
+
         </div>
 
         <!-- Sidebar / Metrics -->
         <div class="lg:col-span-1">
-            <div class="bg-editorial-surface-low dark:bg-editorial-surface-low-dark p-10 border border-editorial-surface-highest dark:border-editorial-surface-highest-dark sticky top-32">
-                <h3 class="text-xs font-mono font-bold text-editorial-text dark:text-editorial-text-dark mb-12 uppercase tracking-[0.3em] border-b border-editorial-surface-highest dark:border-editorial-surface-highest-dark pb-6">Operational Impact</h3>
-                
-                <div class="space-y-10">
-                    {project.details?.metrics?.map((metric) => (
-                        <div class="group">
-                            <p class="text-[10px] font-mono uppercase tracking-[0.2em] text-editorial-secondary dark:text-editorial-secondary-dark mb-4 group-hover:text-editorial-primary dark:group-hover:text-editorial-primary-dark transition-colors">{metric.label}</p>
-                            <div class="flex items-baseline gap-4">
-                                <span class="text-4xl font-bold text-editorial-text dark:text-editorial-text-dark font-serif italic tracking-tighter">{metric.value}</span>
-                                {metric.change && <span class="text-[10px] font-mono font-bold text-editorial-primary dark:text-editorial-primary-dark bg-editorial-primary/5 dark:bg-editorial-primary-dark/10 px-2 py-1 tracking-widest">{metric.change}</span>}
+            <div class="space-y-12 sticky top-32">
+                <!-- Metrics -->
+                <div class="bg-editorial-surface-low dark:bg-editorial-surface-low-dark p-8 border border-editorial-surface-highest dark:border-editorial-surface-highest-dark">
+                    <h3 class="text-xs font-mono font-bold text-editorial-text dark:text-editorial-text-dark mb-10 uppercase tracking-[0.3em] border-b border-editorial-surface-highest dark:border-editorial-surface-highest-dark pb-6">Operational Impact</h3>
+                    
+                    <div class="space-y-10">
+                        {project.details?.metrics?.map((metric) => (
+                            <div class="group">
+                                <p class="text-[10px] font-mono uppercase tracking-[0.2em] text-editorial-secondary dark:text-editorial-secondary-dark mb-3 group-hover:text-editorial-primary dark:group-hover:text-editorial-primary-dark transition-colors">{metric.label}</p>
+                                <div class="space-y-2">
+                                    <span class="block text-4xl font-bold text-editorial-text dark:text-editorial-text-dark font-serif italic tracking-tighter leading-none">{metric.value}</span>
+                                    {metric.change && (
+                                        <span class="inline-block text-[9px] font-mono font-bold text-editorial-primary dark:text-editorial-primary-dark bg-editorial-primary/5 dark:bg-editorial-primary-dark/10 px-2 py-1 tracking-[0.15em] uppercase">
+                                            {metric.change}
+                                        </span>
+                                    )}
+                                </div>
                             </div>
-                        </div>
-                    )) || <p class="text-editorial-secondary dark:text-editorial-secondary-dark font-mono text-xs uppercase tracking-widest">Awaiting Metric Verification...</p>}
+                        )) || <p class="text-editorial-secondary dark:text-editorial-secondary-dark font-mono text-xs uppercase tracking-widest">Awaiting Metric Verification...</p>}
+                    </div>
                 </div>
-
-
+                <!-- Tech Stack -->
+                <div class="bg-editorial-surface-low dark:bg-editorial-surface-low-dark p-8 border border-editorial-surface-highest dark:border-editorial-surface-highest-dark">
+                    <h3 class="text-xs font-mono font-bold text-editorial-text dark:text-editorial-text-dark mb-10 uppercase tracking-[0.3em] border-b border-editorial-surface-highest dark:border-editorial-surface-highest-dark pb-6">Technical Stack</h3>
+                    <div class="flex flex-wrap gap-2">
+                        {project.tags.map((tag) => (
+                            <span class="px-3 py-1 bg-editorial-surface-highest dark:bg-editorial-surface-highest-dark text-editorial-text dark:text-editorial-text-dark text-[9px] font-mono font-bold uppercase tracking-[0.1em]">
+                                {tag}
+                            </span>
+                        ))}
+                    </div>
+                </div>
             </div>
         </div>
       </div>
