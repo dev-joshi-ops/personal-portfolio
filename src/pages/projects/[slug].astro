@@ -63,7 +63,7 @@ const breadcrumbSchema = {
             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-3 group-hover:-translate-x-1 transition-transform"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
             Return to Archives
         </a>
-        <h1 class="text-4xl md:text-7xl font-bold text-editorial-text dark:text-editorial-text-dark mb-8 tracking-tight font-serif italic border-l-4 border-editorial-primary dark:border-editorial-primary-dark pl-8">
+        <h1 class="text-4xl md:text-7xl font-bold text-editorial-text dark:text-editorial-text-dark mb-8 tracking-tight   border-l-4 border-editorial-primary dark:border-editorial-primary-dark pl-8">
             {project.name}
         </h1>
         <div class="flex flex-wrap gap-3">
@@ -106,7 +106,7 @@ const breadcrumbSchema = {
             <!-- Challenge -->
             <section class="border-t border-editorial-surface-highest dark:border-editorial-surface-highest-dark pt-12">
                 <h2 class="text-xs font-mono font-bold text-editorial-primary dark:text-editorial-primary-dark uppercase tracking-[0.3em] mb-8">Objective & Constraints</h2>
-                <p class="text-editorial-text dark:text-editorial-text-dark leading-relaxed text-2xl font-serif italic">
+                <p class="text-editorial-text dark:text-editorial-text-dark leading-relaxed text-2xl  ">
                     {project.details?.challenge || project.description}
                 </p>
             </section>
@@ -114,7 +114,7 @@ const breadcrumbSchema = {
             <!-- Strategy -->
             <section class="border-t border-editorial-surface-highest dark:border-editorial-surface-highest-dark pt-12">
                 <h2 class="text-xs font-mono font-bold text-editorial-primary dark:text-editorial-primary-dark uppercase tracking-[0.3em] mb-8">Strategic Implementation</h2>
-                <p class="text-editorial-secondary dark:text-editorial-secondary-dark leading-relaxed text-xl font-sans font-light">
+                <p class="text-editorial-secondary dark:text-editorial-secondary-dark leading-relaxed text-xl  font-light">
                     {project.details?.strategy || "Strategic approach details coming soon."}
                 </p>
             </section>
@@ -124,7 +124,7 @@ const breadcrumbSchema = {
                 <h2 class="text-xs font-mono font-bold text-editorial-primary dark:text-editorial-primary-dark uppercase tracking-[0.3em] mb-8">Protocol Execution</h2>
                 <ul class="space-y-6">
                     {project.details?.implementation?.map((item) => (
-                        <li class="flex items-start gap-6 text-editorial-secondary dark:text-editorial-secondary-dark leading-relaxed text-lg font-sans font-light italic">
+                        <li class="flex items-start gap-6 text-editorial-secondary dark:text-editorial-secondary-dark leading-relaxed text-lg  font-light ">
                             <span class="mt-3 w-8 h-[1px] bg-editorial-primary dark:bg-editorial-primary-dark flex-shrink-0"></span>
                             <span>{item}</span>
                         </li>
@@ -135,7 +135,7 @@ const breadcrumbSchema = {
             {project.details?.reflection && (
                 <section class="border-t border-editorial-surface-highest dark:border-editorial-surface-highest-dark pt-12">
                     <h2 class="text-xs font-mono font-bold text-editorial-primary dark:text-editorial-primary-dark uppercase tracking-[0.3em] mb-8">Professional Reflection</h2>
-                    <p class="text-editorial-secondary dark:text-editorial-secondary-dark leading-relaxed text-xl font-sans font-light italic bg-editorial-surface-low dark:bg-editorial-surface-low-dark p-8 border-l-2 border-editorial-primary dark:border-editorial-primary-dark">
+                    <p class="text-editorial-secondary dark:text-editorial-secondary-dark leading-relaxed text-xl  font-light  bg-editorial-surface-low dark:bg-editorial-surface-low-dark p-8 border-l-2 border-editorial-primary dark:border-editorial-primary-dark">
                         "{project.details.reflection}"
                     </p>
                 </section>
@@ -144,7 +144,7 @@ const breadcrumbSchema = {
             {project.details?.future && (
                 <section class="border-t border-editorial-surface-highest dark:border-editorial-surface-highest-dark pt-12 pb-12">
                     <h2 class="text-xs font-mono font-bold text-editorial-primary dark:text-editorial-primary-dark uppercase tracking-[0.3em] mb-8">Future Scalability</h2>
-                    <p class="text-editorial-secondary dark:text-editorial-secondary-dark leading-relaxed text-lg font-sans font-light">
+                    <p class="text-editorial-secondary dark:text-editorial-secondary-dark leading-relaxed text-lg  font-light">
                         {project.details.future}
                     </p>
                 </section>
@@ -164,7 +164,7 @@ const breadcrumbSchema = {
                             <div class="group">
                                 <p class="text-[10px] font-mono uppercase tracking-[0.2em] text-editorial-secondary dark:text-editorial-secondary-dark mb-3 group-hover:text-editorial-primary dark:group-hover:text-editorial-primary-dark transition-colors">{metric.label}</p>
                                 <div class="space-y-2">
-                                    <span class="block text-4xl font-bold text-editorial-text dark:text-editorial-text-dark font-serif italic tracking-tighter leading-none">{metric.value}</span>
+                                    <span class="block text-4xl font-bold text-editorial-text dark:text-editorial-text-dark   tracking-tighter leading-none">{metric.value}</span>
                                     {metric.change && (
                                         <span class="inline-block text-[9px] font-mono font-bold text-editorial-primary dark:text-editorial-primary-dark bg-editorial-primary/5 dark:bg-editorial-primary-dark/10 px-2 py-1 tracking-[0.15em] uppercase">
                                             {metric.change}

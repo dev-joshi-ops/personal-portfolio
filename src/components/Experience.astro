@@ -6,7 +6,7 @@ import { resume } from '../data/resume';
   <div class="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="mb-16">
         <h2 class="sr-only">Work Experience & Chronology</h2>
-        <h2 aria-hidden="true" class="text-4xl md:text-6xl font-bold text-editorial-text dark:text-editorial-text-dark tracking-tight font-serif italic border-l-4 border-editorial-primary dark:border-editorial-primary-dark pl-8">Chronology</h2>
+        <h2 aria-hidden="true" class="text-4xl md:text-6xl font-bold text-editorial-text dark:text-editorial-text-dark tracking-tight   border-l-4 border-editorial-primary dark:border-editorial-primary-dark pl-8">Chronology</h2>
     </div>
 
     <div class="space-y-24">
@@ -18,17 +18,17 @@ import { resume } from '../data/resume';
             <div class="font-mono text-xs uppercase tracking-[0.2em] text-editorial-primary dark:text-editorial-primary-dark font-bold">
               <time datetime={job.startDate}>{job.startDate}</time> — <time datetime={job.endDate === 'Present' ? new Date().getFullYear().toString() : job.endDate}>{job.endDate}</time>
             </div>
-            <p class="font-serif text-2xl font-bold text-editorial-text dark:text-editorial-text-dark">{job.company}</p>
+            <p class=" text-2xl font-bold text-editorial-text dark:text-editorial-text-dark">{job.company}</p>
             <p class="font-mono text-[10px] uppercase tracking-widest text-editorial-secondary dark:text-editorial-secondary-dark">Ahmedabad</p>
           </div>
 
           <!-- Content (8 cols) -->
           <div class="lg:col-span-8 space-y-8">
-            <h3 class="text-[clamp(1.75rem,5vw,3rem)] font-bold text-editorial-text dark:text-editorial-text-dark tracking-tight font-serif leading-tight italic">
+            <h3 class="text-[clamp(1.75rem,5vw,3rem)] font-bold text-editorial-text dark:text-editorial-text-dark tracking-tight  leading-tight ">
               {job.position}
             </h3>
             
-            <p class="text-xl text-editorial-secondary dark:text-editorial-secondary-dark font-sans font-light leading-relaxed italic border-l border-editorial-surface-highest dark:border-editorial-surface-highest-dark pl-8">
+            <p class="text-xl text-editorial-secondary dark:text-editorial-secondary-dark  font-light leading-relaxed  border-l border-editorial-surface-highest dark:border-editorial-surface-highest-dark pl-8">
               {job.summary}
             </p>
             
@@ -36,7 +36,7 @@ import { resume } from '../data/resume';
               {job.highlights.map((highlight) => (
                 <li class="flex items-start gap-6 group">
                   <span class="font-mono text-xs text-editorial-primary dark:text-editorial-primary-dark opacity-40 group-hover:opacity-100 transition-opacity">/</span>
-                  <span class="text-editorial-text dark:text-editorial-text-dark font-sans text-lg font-light leading-relaxed">{highlight}</span>
+                  <span class="text-editorial-text dark:text-editorial-text-dark  text-lg font-light leading-relaxed">{highlight}</span>
                 </li>
               ))}
             </ul>

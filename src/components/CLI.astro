@@ -5,8 +5,8 @@ import { resume } from '../data/resume';
 <section id="cli" class="py-20 bg-editorial-surface dark:bg-editorial-surface-dark border-t border-editorial-surface-highest dark:border-editorial-surface-highest-dark">
   <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-left mb-16">
-        <h2 class="text-4xl md:text-6xl font-bold text-editorial-text dark:text-editorial-text-dark tracking-tight font-serif italic italic border-l-4 border-editorial-primary dark:border-editorial-primary-dark pl-8">Interactive Terminal</h2>
-        <p class="text-editorial-secondary dark:text-editorial-secondary-dark text-lg font-sans font-light mt-6">Get to know me via CLI. Type <code class="bg-editorial-surface-highest dark:bg-editorial-surface-highest-dark px-2 py-0.5 text-editorial-primary dark:text-editorial-primary-dark font-mono text-sm">help</code> to start.</p>
+        <h2 class="text-4xl md:text-6xl font-bold text-editorial-text dark:text-editorial-text-dark tracking-tight    border-l-4 border-editorial-primary dark:border-editorial-primary-dark pl-8">Interactive Terminal</h2>
+        <p class="text-editorial-secondary dark:text-editorial-secondary-dark text-lg  font-light mt-6">Get to know me via CLI. Type <code class="bg-editorial-surface-highest dark:bg-editorial-surface-highest-dark px-2 py-0.5 text-editorial-primary dark:text-editorial-primary-dark font-mono text-sm">help</code> to start.</p>
     </div>
 
     <div class="bg-[#111111] shadow-none overflow-hidden border border-editorial-surface-highest dark:border-editorial-surface-highest-dark font-mono text-base">
@@ -76,7 +76,7 @@ import { resume } from '../data/resume';
         about: {
             desc: 'Who am I?',
             action: () => {
-                return `<div class="text-slate-300 max-w-2xl leading-relaxed italic border-l border-editorial-primary pl-4">${resume.basics.summary}</div>`;
+                return `<div class="text-slate-300 max-w-2xl leading-relaxed  border-l border-editorial-primary pl-4">${resume.basics.summary}</div>`;
             }
         },
         skills: {
@@ -103,12 +103,12 @@ import { resume } from '../data/resume';
                 const projectList = resume.projects.map(p => 
                     `<div class="mb-4">
                         <span class="text-editorial-primary font-bold uppercase tracking-widest text-xs">${p.name}</span>
-                        <p class="text-slate-400 text-sm mt-1 italic">${p.description}</p>
+                        <p class="text-slate-400 text-sm mt-1 ">${p.description}</p>
                      </div>`
                 ).join('');
                 return `<div class="text-slate-300">
                     ${projectList}
-                    <div class="mt-2 text-slate-500 italic text-[10px] uppercase tracking-widest">Reference Archives Section for Full Details</div>
+                    <div class="mt-2 text-slate-500  text-[10px] uppercase tracking-widest">Reference Archives Section for Full Details</div>
                 </div>`;
             }
         },
@@ -138,7 +138,7 @@ import { resume } from '../data/resume';
         if (cmd !== 'clear') {
             output.innerHTML += `
                 <div class="mb-4">
-                    <span class="text-editorial-primary">➜</span> <span class="text-editorial-primary font-bold">~</span> <span class="text-slate-100 italic">${cmd}</span>
+                    <span class="text-editorial-primary">➜</span> <span class="text-editorial-primary font-bold">~</span> <span class="text-slate-100 ">${cmd}</span>
                 </div>
             `;
         }

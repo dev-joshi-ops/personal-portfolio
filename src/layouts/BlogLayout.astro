@@ -91,7 +91,7 @@ const breadcrumbSchema = {
           <span>/</span>
           <span>{frontmatter.readTime}</span>
         </div>
-        <h1 class="text-4xl md:text-6xl font-bold text-editorial-text dark:text-editorial-text-dark mb-8 tracking-tight font-serif leading-[1.1]">{frontmatter.title}</h1>
+        <h1 class="text-4xl md:text-6xl font-bold text-editorial-text dark:text-editorial-text-dark mb-8 tracking-tight  leading-[1.1]">{frontmatter.title}</h1>
         <div class="flex items-center justify-start gap-4 py-6 border-y border-editorial-surface-highest dark:border-editorial-surface-highest-dark">
             <div class="w-12 h-12 bg-editorial-surface-highest dark:bg-editorial-surface-highest-dark flex items-center justify-center grayscale">
                 <!-- User Icon or Initials -->
@@ -104,7 +104,7 @@ const breadcrumbSchema = {
         </div>
       </header>
 
-      <div class="blog-content prose prose-lg prose-slate dark:prose-invert max-w-none font-sans text-editorial-text dark:text-editorial-text-dark leading-relaxed">
+      <div class="blog-content prose prose-lg prose-slate dark:prose-invert max-w-none  text-editorial-text dark:text-editorial-text-dark leading-relaxed">
         <slot />
       </div>
 
@@ -207,7 +207,7 @@ const breadcrumbSchema = {
   .blog-content h2,
   .blog-content h3,
   .blog-content h4 {
-    font-family: 'Newsreader', Georgia, serif;
+    font-family: 'JetBrains Mono', monospace;
     color: #323232;
     letter-spacing: -0.02em;
   }
@@ -298,7 +298,6 @@ const breadcrumbSchema = {
   .blog-content blockquote {
     border-left: 3px solid #4d44e3;
     padding-left: 1.25rem;
-    font-style: italic;
     color: #585f6d;
   }
   .dark .blog-content blockquote {
