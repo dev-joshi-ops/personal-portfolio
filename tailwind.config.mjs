@@ -13,7 +13,7 @@ export default {
                 editorial: {
                     surface: '#f0ece4',
                     text: '#000000',
-                    primary: '#20b6d0',
+                    primary: '#df492f',
                     secondary: '#585f6d',
                     'surface-low': '#e8e4dc',
                     'surface-container': '#e0dcd4',
@@ -23,7 +23,7 @@ export default {
                     // Dark Mode (Inverted Monograph)
                     'surface-dark': '#0f0f0f',
                     'text-dark': '#efefef',
-                    'primary-dark': '#7c73ff',
+                    'primary-dark': '#df492f',
                     'secondary-dark': '#a1a1a1',
                     'surface-low-dark': '#1a1a1a',
                     'surface-highest-dark': '#2d2d2d',
