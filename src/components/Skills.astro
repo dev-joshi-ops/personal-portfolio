@@ -7,7 +7,7 @@ import { resume } from '../data/resume';
     <!-- Section Header -->
     <div class="text-left mb-16">
       <h2 class="sr-only">Technical Skills & Expertise</h2>
-      <h2 aria-hidden="true" class="text-5xl md:text-7xl font-bold text-editorial-text dark:text-editorial-text-dark mb-12 font-serif italic tracking-tighter border-l-4 border-editorial-primary dark:border-editorial-primary-dark pl-8">Stack</h2>
+      <h2 aria-hidden="true" class="text-5xl md:text-7xl font-bold text-editorial-text dark:text-editorial-text-dark mb-12   tracking-tighter border-l-4 border-editorial-primary dark:border-editorial-primary-dark pl-8">Stack</h2>
     </div>
 
     <!-- Tabs Container -->
@@ -23,7 +23,7 @@ import { resume } from '../data/resume';
           { id: 'governance', label: 'Security' }
         ].map((tab, index) => (
           <button
-            class={`skill-tab-btn font-sans text-[16px] transition-all relative pb-2 group ${index === 0 ? 'active text-editorial-text dark:text-editorial-text-dark font-medium' : 'text-[#888] dark:text-editorial-secondary-dark hover:text-editorial-text'}`}
+            class={`skill-tab-btn  text-[16px] transition-all relative pb-2 group ${index === 0 ? 'active text-editorial-text dark:text-editorial-text-dark font-medium' : 'text-[#888] dark:text-editorial-secondary-dark hover:text-editorial-text'}`}
             data-tab={tab.id}
           >
             {tab.label}
@@ -39,7 +39,7 @@ import { resume } from '../data/resume';
         <div id="tab-cloud" class="skill-content grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
           {resume.skills.cloud.map((skill) => (
             <div class="skill-item py-5 px-6 border border-[#eee] dark:border-editorial-surface-highest-dark bg-white dark:bg-editorial-surface-low-dark group hover:border-editorial-primary transition-colors opacity-0 translate-y-2">
-              <span class="block text-[17px] font-sans font-bold text-editorial-text dark:text-editorial-text-dark tracking-tight">{skill.name.split('(')[0].trim()}</span>
+              <span class="block text-[17px]  font-bold text-editorial-text dark:text-editorial-text-dark tracking-tight">{skill.name.split('(')[0].trim()}</span>
             </div>
           ))}
         </div>
@@ -48,7 +48,7 @@ import { resume } from '../data/resume';
         <div id="tab-orchestration" class="skill-content hidden grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
           {resume.skills.containerization.map((skill) => (
             <div class="skill-item py-5 px-6 border border-[#eee] dark:border-editorial-surface-highest-dark bg-white dark:bg-editorial-surface-low-dark group hover:border-editorial-primary transition-colors opacity-0 translate-y-2">
-              <span class="block text-[15px] font-sans font-medium text-editorial-text dark:text-editorial-text-dark">{skill}</span>
+              <span class="block text-[15px]  font-medium text-editorial-text dark:text-editorial-text-dark">{skill}</span>
             </div>
           ))}
         </div>
@@ -57,7 +57,7 @@ import { resume } from '../data/resume';
         <div id="tab-iac" class="skill-content hidden grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
           {resume.skills.iac.map((skill) => (
             <div class="skill-item py-5 px-6 border border-[#eee] dark:border-editorial-surface-highest-dark bg-white dark:bg-editorial-surface-low-dark group hover:border-editorial-primary transition-colors opacity-0 translate-y-2">
-              <span class="block text-[17px] font-sans font-bold text-editorial-text dark:text-editorial-text-dark tracking-tight">{skill}</span>
+              <span class="block text-[17px]  font-bold text-editorial-text dark:text-editorial-text-dark tracking-tight">{skill}</span>
             </div>
           ))}
         </div>
@@ -66,7 +66,7 @@ import { resume } from '../data/resume';
         <div id="tab-cicd" class="skill-content hidden grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
           {resume.skills.cicd.map((skill) => (
             <div class="skill-item py-5 px-6 border border-[#eee] dark:border-editorial-surface-highest-dark bg-white dark:bg-editorial-surface-low-dark group hover:border-editorial-primary transition-colors opacity-0 translate-y-2">
-              <span class="block text-[15px] font-sans font-medium text-editorial-text dark:text-editorial-text-dark">{skill}</span>
+              <span class="block text-[15px]  font-medium text-editorial-text dark:text-editorial-text-dark">{skill}</span>
             </div>
           ))}
         </div>
@@ -75,7 +75,7 @@ import { resume } from '../data/resume';
         <div id="tab-observability" class="skill-content hidden grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
           {resume.skills.observability.map((skill) => (
             <div class="skill-item py-5 px-6 border border-[#eee] dark:border-editorial-surface-highest-dark bg-white dark:bg-editorial-surface-low-dark group hover:border-editorial-primary transition-colors opacity-0 translate-y-2">
-              <span class="block text-[15px] font-sans font-medium text-editorial-text dark:text-editorial-text-dark">{skill}</span>
+              <span class="block text-[15px]  font-medium text-editorial-text dark:text-editorial-text-dark">{skill}</span>
             </div>
           ))}
         </div>
@@ -84,7 +84,7 @@ import { resume } from '../data/resume';
         <div id="tab-governance" class="skill-content hidden grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
           {resume.skills.security?.map((skill) => (
             <div class="skill-item py-5 px-6 border border-[#eee] dark:border-editorial-surface-highest-dark bg-white dark:bg-editorial-surface-low-dark group hover:border-editorial-primary transition-colors opacity-0 translate-y-2">
-              <span class="block text-[15px] font-sans font-medium text-editorial-text dark:text-editorial-text-dark">{skill}</span>
+              <span class="block text-[15px]  font-medium text-editorial-text dark:text-editorial-text-dark">{skill}</span>
             </div>
           ))}
         </div>

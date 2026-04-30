@@ -21,10 +21,10 @@ const topProjects = resume.openSource.slice(0, 2);
       {topProjects.map((project) => (
         <article class="bg-editorial-surface-low dark:bg-editorial-surface-low-dark p-8 lg:p-12 transition-all duration-500 hover:bg-editorial-surface-highest dark:hover:bg-editorial-surface-highest-dark flex flex-col h-full group border border-transparent hover:border-editorial-surface-highest dark:hover:border-editorial-surface-highest-dark">
           <div class="flex justify-between items-start mb-6">
-            <h3 class="font-serif text-3xl tracking-tight text-editorial-text dark:text-editorial-text-dark group-hover:text-editorial-primary dark:group-hover:text-editorial-primary-dark transition-colors">{project.name}</h3>
+            <h3 class=" text-3xl tracking-tight text-editorial-text dark:text-editorial-text-dark group-hover:text-editorial-primary dark:group-hover:text-editorial-primary-dark transition-colors">{project.name}</h3>
             <span class="bg-editorial-surface dark:bg-editorial-surface-dark text-editorial-secondary dark:text-editorial-secondary-dark font-mono text-[10px] px-3 py-1 border border-editorial-outline/20 dark:border-editorial-secondary-dark/20 uppercase tracking-widest font-bold">{project.category.slice(0, -1)}</span>
           </div>
-          <p class="font-sans text-sm md:text-base text-editorial-secondary dark:text-editorial-secondary-dark leading-relaxed mb-12 flex-grow">
+          <p class=" text-sm md:text-base text-editorial-secondary dark:text-editorial-secondary-dark leading-relaxed mb-12 flex-grow">
             {project.description}
           </p>
           <div class="mt-auto">
