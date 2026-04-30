@@ -1,17 +1,11 @@
 <div class="custom-cursor">
-
   <svg
     id="cursorSvg"
     viewBox="0 0 64 64"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
   >
-    <!--
-      Both paths below have been normalised to the SAME number of cubic-bezier
-      commands so GSAP can interpolate the "d" attribute freely without needing
-      the paid MorphSVGPlugin.
-    -->
-    <!-- The CIRCLE (default state) encoded as a cubic-bezier approximation -->
+    <!-- The CIRCLE (default state) -->
     <path
       id="cursorDot"
       d="M32 14
@@ -25,7 +19,6 @@
     <!-- The I-BEAM (text-hover state) -->
     <path
       id="iBeamPath"
-      style="display:none"
       fill-rule="evenodd"
       clip-rule="evenodd"
       d="M23 54C22.4477 54 22 54.4477 22 55C22 55.5523 22.4477 56 23 56L28 56C30.2091 56 32 54.2092 32 52C32 54.2092 33.7909 56 36 56L41 56C41.5523 56 42 55.5523 42 55C42 54.4477 41.5523 54 41 54L37 54C34.7909 54 33 52.2092 33 50L33 14C33 11.7916 34.7896 10.0013 36.9975 10L41 10C41.5523 10 42 9.55229 42 9C42 8.44772 41.5523 8 41 8L36 8C33.7909 8 32 9.79077 32 12C32 9.79077 30.2091 8 28 8L23 8C22.4477 8 22 8.44771 22 9C22 9.55228 22.4477 10 23 10L27 10C29.2085 10.0007 31 11.7912 31 14L31 50C31 52.2092 29.2091 54 27 54L23 54Z"
@@ -35,7 +28,6 @@
     <!-- The I-BEAM HELD (mousedown state) -->
     <path
       id="iBeamHold"
-      style="display:none"
       fill-rule="evenodd"
       clip-rule="evenodd"
       d="M21 49C20.4477 49 20 49.4477 20 50C20 50.5523 20.4477 51 21 51L28 51C30.2091 51 32 49.2092 32 47C32 49.2092 33.7909 51 36 51L43 51C43.5523 51 44 50.5523 44 50C44 49.4477 43.5523 49 43 49L37 49C34.7909 49 33 47.2092 33 45L33 19C33 16.7916 34.7896 15.0013 36.9975 15L43 15C43.5523 15 44 14.5523 44 14C44 13.4477 43.5523 13 43 13L36 13C33.7909 13 32 14.7908 32 17C32 14.7908 30.2091 13 28 13L21 13C20.4477 13 20 13.4477 20 14C20 14.5523 20.4477 15 21 15L27 15C29.2085 15.0007 31 16.7912 31 19L31 45C31 47.2092 29.2091 49 27 49L21 49Z"
@@ -52,21 +44,26 @@
   const iBeam      = document.getElementById('iBeamPath')    as unknown as SVGPathElement;
   const iBeamHold  = document.getElementById('iBeamHold')    as unknown as SVGPathElement;
 
-  if (!cursorWrap || !dot) {
-    console.error('Cursor: elements missing');
-  } else {
-    // ─── Move cursor SVG directly (same pattern as CodePen) ──────────────────
+  if (cursorWrap && dot && iBeam && iBeamHold) {
+    // Initial State
+    gsap.set(cursorWrap, { xPercent: -50, yPercent: -50, autoAlpha: 0 });
+    gsap.set(dot, { autoAlpha: 1, scale: 1 });
+    gsap.set([iBeam, iBeamHold], { autoAlpha: 0, scale: 0 });
+
     const xTo = gsap.quickTo(cursorWrap, 'x', { duration: 0.2, ease: 'power3' });
     const yTo = gsap.quickTo(cursorWrap, 'y', { duration: 0.2, ease: 'power3' });
 
-    gsap.set(cursorWrap, { xPercent: -50, yPercent: -50 });
-
+    let hasMoved = false;
     window.addEventListener('mousemove', (e) => {
+      if (!hasMoved) {
+        gsap.to(cursorWrap, { autoAlpha: 1, duration: 0.3 });
+        hasMoved = true;
+      }
       xTo(e.clientX);
       yTo(e.clientY);
     });
 
-    // ─── Text hover timeline: rings fade + dot swaps to I-beam ───────────────
+    // ─── Text hover logic ──────────────────────────────────────────────────
     const tl = gsap.timeline({ paused: true });
 
     tl.to(dot, {
@@ -77,42 +74,39 @@
       ease: 'power2.in',
     }, 0);
 
-    tl.fromTo(iBeam, {
-      autoAlpha: 0,
-      scale: 0,
-      transformOrigin: 'center center',
-    }, {
+    tl.to(iBeam, {
       autoAlpha: 1,
       scale: 1,
       transformOrigin: 'center center',
       duration: 0.2,
       ease: 'back.out(2)',
-      clearProps: 'all',
     }, 0.1);
+
+    const handleEnter = () => tl.play();
+    const handleLeave = () => tl.reverse();
 
     // ─── Mouse-down: swap I-beam → I-beam held ───────────────────────────────
     const morphToHold = () => {
-      gsap.to(iBeam,     { autoAlpha: 0, scale: 0.8, duration: 0.1, ease: 'power2.in' });
-      gsap.fromTo(iBeamHold, { autoAlpha: 0, scale: 0.8 }, {
-        autoAlpha: 1, scale: 1, duration: 0.3, ease: 'back.out(3)',
-        transformOrigin: 'center center',
-      });
+      if (tl.progress() > 0.5) { // Only if we are in I-beam state
+        gsap.to(iBeam,     { autoAlpha: 0, scale: 0.8, duration: 0.1, overwrite: true });
+        gsap.to(iBeamHold, { autoAlpha: 1, scale: 1, duration: 0.3, ease: 'back.out(3)', transformOrigin: 'center center', overwrite: true });
+      }
     };
 
     const morphToIBeam = () => {
-      gsap.to(iBeamHold, { autoAlpha: 0, scale: 0.8, duration: 0.1, ease: 'power2.in' });
-      gsap.fromTo(iBeam, { autoAlpha: 0, scale: 0.8 }, {
-        autoAlpha: 1, scale: 1, duration: 0.3, ease: 'back.out(3)',
-        transformOrigin: 'center center',
-      });
+      if (tl.progress() > 0.5) {
+        gsap.to(iBeamHold, { autoAlpha: 0, scale: 0.8, duration: 0.1, overwrite: true });
+        gsap.to(iBeam,     { autoAlpha: 1, scale: 1, duration: 0.3, ease: 'back.out(3)', transformOrigin: 'center center', overwrite: true });
+      }
     };
 
     // ─── Wire up targets ──────────────────────────────────────────────────────
     function setupTargets() {
-      document.querySelectorAll<HTMLElement>('[data-text-hover], h1, h2, h3, h4, p, li, blockquote').forEach(el => {
+      const targets = document.querySelectorAll<HTMLElement>('[data-text-hover], h1, h2, h3, h4, h5, h6, p, li, blockquote');
+      targets.forEach(el => {
         if (el.closest('a') || el.closest('button')) return;
-        el.addEventListener('mouseenter', () => tl.play());
-        el.addEventListener('mouseleave', () => tl.reverse());
+        el.addEventListener('mouseenter', handleEnter);
+        el.addEventListener('mouseleave', handleLeave);
         el.addEventListener('mousedown',  morphToHold);
         el.addEventListener('mouseup',    morphToIBeam);
       });
@@ -137,6 +131,8 @@
     align-items: center;
     justify-content: center;
     will-change: transform;
+    opacity: 0;
+    visibility: hidden;
   }
 
   .custom-cursor svg {
@@ -145,10 +141,8 @@
     height: 64px;
   }
 
-  #iBeamPath, #iBeamHold {
-    display: block; /* we control visibility via GSAP autoAlpha */
-    opacity: 0;
-    visibility: hidden;
+  #iBeamPath, #iBeamHold, #cursorDot {
+    transform-origin: center center;
   }
 
   @media (hover: none) {
