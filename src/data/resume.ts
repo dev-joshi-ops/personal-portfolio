@@ -2,7 +2,7 @@ export const resume = {
     basics: {
         name: "Dev Joshi",
         label: "DevOps & AI Tooling Engineer",
-        email: "joshid647@gmail.com",
+        email: "https://calendly.com/joshid647/30min",
         phone: "9638140640",
         location: "Ahmedabad, Gujarat",
         handle: "dev-joshi",
