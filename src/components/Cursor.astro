@@ -24,7 +24,7 @@
   const cursorWrap = document.querySelector<HTMLElement>('.custom-cursor')!;
   const dot        = document.getElementById('cursorDot') as unknown as SVGPathElement;
 
-  if (cursorWrap && dot) {
+  if (cursorWrap && dot && window.matchMedia('(hover: hover)').matches) {
     // Initial State
     gsap.set(cursorWrap, { xPercent: -50, yPercent: -50, autoAlpha: 0 });
     gsap.set(dot, { autoAlpha: 1, scale: 1 });
@@ -41,6 +41,9 @@
       xTo(e.clientX);
       yTo(e.clientY);
     });
+  } else if (cursorWrap) {
+    // Ensure it's hidden if no hover support
+    cursorWrap.style.display = 'none';
   }
 </script>
 
@@ -62,6 +65,15 @@
     visibility: hidden;
   }
 
+  /* Robust hiding for mobile/touch */
+  @media (hover: none), (pointer: coarse) {
+    .custom-cursor { 
+      display: none !important; 
+      visibility: hidden !important;
+      opacity: 0 !important;
+    }
+  }
+
   .custom-cursor svg {
     overflow: visible;
     width: 64px;
@@ -70,9 +82,5 @@
 
   #cursorDot {
     transform-origin: center center;
-  }
-
-  @media (hover: none) {
-    .custom-cursor { display: none !important; }
   }
 </style>
