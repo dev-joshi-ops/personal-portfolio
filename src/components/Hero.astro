@@ -2,37 +2,37 @@
 import { resume } from '../data/resume';
 ---
 
-<section id="about" class="pt-20 bg-editorial-surface dark:bg-editorial-surface-dark pb-20">
+<section id="about" class="pt-32 bg-editorial-surface dark:bg-editorial-surface-dark pb-12">
   <div class="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
     <div class="flex flex-col lg:flex-row justify-between items-start gap-0">
       
       <!-- Left Column: Text (max-w-3xl) -->
-      <div class="lg:max-w-3xl space-y-12">
+      <div class="lg:max-w-3xl space-y-10">
 
 
         <!-- Headline -->
-        <h1 class="text-[54px] md:text-[80px] font-bold text-editorial-text dark:text-editorial-text-dark tracking-tighter leading-[1.1] " fetchpriority="high">
-          Automating the <br />
-          Future of <span class="text-editorial-primary dark:text-editorial-primary-dark">Cloud.</span>
+        <h1 class="text-[54px] md:text-[90px] font-bold text-editorial-text dark:text-editorial-text-dark tracking-tighter leading-[1.1] " fetchpriority="high">
+          Zero to <span class="text-editorial-primary dark:text-editorial-primary-dark">Cloud.</span> <br />
+          Done Right.
         </h1>
         
         <!-- Subheading -->
-        <p class="text-[20px] md:text-[24px] text-editorial-secondary dark:text-editorial-secondary-dark font-mono font-medium tracking-tight">
-          DevOps Engineer · Cloud · Kubernetes · AI Tooling
+        <p class="text-[20px] md:text-[26px] text-editorial-secondary dark:text-editorial-secondary-dark font-mono font-medium tracking-tight max-w-2xl leading-relaxed">
+          Production-grade infra. Built from scratch. Delivered on time.
         </p>
  
         <!-- Buttons -->
         <div class="flex flex-wrap gap-4 pt-4">
           <a 
             href="#projects"
-            class="px-12 py-4 bg-editorial-primary dark:bg-editorial-primary-dark text-white dark:text-editorial-surface-dark font-mono text-[12px] font-bold hover:opacity-90 transition-all"
+            class="w-56 py-4 bg-editorial-primary dark:bg-editorial-primary-dark text-white dark:text-editorial-surface-dark font-mono text-[12px] font-bold hover:opacity-90 transition-all text-center"
           >
             View Work
           </a>
           <a 
             href={resume.basics.url || "#"}
             download="Dev_Joshi_Resume.pdf"
-            class="px-12 py-4 border border-editorial-surface-highest dark:border-editorial-surface-highest-dark bg-white dark:bg-transparent text-editorial-text dark:text-editorial-text-dark font-mono text-[12px] font-bold hover:bg-editorial-surface-low dark:hover:bg-editorial-surface-low-dark transition-all"
+            class="w-56 py-4 border border-editorial-surface-highest dark:border-editorial-surface-highest-dark bg-white dark:bg-transparent text-editorial-text dark:text-editorial-text-dark font-mono text-[12px] font-bold hover:bg-editorial-surface-low dark:hover:bg-editorial-surface-low-dark transition-all text-center"
           >
             Download CV
           </a>
@@ -43,7 +43,7 @@ import { resume } from '../data/resume';
       <div class="pt-20 hidden lg:flex flex-col items-end">
         <ul class="space-y-12 font-mono text-[15px] font-medium text-[#777] dark:text-editorial-secondary-dark border-l border-[#eee] dark:border-white/5 pl-12 py-4 w-fit mr-0">
           <li class="flex items-center gap-4">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-[#999] dark:text-editorial-outline"><path d="M17.5 19c.7 0 1.2-.6 1.2-1.3l-.2-6.5c0-.4-.2-.8-.6-1L12.7 7.4c-.4-.2-.9-.2-1.3 0l-5.2 2.8c-.4.2-.6.6-.6 1l-.2 6.5c0 .7.5 1.3 1.2 1.3h11z"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-[#999] dark:text-editorial-outline"><path d="M17.5 19c.7 0 1.2-.6 1.2-1.3l-.2-6.5c0-.4-.2-.8-.6-1L12.7 7.4c-.4-.2-.9-.2-1.3 0l-5.2 2.8c-.4.2-.6.6-.6 1 l-.2 6.5c0 .7.5 1.3 1.2 1.3h11z"/></svg>
             Amazon Web Services
           </li>
           <li class="flex items-center gap-4">
@@ -63,16 +63,16 @@ import { resume } from '../data/resume';
     </div>
 
     <!-- Intro Section (from screenshot bottom) -->
-    <div class="mt-24 pt-16 border-t border-editorial-surface-highest dark:border-editorial-surface-highest-dark grid grid-cols-1 lg:grid-cols-2 gap-16">
-      <div class="text-[32px] md:text-[44px] font-bold text-editorial-text dark:text-editorial-text-dark   leading-tight tracking-tight">
-        "Bridging the gap between code and production with robust, scalable infrastructure."
+    <div class="mt-12 pt-10 border-t border-editorial-surface-highest dark:border-editorial-surface-highest-dark grid grid-cols-1 lg:grid-cols-2 gap-12">
+      <div class="text-[28px] md:text-[38px] font-bold text-editorial-text dark:text-editorial-text-dark   leading-tight tracking-tight">
+        Most teams get DevOps half-built. Pipelines that break, infra nobody owns, compliance gaps that surface at the worst time.
       </div>
       <div class="space-y-8 text-[17px] md:text-[19px] text-editorial-secondary dark:text-editorial-secondary-dark  font-light leading-relaxed">
         <p>
-          I am a DevOps engineer dedicated to building resilient systems. My focus lies in orchestrating complex cloud environments and streamlining CI/CD pipelines to ensure seamless delivery.
+          I come in, architect it properly, and ship it. Whether it's a greenfield cloud setup or a high-stakes government migration under compliance deadlines, I've delivered both.
         </p>
         <p>
-          With a background in software engineering, I understand both sides of the deployment coin, allowing me to architect solutions that developers love to use and businesses can rely on.
+          Now with AI-augmented tooling (MCP agents, pipeline intelligence) built into my workflow. Not as a buzzword, but as actual open-source tools I've shipped.
         </p>
       </div>
     </div>

@@ -3,23 +3,22 @@ import { resume } from '../data/resume';
 
 const topProjects = resume.openSource.slice(0, 2);
 ---
-<section id="open-source" class="py-24 relative overflow-hidden bg-editorial-surface dark:bg-editorial-surface-dark transition-colors duration-500">
+<section id="open-source" class="py-16 relative overflow-hidden bg-editorial-surface dark:bg-editorial-surface-dark border-t border-editorial-surface-highest dark:border-editorial-surface-highest-dark transition-colors duration-500">
   <div class="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-    <div class="flex items-center justify-between mb-16">
-      <div class="flex items-center gap-4 flex-grow">
-        <h2 class="text-[12px] font-bold uppercase tracking-[0.2em] text-editorial-text dark:text-editorial-text-dark font-mono">
-          Open Source
-        </h2>
-        <div class="h-px bg-editorial-surface-highest dark:bg-editorial-surface-highest-dark flex-grow"></div>
+    <div class="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-10 gap-12">
+      <div class="max-w-2xl">
+        <h2 class="sr-only">Open Source Contributions</h2>
+        <h2 aria-hidden="true" class="text-4xl md:text-6xl font-bold text-editorial-text dark:text-editorial-text-dark mb-6 tracking-tight border-l-4 border-editorial-primary dark:border-editorial-primary-dark pl-8">Open Source</h2>
+        <p class="text-editorial-secondary dark:text-editorial-secondary-dark text-xl font-light leading-relaxed">Tools, scripts, and templates built and shared with the DevOps community.</p>
       </div>
-      <a href="/open-source" class="ml-8 font-mono text-[10px] uppercase tracking-widest text-editorial-primary dark:text-editorial-primary-dark hover:underline transition-all font-bold whitespace-nowrap">
+      <a href="/open-source" class="font-mono text-[12px] uppercase tracking-widest text-editorial-primary dark:text-editorial-primary-dark hover:underline transition-all font-bold whitespace-nowrap pb-2">
         View All <span class="text-sm">→</span>
       </a>
     </div>
     
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
       {topProjects.map((project) => (
-        <article class="bg-editorial-surface-low dark:bg-editorial-surface-low-dark p-8 lg:p-12 transition-all duration-500 hover:bg-editorial-surface-highest dark:hover:bg-editorial-surface-highest-dark flex flex-col h-full group border border-transparent hover:border-editorial-surface-highest dark:hover:border-editorial-surface-highest-dark">
+        <article class="bg-editorial-surface-low dark:bg-editorial-surface-low-dark p-6 lg:p-10 transition-all duration-500 hover:bg-editorial-surface-highest dark:hover:bg-editorial-surface-highest-dark flex flex-col h-full group border border-transparent hover:border-editorial-surface-highest dark:hover:border-editorial-surface-highest-dark">
           <div class="flex justify-between items-start mb-6">
             <h3 class=" text-3xl tracking-tight text-editorial-text dark:text-editorial-text-dark group-hover:text-editorial-primary dark:group-hover:text-editorial-primary-dark transition-colors">{project.name}</h3>
             <span class="bg-editorial-surface dark:bg-editorial-surface-dark text-editorial-secondary dark:text-editorial-secondary-dark font-mono text-[10px] px-3 py-1 border border-editorial-outline/20 dark:border-editorial-secondary-dark/20 uppercase tracking-widest font-bold">{project.category.slice(0, -1)}</span>
