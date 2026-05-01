@@ -107,8 +107,26 @@ const jsonLdArray = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
                 });
             });
         </script>
+        <style is:inline>
+            /* Critical Loader Styles to prevent FOUC */
+            #app-loader {
+                position: fixed;
+                inset: 0;
+                z-index: 9999;
+                display: grid;
+                place-items: center;
+                background: #f0ece6; /* Fallback for light mode */
+                transition: opacity 0.3s ease;
+            }
+            .dark #app-loader {
+                background: #0f0f0f;
+            }
+            #app-loader[aria-hidden="true"] {
+                display: grid !important;
+            }
+        </style>
 	</head>
-	<body class="bg-editorial-surface text-editorial-text dark:bg-editorial-surface-dark dark:text-editorial-text-dark font-mono antialiased selection:bg-editorial-selection selection:text-white dark:selection:bg-editorial-primary-dark cursor-none">
+	<body class="bg-editorial-surface text-editorial-text dark:bg-editorial-surface-dark dark:text-editorial-text-dark font-mono antialiased selection:bg-editorial-selection selection:text-white dark:selection:bg-editorial-primary-dark cursor-none" style="overflow: hidden;">
         <div id="app-loader" aria-hidden="true">
             <div class="loader-shell">
                 <svg
@@ -145,16 +163,7 @@ const jsonLdArray = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
                         <path d="M 94.8 95 v -36" />
                         <path d="M 88 88 v -15 q 0 -5 -5 -5 h -10 q -5 0 -5 -5 v -5 q 0 -5 5 -5 h 14" />
                         <path d="M 30 30 h 25 q 5 0 5 5 v 6.5 q 0 5 5 5 h 20" />
-                        <animate
-                            attributeName="stroke-dashoffset"
-                            from="100"
-                            to="0"
-                            dur="1s"
-                            fill="freeze"
-                            calcMode="spline"
-                            keySplines="0.25,0.1,0.5,1"
-                            keyTimes="0; 1"
-                        />
+
                     </g>
 
                     <g mask="url(#cpu-mask-1)">
@@ -381,16 +390,83 @@ const jsonLdArray = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
         </div>
         <Cursor />
         <slot />
-        <script is:inline>
+        <script>
+            import { gsap } from 'gsap';
+
             const removeLoader = () => {
+                console.log('removeLoader started');
                 const loader = document.getElementById('app-loader');
                 if (!loader) return;
+
+                // Animate the SVG paths drawing in first (if they haven't finished)
+                gsap.to('#app-loader svg g path', {
+                    strokeDashoffset: 0,
+                    duration: 1.5,
+                    stagger: 0.05,
+                    ease: 'power2.inOut'
+                });
+
+                // Pulse the central chip
+                gsap.to('#app-loader rect[fill="#181818"]', {
+                    filter: 'drop-shadow(0 0 8px rgba(223, 73, 47, 0.4))',
+                    repeat: -1,
+                    yoyo: true,
+                    duration: 1,
+                    ease: 'sine.inOut'
+                });
+
                 const elapsed = Date.now() - (window.__loaderStart || Date.now());
-                const delay = Math.max(0, 900 - elapsed);
-                window.setTimeout(() => {
-                    loader.classList.add('is-hidden');
-                    window.setTimeout(() => loader.remove(), 450);
-                }, delay);
+                const delay = Math.max(0, 1500 - elapsed) / 1000;
+                console.log('Loader delay:', delay);
+
+                const tl = gsap.timeline({
+                    delay: delay,
+                    onStart: () => console.log('Reveal timeline started'),
+                    onComplete: () => {
+                        console.log('Reveal timeline completed');
+                        loader.remove();
+                        document.body.style.overflow = '';
+                        // Ensure everything is visible in case GSAP fails
+                        gsap.set(['.nav-entrance', 'main', '.hero-entrance'], { opacity: 1, visibility: 'visible', y: 0 });
+                        window.dispatchEvent(new CustomEvent('loaderFinished'));
+                    }
+                });
+
+                // 1. Fade out the loader graphic and text first
+                tl.to('.loader-shell', {
+                    opacity: 0,
+                    y: -20,
+                    duration: 0.5,
+                    ease: 'power2.inOut'
+                });
+
+                // 2. Expand and fade the loader background
+                tl.to(loader, {
+                    opacity: 0,
+                    duration: 0.6,
+                    ease: 'power2.inOut'
+                }, '-=0.2');
+
+                // 3. Entrance animation for the Navbar and Main content
+                tl.to(['.nav-entrance', 'main'], {
+                    opacity: 1,
+                    duration: 0.8,
+                    ease: 'power2.out'
+                }, '-=0.4');
+
+                // 4. Staggered reveal for Hero elements
+                tl.fromTo('.hero-entrance', 
+                    { y: 20, opacity: 0 },
+                    {
+                        y: 0,
+                        opacity: 1,
+                        duration: 1,
+                        stagger: 0.1,
+                        ease: 'expo.out',
+                        clearProps: 'all'
+                    }, 
+                    '-=0.6'
+                );
             };
 
             if (document.readyState === 'complete') {
